@@ -14,16 +14,22 @@ public abstract class ContinuousVector extends Vector {
 
     @Override
     public boolean toBool() {
-        return abs != null && abs > 0;
+        return abs > 0;
     }
 
-    /** head unit ContinuousVector */
+    /**
+     * head unit ContinuousVector
+     *
+     * @param fromrank is the rank of the from Pos
+     */
     public abstract ContinuousVector head(int fromrank);
+
     public abstract Vector tail(int fromrank);
 
-    public boolean isUnit() { return abs<=1; }
+    public boolean isUnit() {
+        return abs <= 1;
+    }
 
-    @Override
     Iterable<ContinuousVector> unitsContinuous(int fromRank) {
         return () -> new Iterator<>() {
             private boolean headRemaining;
@@ -45,10 +51,10 @@ public abstract class ContinuousVector extends Vector {
                 curTail = theTail.tail(ourFromRank);
                 return toReturn;
             }
-        }
+        };
     }
 
-    public Iterable<Vector> units(int fromRank) {
+    public Iterable<ContinuousVector> units(int fromRank) {
         return unitsContinuous(fromRank);
     }
 
@@ -58,7 +64,7 @@ public abstract class ContinuousVector extends Vector {
     }
 
     public Iterable<Pos> emptiesBetween(Pos from) {
-        return () -> new Iterator<Pos>() {
+        return () -> new Iterator<>() {
             private Pos pos = from;
             private Iterator<ContinuousVector> it = unitsContinuous(from.rank).iterator();
 
@@ -69,8 +75,13 @@ public abstract class ContinuousVector extends Vector {
 
             @Override
             public Pos next() {
-                return pos.addVec(it.next());
+                try {
+                    pos = pos.addVec(it.next());
+                } catch (VectorAdditionFailedException e) {
+                    e.printStackTrace();
+                }
+                return pos;
             }
-        }
+        };
     }
 }

@@ -7,6 +7,7 @@ import java.util.Iterator;
  */
 public class SingleElementIterable<T> implements Iterable<T> {
     public final T elem;
+
     public SingleElementIterable(T element) {
         this.elem = element;
     }
@@ -27,6 +28,6 @@ public class SingleElementIterable<T> implements Iterable<T> {
                 notYet = false;
                 return elem;
             }
-        }
+        };
     }
 }

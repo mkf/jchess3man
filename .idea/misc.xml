@@ -1,5 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.CanIDiagonal no" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.CannotConstructVectorException from" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.CannotConstructVectorException to" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector$1 headRemaining" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther whetherFurther" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther whetherThruCenter" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.Pos zero" />
+    </entry_points>
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.AxisVector" method="AxisVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.CanIDiagonal" method="CanIDiagonal" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.CannotConstructVectorException" method="CannotConstructVectorException" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Color" method="Color" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Color" method="fromSegm" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Color" method="toByte" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Color" method="toShort" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Color" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" method="unitsContinuous" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" method="isUnit" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" method="ContinuousVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector" method="whetherThruCenterAndWhetherFurther" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther" method="WhetherThruCenterAndWhetherFurther" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector" method="badNotInward" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector" method="DiagonalVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.DirectDiagonalVector" method="DirectDiagonalVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.DirectDiagonalVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.JumpVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.FileVector" method="FileVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.FileVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.KnightVector" method="knightVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.KnightVector" method="KnightVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.KnightVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.LongDiagonalVector" method="LongDiagonalVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.LongDiagonalVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" method="moats" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" method="PawnCapVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector" method="PawnLongJumpVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnVector" method="reqProm" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnVector" method="reqpc" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector" method="PawnWalkVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="kingContinuousVectorTo" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="axisVectorsTo" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="knightVectorTo" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="diagonalSomehow" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="isAdjacentFile" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="next" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="Pos" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.RankVector" method="RankVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.RankVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable" method="SingleElementIterable" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.SolelyThruCenterDiagonalVector" method="SolelyThruCenterDiagonalVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.SolelyThruCenterDiagonalVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Vector" method="moats" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Vector" method="emptiesFrom" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Vector" method="units" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Vector" method="toBool" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Vector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.VectorAdditionFailedException" method="VectorAdditionFailedException" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.VectorAdditionFailedException" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" method="emptiesFom" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" method="ZeroVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="9-internal (1)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

@@ -1,17 +1,13 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
-import com.sun.xml.internal.fastinfoset.stax.events.EmptyIterator;
-
 import java.util.Collections;
-import java.util.Iterator;
-
-import static java.util.Collections.emptyList;
 
 /**
  * Created by Michał Krzysztof Feiler on 24.01.17.
  */
 public class ZeroVector extends Vector {
-    public ZeroVector() {};
+    public ZeroVector() {
+    }
 
     public int rank() {
         return 0;
@@ -31,15 +27,16 @@ public class ZeroVector extends Vector {
         return from;
     }
 
-    public Iterable<Vector> units(int _) {
+    public Iterable<ContinuousVector> units(int ignored) {
         return Collections.emptyList();
     }
 
-    public Iterable<Pos> emptiesFom(Pos _) {
+    @Override
+    public Iterable<Pos> emptiesFrom(Pos from) {
         return Collections.emptyList();
     }
 
-    public Iterable<Color> moats(Pos _) {
+    public Iterable<Color> moats(Pos ignored) {
         return Collections.emptyList();
     }
 }

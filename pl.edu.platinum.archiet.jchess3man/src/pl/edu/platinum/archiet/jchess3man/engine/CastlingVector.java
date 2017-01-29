@@ -4,33 +4,34 @@ import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.stream.Stream.of;
 
 /**
  * Created by Michał Krzysztof Feiler on 24.01.17.
  */
 public abstract class CastlingVector extends JumpVector {
-    Iterable<Vector> units(int fromRank) {
+    public Iterable<CastlingVector> units(int fromRank) {
         assert (fromRank == 0);
         return new SingleElementIterable<>(this);
     }
 
     public static class QueensideCastlingVector extends CastlingVector {
-        public int file() { return -2; }
-        public static int[] empties = {3,2,1};
+        public int file() {
+            return -2;
+        }
+
+        public static int[] empties = {3, 2, 1};
     }
 
     public static class KingsideCastlingVector extends CastlingVector {
-        public int file() { return 2; }
-        public static int[] empties = {5,6};
+        public int file() {
+            return 2;
+        }
+
+        public static int[] empties = {5, 6};
     }
 
-    public static int[] empties;
+    public /*pseudo-abstract*/ static final int[] empties = {};
 
     @Override
     public boolean toBool() {
@@ -42,11 +43,12 @@ public abstract class CastlingVector extends JumpVector {
         return 0;
     }
 
-    private static int kfm = 4;
+    private static final int kfm = 4;
+
     @Override
     Pos addTo(Pos from) {
-        assert from.rank==0&&from.file%8==kfm;
-        return new Pos(0,from.file+file());
+        assert from.rank == 0 && from.file % 8 == kfm;
+        return new Pos(0, from.file + file());
     }
 
     @Override
@@ -56,18 +58,21 @@ public abstract class CastlingVector extends JumpVector {
 
     private class EmptyFromAdding {
         private final int a;
+
         EmptyFromAdding(int add) {
-            this.a=add;
+            this.a = add;
         }
+
         Pos giveFor(int rem) {
-            return new Pos(0,a+rem);
+            return new Pos(0, a + rem);
         }
     }
+
     @Override
     public Iterable<Pos> emptiesFrom(Pos from) {
-        assert(from.file%8==kfm);
-        assert(from.rank==0);
-        int add = from.file-kfm;
+        assert (from.file % 8 == kfm);
+        assert (from.rank == 0);
+        int add = from.file - kfm;
         EmptyFromAdding adder = new EmptyFromAdding(add);
         return Arrays.stream(empties).mapToObj(adder::giveFor).collect(Collectors.toList());
     }

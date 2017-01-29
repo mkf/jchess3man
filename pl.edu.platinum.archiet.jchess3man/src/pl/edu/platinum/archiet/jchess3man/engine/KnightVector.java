@@ -30,6 +30,34 @@ public class KnightVector extends JumpVector {
         this.centerOneCloser = centerOneCloser;
     }
 
+    public static KnightVector knightVector(Pos from, Pos to) throws CannotConstructVectorException {
+        return knightVector(from, to, null, null, null);
+    }
+
+    public static KnightVector knightVector(Pos from, Pos to, Boolean inward, Boolean plusFile, Boolean centerOneCloser) throws CannotConstructVectorException {
+        if (inward == null) try {
+            return knightVector(from, to, false, plusFile, centerOneCloser);
+        } catch (CannotConstructVectorException e) {
+            return knightVector(from, to, true, plusFile, centerOneCloser);
+        }
+        if (plusFile == null) try {
+            return knightVector(from, to, inward, false, centerOneCloser);
+        } catch (CannotConstructVectorException e) {
+            return knightVector(from, to, inward, true, centerOneCloser);
+        }
+        if (centerOneCloser == null) try {
+            return knightVector(from, to, inward, plusFile, false);
+        } catch (CannotConstructVectorException e) {
+            return knightVector(from, to, inward, plusFile, true);
+        }
+        KnightVector vec = new KnightVector(inward, plusFile, centerOneCloser);
+        Pos res = vec.addTo(from);
+        if (!res.equals(to)) {
+            throw new CannotConstructVectorException(from, to);
+        }
+        return vec;
+    }
+
     /**
      * Two times increment rank and once file?
      */
@@ -66,16 +94,14 @@ public class KnightVector extends JumpVector {
     /**
      * helper for [this.moat]
      */
-    private static boolean xoreq(Pos f, Pos t) {
+    private static Boolean xoreq(Pos f, Pos t) {
         if (f.rank > 2 && t.rank > 2) return null;
         int w = xrqnmv(f.file % 8, t.file % 8);
         switch (f.rank) {
             case 0:
                 return t.rank == w;
-            case w:
-                return t.rank == 0;
             default:
-                return false;
+                return f.rank == w && t.rank == 0;
         }
     }
 
@@ -99,20 +125,28 @@ public class KnightVector extends JumpVector {
 
     public Color moat(Pos from) {
         Pos to = addTo(from);
-        boolean _xoreq = xoreq(from, to);
-        return _xoreq == true ? Color.fromSegm(((from.file+2)~/8)%3) : null;
+        Boolean _xoreq = xoreq(from, to);
+        return _xoreq == Boolean.TRUE
+                ? Color.fromSegm(((from.file + 2) / 8) % 3)
+                : null;
     }
 
     public Iterable<Color> moats(Pos from) {
         Color m = moat(from);
-        if(m!=null) return new SingleElementIterable<>(m);
+        if (m != null) return new SingleElementIterable<>(m);
         return Collections.emptyList();
     }
 
     public boolean toBool() {
-        return inward!=null && plusFile!=null && centerOneCloser!=null;
+        return true;
     }
-    public Iterable<Vector> units(int _) {
+
+    public Iterable<KnightVector> units(int ignored) {
         return new SingleElementIterable<>(this);
+    }
+
+    @Override
+    public Iterable<Pos> emptiesFrom(Pos from) {
+        return Collections.emptyList();
     }
 }
