@@ -15,22 +15,6 @@ public abstract class CastlingVector extends JumpVector {
         return new SingleElementIterable<>(this);
     }
 
-    public static class QueensideCastlingVector extends CastlingVector {
-        public int file() {
-            return -2;
-        }
-
-        public static int[] empties = {3, 2, 1};
-    }
-
-    public static class KingsideCastlingVector extends CastlingVector {
-        public int file() {
-            return 2;
-        }
-
-        public static int[] empties = {5, 6};
-    }
-
     public /*pseudo-abstract*/ static final int[] empties = {};
 
     @Override
