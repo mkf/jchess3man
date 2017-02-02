@@ -63,6 +63,17 @@ public class Pos {
         return sameFile(ano) && sameRank(ano);
     }
 
+    public int toInt() {
+        return rank * 24 + file;
+    }
+
+    @Override
+    public int hashCode() {
+        assert (file < 24);
+        //return rank<<5 | file;
+        return toInt();
+    }
+
     public boolean equals(Object obj) {
         return obj instanceof Pos && equals((Pos) obj);
     }
