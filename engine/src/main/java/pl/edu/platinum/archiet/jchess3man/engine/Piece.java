@@ -25,7 +25,8 @@ public class Piece {
     @Contract("_ -> !null")
     private static Map<Color, Character> bCM(char... c) {
         return Collections.unmodifiableMap(new HashMap<Color, Character>() {{
-            put(Color.ZeroColor, c[0]);
+            //put(Color.ZeroColor, c[0]);
+            put(null, c[0]);
             put(Color.White, c[1]);
             put(Color.Gray, c[2]);
             put(Color.Black, c[3]);

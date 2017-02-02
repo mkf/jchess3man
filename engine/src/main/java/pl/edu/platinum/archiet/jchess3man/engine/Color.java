@@ -6,14 +6,16 @@ import org.jetbrains.annotations.Contract;
  * Created by Michał Krzysztof Feiler on 24.01.17.
  */
 public enum Color {
-    ZeroColor((byte) 0), White((byte) 1), Gray((byte) 2), Black((byte) 3);
+    //ZeroColor((byte) 0),
+    White((byte) 1), Gray((byte) 2), Black((byte) 3);
     public final byte index;
 
     Color(byte index) {
         this.index = index;
     }
 
-    public static final Color[] colorsFromZero = {ZeroColor, White, Gray, Black};
+    public static final Color[] colorsFromZero =
+            new Color[]{null, White, Gray, Black};
     public static final Color[] colors = {White, Gray, Black};
     @Deprecated
     public static final String[] strings = {"ZeroColor", "White", "Gray", "Black"};
@@ -65,8 +67,8 @@ public enum Color {
 
     public Color next() {
         switch (this) {
-            case ZeroColor:
-                return White;
+            //case null/ZeroColor:
+            //    return White;
             case White:
                 return Gray;
             case Gray:
@@ -79,8 +81,8 @@ public enum Color {
 
     public Color previous() {
         switch (this) {
-            case ZeroColor:
-                return Black;
+            //case null/ZeroColor:
+            //    return Black;
             case White:
                 return Black;
             case Gray:
