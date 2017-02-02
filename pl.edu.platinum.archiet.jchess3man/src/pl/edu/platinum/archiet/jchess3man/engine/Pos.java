@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 
 import static pl.edu.platinum.archiet.jchess3man.engine.helpers.BooleanHelpers.beq;
@@ -205,7 +207,7 @@ public class Pos {
         return CastlingVector.castlingVector(this, ano);
     }
 
-    public Vector kingVectorTo(Pos ano) {
+    public Vector kingVectorTo(Pos ano) throws CannotConstructVectorException {
         try {
             return kingContinuousVectorTo(ano);
         } catch (CannotConstructVectorException ignored) {
@@ -312,16 +314,18 @@ public class Pos {
         } catch (CannotConstructVectorException ignored) {
             try {
                 return pawnWalkVectorTo(ano);
-            } catch (CannotConstructVectorException ignored) {
+            } catch (CannotConstructVectorException ignoredAsWell) {
                 return pawnCapVectorTo(ano);
             }
         }
     }
 
+    @Contract(pure = true)
     private static int wrappedFileVector(int from, int to) {
         return wrappedFileVector(from, to, false);
     }
 
+    @Contract(pure = true)
     private static int wrappedFileVector(int from, int to, boolean wLong) {
         int diff = to - from;
         int sgn = diff < 0 ? -1 : 1;

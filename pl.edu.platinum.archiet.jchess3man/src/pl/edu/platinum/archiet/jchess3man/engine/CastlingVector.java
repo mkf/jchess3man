@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Michał Krzysztof Feiler on 24.01.17.
  */
-public abstract class CastlingVector extends JumpVector {
+public abstract class CastlingVector implements JumpVector, KingVector {
     public Iterable<CastlingVector> units(int fromRank) {
         assert (fromRank == 0);
         return new SingleElementIterable<>(this);
@@ -49,7 +49,7 @@ public abstract class CastlingVector extends JumpVector {
     private static final int kfm = 4;
 
     @Override
-    Pos addTo(Pos from) {
+    public Pos addTo(Pos from) {
         assert from.rank == 0 && from.file % 8 == kfm;
         return new Pos(0, from.file + file());
     }

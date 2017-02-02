@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
 
 import java.util.Collections;
@@ -7,7 +9,7 @@ import java.util.Collections;
 /**
  * Created by Michał Krzysztof Feiler on 25.01.17.
  */
-public class KnightVector extends JumpVector {
+public class KnightVector implements JumpVector {
     /**
      * Towards the center, i.e. inwards
      */
@@ -81,7 +83,7 @@ public class KnightVector extends JumpVector {
     }
 
     @Override
-    Pos addTo(Pos from) {
+    public Pos addTo(Pos from) {
         if (inward && (centerOneCloser && from.rank >= 4 || from.rank == 5))
             if (centerOneCloser)
                 return new Pos(
@@ -94,6 +96,8 @@ public class KnightVector extends JumpVector {
     /**
      * helper for [this.moat]
      */
+    @Nullable
+    @Contract(pure = true)
     private static Boolean xoreq(Pos f, Pos t) {
         if (f.rank > 2 && t.rank > 2) return null;
         int w = xrqnmv(f.file % 8, t.file % 8);
@@ -108,6 +112,7 @@ public class KnightVector extends JumpVector {
     /**
      * helper map for [xoreq]
      */
+    @Contract(pure = true)
     private static int xrqnmv(int ffm, int tfm) {
         switch (ffm) {
             case 6:

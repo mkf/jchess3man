@@ -1,5 +1,6 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.Contract;
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
 
 import java.util.Collections;
@@ -41,12 +42,13 @@ public class SolelyThruCenterDiagonalVector extends DiagonalVector {
     }
 
     @Override
-    Pos addTo(Pos from) throws VectorAdditionFailedException {
+    public Pos addTo(Pos from) throws VectorAdditionFailedException {
         if (from.rank != 5)
             throw new VectorAdditionFailedException(from, this);
         return new Pos(5, addFile(from.file, plusFile));
     }
 
+    @Contract(pure = true)
     static int addFile(int posFile, boolean plusFile) {
         return (posFile + (plusFile ? -10 : 10)) % 24;
     }

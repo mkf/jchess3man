@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
 /**
  * Created by Michał Krzysztof Feiler on 29.01.17.
  */
-public class PawnLongJumpVector extends JumpVector implements PawnVector {
+public class PawnLongJumpVector implements JumpVector, PawnVector {
     public PawnLongJumpVector() {
     }
 
@@ -27,11 +29,12 @@ public class PawnLongJumpVector extends JumpVector implements PawnVector {
         return false;
     }
 
-    Pos addTo(Pos from) throws VectorAdditionFailedException {
+    public Pos addTo(Pos from) throws VectorAdditionFailedException {
         if (from.rank != 1) throw new VectorAdditionFailedException(from, this);
         return new Pos(3, from.file);
     }
 
+    @Contract(pure = true)
     public static boolean willDo(Pos from, Pos to) {
         return from.rank == 1 && to.rank == 3 && from.file == to.file;
     }
@@ -50,7 +53,7 @@ public class PawnLongJumpVector extends JumpVector implements PawnVector {
     }
 
     @Override
-    public List<Pos> emptiesFrom(Pos from) {
+    public List<Pos> emptiesFrom(Pos from) throws VectorAdditionFailedException {
         Pos[] list = {enPassantField(from), addTo(from)};
         return Arrays.asList(list);
     }

@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * Created by Michał Krzysztof Feiler on 25.01.17.
  */
-public abstract class ContinuousVector extends Vector {
+public abstract class ContinuousVector implements Vector, KingVector {
     public final int abs;
 
     ContinuousVector(int abs) {

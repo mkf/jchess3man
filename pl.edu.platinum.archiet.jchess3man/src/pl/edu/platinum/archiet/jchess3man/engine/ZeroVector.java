@@ -5,7 +5,7 @@ import java.util.Collections;
 /**
  * Created by Michał Krzysztof Feiler on 24.01.17.
  */
-public class ZeroVector extends Vector {
+public class ZeroVector implements Vector {
     public ZeroVector() {
     }
 
@@ -23,7 +23,7 @@ public class ZeroVector extends Vector {
     }
 
     @Override
-    Pos addTo(Pos from) {
+    public Pos addTo(Pos from) {
         return from;
     }
 

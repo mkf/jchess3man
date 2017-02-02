@@ -55,7 +55,10 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
 
     public static PawnCapVector pawnCapVector(Pos from, Pos to) throws CannotConstructVectorException {
         for (PawnCapVector tryin : allCombinations) {
-            if (tryin.addTo(from).equals(to)) return tryin;
+            try {
+                if (tryin.addTo(from).equals(to)) return tryin;
+            } catch (VectorAdditionFailedException ignored) {
+            }
         }
         throw new CannotConstructVectorException(from, to);
     }
@@ -68,7 +71,7 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
     }
 
     @Override
-    Pos addTo(Pos from) throws VectorAdditionFailedException {
+    public Pos addTo(Pos from) throws VectorAdditionFailedException {
         if (creek(from)) {
             throw new VectorAdditionFailedException(from, this);
         }

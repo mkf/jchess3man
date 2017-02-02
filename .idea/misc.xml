@@ -11,6 +11,14 @@
       <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.Pos zero" />
       <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.Color zeroColor" />
       <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector empties" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.FigType Pawn" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.FigType King" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.FigType Queen" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.FigType Bishop" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.FigType Knight" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.FigType Rook" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.FigType ZeroFigType" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.FigType firstRankNewGame" />
     </entry_points>
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.AxisVector" method="AxisVector" />
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.CanIDiagonal" method="CanIDiagonal" />
@@ -79,6 +87,17 @@
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="shorterDiagonalVectorTo" />
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="continuousVectorsTo" />
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="pawnVectorTo" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Color" method="byIndex" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.FigType" method="toInt" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.FigType" method="FigType" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.FigType" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Fig" method="sevenBit" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Fig" method="fromSevenBit" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Fig" method="subClass" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn" method="vector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn" method="Pawn" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.VecsInterface" method="vecs" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="9-internal (1)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
