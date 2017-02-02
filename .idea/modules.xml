@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/pl.edu.platinum.archiet.jchess3man.iml" filepath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/pl.edu.platinum.archiet.jchess3man.iml" />
+      <module fileurl="file://$PROJECT_DIR$/engine/engine.iml" filepath="$PROJECT_DIR$/engine/engine.iml" />
     </modules>
   </component>
 </project>
