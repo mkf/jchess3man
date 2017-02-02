@@ -32,23 +32,29 @@ public abstract class ContinuousVector extends Vector {
 
     Iterable<ContinuousVector> unitsContinuous(int fromRank) {
         return () -> new Iterator<>() {
-            private boolean headRemaining;
+            private boolean headRemaining = false;
             private ContinuousVector curHead = head(fromRank);
             private Vector curTail = tail(fromRank);
             private int ourFromRank = fromRank;
 
             @Override
             public boolean hasNext() {
-                return !(curTail instanceof ZeroVector) && headRemaining;
+                return !(curTail instanceof ZeroVector) || headRemaining;
             }
 
             @Override
             public ContinuousVector next() {
                 ourFromRank += curHead.rank();
                 ContinuousVector toReturn = curHead;
-                ContinuousVector theTail = ((ContinuousVector) curTail);
-                curHead = theTail.head(ourFromRank);
-                curTail = theTail.tail(ourFromRank);
+                if (curTail instanceof ContinuousVector) {
+                    ContinuousVector theTail = ((ContinuousVector) curTail);
+                    curHead = theTail.head(ourFromRank);
+                    curTail = theTail.tail(ourFromRank);
+                    if (curTail instanceof ZeroVector) headRemaining = true;
+                } else if (curTail instanceof ZeroVector) {
+                    headRemaining = false;
+                    curHead = null;
+                }
                 return toReturn;
             }
         };
@@ -66,7 +72,8 @@ public abstract class ContinuousVector extends Vector {
     public Iterable<Pos> emptiesBetween(Pos from) {
         return () -> new Iterator<>() {
             private Pos pos = from;
-            private Iterator<ContinuousVector> it = unitsContinuous(from.rank).iterator();
+            private final Iterator<ContinuousVector> it =
+                    unitsContinuous(from.rank).iterator();
 
             @Override
             public boolean hasNext() {

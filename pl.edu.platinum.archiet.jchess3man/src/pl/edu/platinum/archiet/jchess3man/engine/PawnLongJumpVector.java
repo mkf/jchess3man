@@ -27,9 +27,13 @@ public class PawnLongJumpVector extends JumpVector implements PawnVector {
         return false;
     }
 
-    Pos addTo(Pos from) {
-        assert (from.rank == 1);
+    Pos addTo(Pos from) throws VectorAdditionFailedException {
+        if (from.rank != 1) throw new VectorAdditionFailedException(from, this);
         return new Pos(3, from.file);
+    }
+
+    public static boolean willDo(Pos from, Pos to) {
+        return from.rank == 1 && to.rank == 3 && from.file == to.file;
     }
 
     public Pos enPassantField(Pos from) {

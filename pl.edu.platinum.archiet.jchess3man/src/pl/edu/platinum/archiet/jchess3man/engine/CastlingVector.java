@@ -15,7 +15,26 @@ public abstract class CastlingVector extends JumpVector {
         return new SingleElementIterable<>(this);
     }
 
-    public /*pseudo-abstract*/ static final int[] empties = {};
+    public static CastlingVector castlingVector(Pos from, Pos to) throws CannotConstructVectorException {
+        if (from.rank == 0 && to.rank == 0 && from.file % 8 == kfm)
+            switch (to.file % 8) {
+                case 2:
+                    return QueensideCastlingVector.c;
+                case 6:
+                    return KingsideCastlingVector.c;
+            }
+        throw new CannotConstructVectorException(from, to);
+    }
+
+    //public /*pseudo-abstract*/ static final int[] empties = {};
+
+    public int[] empties() {
+        if (this instanceof KingsideCastlingVector)
+            return KingsideCastlingVector.empties;
+        if (this instanceof QueensideCastlingVector)
+            return QueensideCastlingVector.empties;
+        throw new IllegalArgumentException("not a Kingside not QueenSide, " + this.toString());
+    }
 
     @Override
     public boolean toBool() {
@@ -58,6 +77,6 @@ public abstract class CastlingVector extends JumpVector {
         assert (from.rank == 0);
         int add = from.file - kfm;
         EmptyFromAdding adder = new EmptyFromAdding(add);
-        return Arrays.stream(empties).mapToObj(adder::giveFor).collect(Collectors.toList());
+        return Arrays.stream(empties()).mapToObj(adder::giveFor).collect(Collectors.toList());
     }
 }

@@ -2,6 +2,8 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import java.util.ArrayList;
 
+import static pl.edu.platinum.archiet.jchess3man.engine.helpers.BooleanHelpers.beq;
+
 /**
  * Created by Michał Krzysztof Feiler on 24.01.17.
  */
@@ -196,6 +198,123 @@ public class Pos {
             return kingAxisVectorTo(ano);
         } catch (CannotConstructVectorException ignored) {
             return kingDiagonalVectorTo(ano);
+        }
+    }
+
+    public CastlingVector castlingVectorTo(Pos ano) throws CannotConstructVectorException {
+        return CastlingVector.castlingVector(this, ano);
+    }
+
+    public Vector kingVectorTo(Pos ano) {
+        try {
+            return kingContinuousVectorTo(ano);
+        } catch (CannotConstructVectorException ignored) {
+            return castlingVectorTo(ano);
+        }
+    }
+
+    public DiagonalVector shorterDiagonalVectorTo(Pos ano) throws CannotConstructVectorException {
+        //return shorterDiagonalVectorTo(ano, null, null, null);
+        if (rank != ano.rank) {
+            boolean inward = ano.rank > rank;
+            int shorttd = (!inward ? rank - ano.rank : ano.rank - rank);
+            if (ano.file == (file + shorttd) % 24)
+                return new DirectDiagonalVector(shorttd, inward, true);
+            if (ano.file == (file - shorttd) % 24)
+                return new DirectDiagonalVector(shorttd, inward, false);
+        } else {
+            int rankSum = ano.rank + rank;
+            if (ano.file == (file + rankSum) % 24)
+                return new LongDiagonalVector(rankSum, false);
+            if (ano.file == (file - rankSum) % 24)
+                return new LongDiagonalVector(rankSum, true);
+        }
+        throw new CannotConstructVectorException(this, ano);
+    }
+
+    public DiagonalVector shorterDiagonalVectorTo(
+            Pos ano, Boolean positiveSgn, Boolean wShort, Boolean wLong)
+            throws CannotConstructVectorException {
+        if (!beq(wShort, false) &&
+                rank != ano.rank) {
+            boolean inward = ano.rank > rank;
+            int shorttd = (!inward ? rank - ano.rank : ano.rank - rank);
+            if (!beq(positiveSgn, false) &&
+                    ano.file == (file + shorttd) % 24)
+                return new DirectDiagonalVector(shorttd, inward, true);
+            if (!beq(positiveSgn, true) &&
+                    ano.file == (file - shorttd) % 24)
+                return new DirectDiagonalVector(shorttd, inward, false);
+        } else if (!beq(wLong, false)) {
+            int rankSum = ano.rank + rank;
+            if (!beq(positiveSgn, true) &&
+                    ano.file == (file + rankSum) % 24)
+                return new LongDiagonalVector(rankSum, false);
+            if (!beq(positiveSgn, false) &&
+                    ano.file == (file - rankSum) % 24)
+                return new LongDiagonalVector(rankSum, true);
+        }
+        throw new CannotConstructVectorException(this, ano);
+    }
+
+    public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DiagonalVector shorter) throws CannotConstructVectorException {
+        if (shorter instanceof DirectDiagonalVector)
+            return longerDiagonalVectorTo(ano, (DirectDiagonalVector) shorter);
+        throw new CannotConstructVectorException(this, ano);
+    }
+
+    public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DirectDiagonalVector shorter) throws CannotConstructVectorException {
+        int ranksum = ano.rank + rank;
+        if (ano.file == (shorter.plusFile ? file - ranksum : file + ranksum) % 24)
+            return new LongDiagonalVector(ranksum, shorter.plusFile);
+        throw new CannotConstructVectorException(this, ano);
+    }
+
+    public ArrayList<DiagonalVector> diagonalVectorsTo(Pos ano) {
+        ArrayList<DiagonalVector> ret = new ArrayList<>();
+        try {
+            DiagonalVector shorter = shorterDiagonalVectorTo(ano);
+            ret.add(shorter);
+            ret.add(longerDiagonalVectorTo(ano, shorter));
+        } catch (CannotConstructVectorException ignored) {
+        }
+        return ret;
+    }
+
+    public ArrayList<ContinuousVector> continuousVectorsTo(Pos ano) {
+        ArrayList<ContinuousVector> ret = new ArrayList<>();
+        ret.addAll(axisVectorsTo(ano));
+        ret.addAll(diagonalVectorsTo(ano));
+        return ret;
+    }
+
+    public PawnWalkVector pawnWalkVectorTo(Pos ano) throws CannotConstructVectorException {
+        PawnWalkVector tryin = new PawnWalkVector(true);
+        if (tryin.addTo(this).equals(ano)) return tryin;
+        tryin = new PawnWalkVector(false);
+        if (tryin.addTo(this).equals(ano)) return tryin;
+        throw new CannotConstructVectorException(this, ano);
+    }
+
+    public PawnLongJumpVector pawnLongJumpVectorTo(Pos ano) throws CannotConstructVectorException {
+        if (PawnLongJumpVector.willDo(this, ano))
+            return new PawnLongJumpVector();
+        throw new CannotConstructVectorException(this, ano);
+    }
+
+    public PawnCapVector pawnCapVectorTo(Pos ano) throws CannotConstructVectorException {
+        return PawnCapVector.pawnCapVector(this, ano);
+    }
+
+    public PawnVector pawnVectorTo(Pos ano) throws CannotConstructVectorException {
+        try {
+            return pawnLongJumpVectorTo(ano);
+        } catch (CannotConstructVectorException ignored) {
+            try {
+                return pawnWalkVectorTo(ano);
+            } catch (CannotConstructVectorException ignored) {
+                return pawnCapVectorTo(ano);
+            }
         }
     }
 

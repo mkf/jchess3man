@@ -2,7 +2,9 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static java.lang.Boolean.logicalOr;
 
@@ -42,6 +44,20 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
 
     public Iterable<Color> moats() {
         return Collections.emptyList();
+    }
+
+    static final List<PawnCapVector> allCombinations = Arrays.asList(
+            new PawnCapVector(false, false),
+            new PawnCapVector(false, true),
+            new PawnCapVector(true, false),
+            new PawnCapVector(true, true)
+    );
+
+    public static PawnCapVector pawnCapVector(Pos from, Pos to) throws CannotConstructVectorException {
+        for (PawnCapVector tryin : allCombinations) {
+            if (tryin.addTo(from).equals(to)) return tryin;
+        }
+        throw new CannotConstructVectorException(from, to);
     }
 
     public boolean creek(Pos from) {

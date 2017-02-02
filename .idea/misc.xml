@@ -9,6 +9,8 @@
       <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther whetherFurther" />
       <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther whetherThruCenter" />
       <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.Pos zero" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.Color zeroColor" />
+      <entry_point TYPE="field" FQNAME="pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector empties" />
     </entry_points>
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.AxisVector" method="AxisVector" />
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.CanIDiagonal" method="CanIDiagonal" />
@@ -72,6 +74,11 @@
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" method="emptiesFom" />
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" method="ZeroVector" />
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector" method="file" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="kingVectorTo" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="shorterDiagonalVectorTo" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="continuousVectorsTo" />
+    <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Pos" method="pawnVectorTo" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="9-internal (1)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

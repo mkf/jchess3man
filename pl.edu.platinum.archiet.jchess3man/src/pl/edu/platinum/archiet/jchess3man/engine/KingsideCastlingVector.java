@@ -8,5 +8,6 @@ public class KingsideCastlingVector extends CastlingVector {
         return 2;
     }
 
-    public static int[] empties = {5, 6};
+    public static final int[] empties = {5, 6};
+    public static final KingsideCastlingVector c = new KingsideCastlingVector();
 }

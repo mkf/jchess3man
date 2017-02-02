@@ -14,7 +14,8 @@ public class SingleElementIterable<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        //noinspection unchecked,Convert2Diamond
+        return new Iterator<T>() {
             private boolean notYet = true;
 
             @Override
