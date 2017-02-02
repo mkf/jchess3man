@@ -55,7 +55,7 @@ public class LongDiagonalVector extends DiagonalVector {
     }
 
     @Override
-    Pos addTo(Pos from) throws VectorAdditionFailedException {
+    public Pos addTo(Pos from) throws VectorAdditionFailedException {
         Pos p = from.addVec(shortToCenterAlmost(from.rank));
         WhetherThruCenterAndWhetherFurther whetherThruCenterAndWhetherFurther =
                 whetherThruCenterAndWhetherFurther(from.rank);

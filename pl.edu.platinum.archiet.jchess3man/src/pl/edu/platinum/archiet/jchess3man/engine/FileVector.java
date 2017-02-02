@@ -66,7 +66,7 @@ public class FileVector extends AxisVector {
     }
 
     @Override
-    Pos addTo(Pos from) {
+    public Pos addTo(Pos from) {
         return new Pos(from.rank, (from.file + this.file()) % 24);
     }
 }

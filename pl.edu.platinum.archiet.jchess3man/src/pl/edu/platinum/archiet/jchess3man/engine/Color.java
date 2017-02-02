@@ -6,10 +6,10 @@ import org.jetbrains.annotations.Contract;
  * Created by Michał Krzysztof Feiler on 24.01.17.
  */
 public enum Color {
-    ZeroColor(0), White(1), Gray(2), Black(3);
-    public final int index;
+    ZeroColor((byte) 0), White((byte) 1), Gray((byte) 2), Black((byte) 3);
+    public final byte index;
 
-    Color(int index) {
+    Color(byte index) {
         this.index = index;
     }
 
@@ -50,7 +50,7 @@ public enum Color {
 
     @Contract(pure = true)
     public int toInt() {
-        return index;
+        return (int) index;
     }
 
     @Contract(pure = true)
@@ -60,7 +60,7 @@ public enum Color {
 
     @Contract(pure = true)
     public short toByte() {
-        return (byte) index;
+        return index;
     }
 
     public Color next() {
@@ -93,6 +93,6 @@ public enum Color {
 
     @Contract(pure = true)
     public int board() {
-        return index - 1;
+        return (int) index - 1;
     }
 }

@@ -35,8 +35,27 @@ public abstract class Fig extends Piece implements VecsInterface {
         return null;
     }
 
-    public int sevenBit() {
-        return (beq(pawnCenter(), true) ? 1 << 6 : 0) | (color.index << 3) | type.index;
+    public int sevenBitInt() {
+        return ((beq(pawnCenter(), true)
+                ? 1 << 6 :
+                0) | color.index << 3 | type.index);
+    }
+
+    public byte sevenBit() {
+        return (byte) sevenBitInt();
+    }
+
+    @Override
+    public int hashCode() {
+        return toInt();
+    }
+
+    public int toInt() {
+        return sevenBitInt();
+    }
+
+    public byte toByte() {
+        return sevenBit();
     }
 
     @Override
@@ -45,13 +64,20 @@ public abstract class Fig extends Piece implements VecsInterface {
         return new String(new char[]{' ', ourChar});
     }
 
+    public static Fig fromSevenBit(byte sb) {
+        return fromSevenBit((int) sb);
+    }
     public static Fig fromSevenBit(int sb) {
         if (sb < 0) throw new IllegalArgumentException(Integer.toString(sb));
         return subClass(sb & 7, Color.byIndex((sb >> 3) & 3), (sb >> 6 != 0));
     }
 
-    public static Fig subClass(int type, Color color, Boolean pawnCenter) {
+    public static Fig subClass(byte type, Color color, Boolean pawnCenter) {
         return subClass(FigType.fromIndex(type), color, pawnCenter);
+    }
+
+    public static Fig subClass(int type, Color color, Boolean pawnCenter) {
+        return subClass((byte) type, color, pawnCenter);
     }
 
     public static Fig subClass(FigType type, Color color) {

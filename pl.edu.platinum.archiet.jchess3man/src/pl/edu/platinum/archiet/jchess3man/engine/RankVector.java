@@ -52,7 +52,7 @@ public class RankVector extends AxisVector {
     }
 
     @Override
-    Pos addTo(Pos from) {
+    public Pos addTo(Pos from) {
         if (thruCenter(from.rank))
             return new Pos(11 - (from.rank + abs), (from.file + 12) % 24);
         else return new Pos(from.rank + rank(), from.file);
