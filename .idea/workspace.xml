@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a068724-aa90-42d6-8040-20dc5e6883c5" name="Default" comment="started using JB annotations, made [Jump|King]Vector ifaces, Color&amp;FigType enums, added Piece&amp;Fig, PawnVector now extends Vector">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Fig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/FigType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/KingVector.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Piece.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="8a068724-aa90-42d6-8040-20dc5e6883c5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/pl.edu.platinum.archiet.jchess3man.iml" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/pl.edu.platinum.archiet.jchess3man.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/CastlingVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/CastlingVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Color.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Color.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/ContinuousVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/ContinuousVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/JumpVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/JumpVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/KnightVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/KnightVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnCapVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnCapVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnLongJumpVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnLongJumpVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Pos.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Pos.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/SolelyThruCenterDiagonalVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/SolelyThruCenterDiagonalVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Vector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Vector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/ZeroVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/ZeroVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/helpers/BooleanHelpers.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/helpers/BooleanHelpers.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/DirectDiagonalVector.java" afterPath="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/DirectDiagonalVector.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,31 +75,318 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QueensideCastlingVector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/QueensideCastlingVector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RankVector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/RankVector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PawnLongJumpVector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnLongJumpVector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
+            <state relative-caret-position="669">
               <caret line="56" column="51" lean-forward="false" selection-start-line="56" selection-start-column="51" selection-end-line="56" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JAVA/pl.edu.platinum.archiet.jchess3man.engine" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/pl.edu.platinum.archiet.jchess3man.engine">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>pl.edu.platinum.archiet.jchess3man.engine</OriginalElement>
+              <nodes>
+                <node x="1429.9999999999998" y="518.0">pl.edu.platinum.archiet.jchess3man.engine.QueensideCastlingVector</node>
+                <node x="198.75" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.Piece</node>
+                <node x="35.99999999999997" y="802.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Queen</node>
+                <node x="131.99999999999997" y="802.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Bishop</node>
+                <node x="218.99999999999997" y="679.0">pl.edu.platinum.archiet.jchess3man.engine.Fig</node>
+                <node x="1387.4974747474744" y="93.0">pl.edu.platinum.archiet.jchess3man.engine.KingVector</node>
+                <node x="784.9999999999998" y="176.0">pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector</node>
+                <node x="889.1249999999998" y="259.0">pl.edu.platinum.archiet.jchess3man.engine.AxisVector</node>
+                <node x="1259.9999999999998" y="518.0">pl.edu.platinum.archiet.jchess3man.engine.CastlingVector.EmptyFromAdding</node>
+                <node x="301.9683257918552" y="895.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn</node>
+                <node x="858.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.Pos</node>
+                <node x="0.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.VectorAdditionFailedException</node>
+                <node x="745.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.Color</node>
+                <node x="1645.9999999999998" y="518.0">pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector</node>
+                <node x="951.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector</node>
+                <node x="829.6249999999998" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.FileVector</node>
+                <node x="265.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther</node>
+                <node x="531.3333333333333" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.CannotConstructVectorException</node>
+                <node x="455.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.CanIDiagonal</node>
+                <node x="576.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.LongDiagonalVector</node>
+                <node x="326.0" y="802.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface</node>
+                <node x="592.9999999999998" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector</node>
+                <node x="617.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.FigType</node>
+                <node x="1202.9633838383834" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.PawnVector</node>
+                <node x="274.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.helpers</node>
+                <node x="760.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.DirectDiagonalVector</node>
+                <node x="1105.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector</node>
+                <node x="1527.5050505050503" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.JumpVector</node>
+                <node x="0.0" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.SolelyThruCenterDiagonalVector</node>
+                <node x="335.0516591251885" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.VecsInterface</node>
+                <node x="1268.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector</node>
+                <node x="1464.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.CastlingVector</node>
+                <node x="413.3333333333333" y="895.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Knight</node>
+                <node x="1610.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.KnightVector</node>
+                <node x="705.7499999999998" y="93.0">pl.edu.platinum.archiet.jchess3man.engine.ZeroVector</node>
+                <node x="1029.7474747474744" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.RankVector</node>
+                <node x="1203.9999999999998" y="0.0">pl.edu.platinum.archiet.jchess3man.engine.Vector</node>
+                <node x="0.0" y="895.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.King</node>
+                <node x="227.99999999999997" y="802.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Rook</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.KnightVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="1668.9999999999998" y="415.0" />
+                  <point x="1618.3383838383834" y="415.0" />
+                  <point x="36.33333333333326" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
+                  <point x="-44.0" y="-16.5" />
+                  <point x="1312.9999999999998" y="415.0" />
+                  <point x="1294.6300505050503" y="415.0" />
+                  <point x="36.66666666666674" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.DirectDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="846.4999999999998" y="415.0" />
+                  <point x="685.3999999999997" y="415.0" />
+                  <point x="26.399999999999977" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.King" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+                  <point x="0.0" y="-16.5" />
+                  <point x="30.0" y="875.0" />
+                  <point x="25.49999999999997" y="875.0" />
+                  <point x="25.49999999999997" y="742.0" />
+                  <point x="224.88461538461536" y="742.0" />
+                  <point x="-19.615384615384613" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn" target="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface">
+                  <point x="22.333333333333314" y="-16.5" />
+                  <point x="357.8016591251885" y="875.0" />
+                  <point x="382.5" y="875.0" />
+                  <point x="0.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.AxisVector" target="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="939.6249999999998" y="234.0" />
+                  <point x="896.7499999999998" y="234.0" />
+                  <point x="37.25" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Bishop" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+                  <point x="-19.0" y="-16.5" />
+                  <point x="150.99999999999997" y="772.0" />
+                  <point x="236.65384615384613" y="772.0" />
+                  <point x="-7.84615384615384" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.RankVector" target="pl.edu.platinum.archiet.jchess3man.engine.AxisVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="1082.7474747474744" y="317.0" />
+                  <point x="964.8749999999998" y="317.0" />
+                  <point x="25.25" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+                  <point x="-33.5" y="-16.5" />
+                  <point x="985.4999999999998" y="405.0" />
+                  <point x="711.7999999999997" y="405.0" />
+                  <point x="52.799999999999955" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.LongDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="0.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.KingVector">
+                  <point x="-31.5" y="-16.5" />
+                  <point x="1496.4999999999998" y="405.0" />
+                  <point x="1464.7474747474744" y="405.0" />
+                  <point x="25.75" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig" target="pl.edu.platinum.archiet.jchess3man.engine.VecsInterface">
+                  <point x="12.750000000000028" y="-16.5" />
+                  <point x="257.25" y="654.0" />
+                  <point x="365.0516591251885" y="654.0" />
+                  <point x="-30.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Knight" target="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface">
+                  <point x="-24.333333333333314" y="-16.5" />
+                  <point x="425.5" y="875.0" />
+                  <point x="420.16666666666663" y="875.0" />
+                  <point x="37.66666666666663" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector.EmptyFromAdding" target="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="1334.9999999999998" y="493.0" />
+                  <point x="1485.9999999999998" y="493.0" />
+                  <point x="-42.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.JumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="1582.0050505050503" y="53.0" />
+                  <point x="1271.4999999999998" y="53.0" />
+                  <point x="30.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.KingVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="1438.9974747474744" y="63.0" />
+                  <point x="1256.4999999999998" y="63.0" />
+                  <point x="15.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.QueensideCastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="0.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="658.9999999999998" y="234.0" />
+                  <point x="822.2499999999998" y="234.0" />
+                  <point x="-37.25" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" target="pl.edu.platinum.archiet.jchess3man.engine.KingVector">
+                  <point x="37.25" y="-16.5" />
+                  <point x="896.7499999999998" y="151.0" />
+                  <point x="1413.2474747474744" y="151.0" />
+                  <point x="-25.75" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
+                  <point x="33.5" y="-16.5" />
+                  <point x="1052.4999999999998" y="405.0" />
+                  <point x="1221.2967171717169" y="405.0" />
+                  <point x="-36.66666666666674" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.FileVector" target="pl.edu.platinum.archiet.jchess3man.engine.AxisVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="878.6249999999998" y="317.0" />
+                  <point x="914.3749999999998" y="317.0" />
+                  <point x="-25.25" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+                  <point x="-37.25" y="-16.5" />
+                  <point x="822.2499999999998" y="73.0" />
+                  <point x="1226.4999999999998" y="73.0" />
+                  <point x="-15.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+                  <point x="0.0" y="-16.5" />
+                  <point x="335.4683257918552" y="855.0" />
+                  <point x="315.5" y="855.0" />
+                  <point x="315.5" y="762.0" />
+                  <point x="256.2692307692307" y="762.0" />
+                  <point x="11.769230769230745" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Queen" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+                  <point x="-19.0" y="-16.5" />
+                  <point x="54.99999999999997" y="752.0" />
+                  <point x="228.80769230769226" y="752.0" />
+                  <point x="-15.692307692307708" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector" target="pl.edu.platinum.archiet.jchess3man.engine.RankVector">
+                  <point x="-35.75" y="-16.5" />
+                  <point x="1141.7499999999998" y="395.0" />
+                  <point x="1082.7474747474744" y="395.0" />
+                  <point x="0.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface" target="pl.edu.platinum.archiet.jchess3man.engine.VecsInterface">
+                  <point x="28.25" y="-16.5" />
+                  <point x="410.75" y="782.0" />
+                  <point x="425.0516591251885" y="782.0" />
+                  <point x="29.999999999999986" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Knight" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+                  <point x="0.0" y="-16.5" />
+                  <point x="449.8333333333333" y="875.0" />
+                  <point x="456.5" y="875.0" />
+                  <point x="456.5" y="742.0" />
+                  <point x="264.1153846153846" y="742.0" />
+                  <point x="19.615384615384613" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
+                  <point x="31.5" y="-16.5" />
+                  <point x="1559.4999999999998" y="415.0" />
+                  <point x="1582.0050505050503" y="415.0" />
+                  <point x="0.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="411.4999999999998" y="415.0" />
+                  <point x="632.5999999999998" y="415.0" />
+                  <point x="-26.399999999999977" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig" target="pl.edu.platinum.archiet.jchess3man.engine.Piece">
+                  <point x="-12.749999999999972" y="-16.5" />
+                  <point x="0.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="1735.9999999999998" y="493.0" />
+                  <point x="1569.9999999999998" y="493.0" />
+                  <point x="42.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Rook" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+                  <point x="16.5" y="-16.5" />
+                  <point x="277.5" y="782.0" />
+                  <point x="248.4230769230769" y="782.0" />
+                  <point x="3.923076923076934" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.SolelyThruCenterDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="123.0" y="405.0" />
+                  <point x="606.1999999999998" y="405.0" />
+                  <point x="-52.799999999999955" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="1257.9633838383834" y="73.0" />
+                  <point x="1241.4999999999998" y="73.0" />
+                  <point x="0.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+                  <point x="0.0" y="-16.5" />
+                  <point x="758.7499999999998" y="63.0" />
+                  <point x="1211.4999999999998" y="63.0" />
+                  <point x="-30.0" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+                  <point x="-28.25" y="-16.5" />
+                  <point x="354.25" y="752.0" />
+                  <point x="260.1923076923076" y="752.0" />
+                  <point x="15.69230769230765" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
+                  <point x="44.0" y="-16.5" />
+                  <point x="1400.9999999999998" y="415.0" />
+                  <point x="1545.6717171717169" y="415.0" />
+                  <point x="-36.33333333333326" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.King" target="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface">
+                  <point x="20.0" y="-16.5" />
+                  <point x="50.0" y="875.0" />
+                  <point x="344.83333333333326" y="875.0" />
+                  <point x="-37.666666666666686" y="16.5" />
+                </edge>
+                <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
+                  <point x="35.75" y="-16.5" />
+                  <point x="1213.2499999999998" y="415.0" />
+                  <point x="1257.9633838383834" y="415.0" />
+                  <point x="0.0" y="16.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="0.6262135922330097" x="363.2558139534884" y="62.25581395348843" />
+              <SelectedNodes>
+                <node>pl.edu.platinum.archiet.jchess3man.engine.Vector</node>
+              </SelectedNodes>
+              <Categories>
+                <Category>Inner Classes</Category>
+              </Categories>
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>public</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DirectDiagonalVector.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/DirectDiagonalVector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="664">
+              <caret line="54" column="18" lean-forward="false" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -135,7 +404,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Fig.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Fig.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Fig.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="261">
@@ -172,7 +441,6 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/RankVector.java" />
         <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/CanIDiagonal.java" />
-        <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/DirectDiagonalVector.java" />
         <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/AxisVector.java" />
         <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/DiagonalVector.java" />
         <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/FileVector.java" />
@@ -200,6 +468,7 @@
         <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/SolelyThruCenterDiagonalVector.java" />
         <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Color.java" />
         <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Fig.java" />
+        <option value="$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/DirectDiagonalVector.java" />
       </list>
     </option>
   </component>
@@ -1386,7 +1655,7 @@
       <workItem from="1485633826510" duration="328000" />
       <workItem from="1485634192116" duration="18951000" />
       <workItem from="1485657672902" duration="706000" />
-      <workItem from="1485984020725" duration="17130000" />
+      <workItem from="1485984020725" duration="18062000" />
     </task>
     <task id="LOCAL-00001" summary="empty .gitignore, intellij idea project files">
       <created>1485557472591</created>
@@ -1423,15 +1692,22 @@
       <option name="project" value="LOCAL" />
       <updated>1486000147394</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="started using JB annotations, made [Jump|King]Vector ifaces, Color&amp;FigType enums, added Piece&amp;Fig, PawnVector now extends Vector">
+      <created>1486010966841</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1486010966841</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66144000" />
+    <option name="totallyTimeSpent" value="67076000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-37" width="1280" height="1061" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1449,7 +1725,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1692,206 +1968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="uml://JAVA/pl.edu.platinum.archiet.jchess3man.engine">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>pl.edu.platinum.archiet.jchess3man.engine</OriginalElement>
-          <nodes>
-            <node x="193.0" y="518.0">pl.edu.platinum.archiet.jchess3man.engine.QueensideCastlingVector</node>
-            <node x="0.0" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.Piece</node>
-            <node x="520.0913978494624" y="93.0">pl.edu.platinum.archiet.jchess3man.engine.KingVector</node>
-            <node x="64.0" y="679.0">pl.edu.platinum.archiet.jchess3man.engine.Fig</node>
-            <node x="770.7217741935484" y="176.0">pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector</node>
-            <node x="580.0913978494624" y="259.0">pl.edu.platinum.archiet.jchess3man.engine.AxisVector</node>
-            <node x="584.0" y="757.0">pl.edu.platinum.archiet.jchess3man.engine.Pos</node>
-            <node x="543.0" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.VectorAdditionFailedException</node>
-            <node x="471.0" y="757.0">pl.edu.platinum.archiet.jchess3man.engine.Color</node>
-            <node x="409.0" y="518.0">pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector</node>
-            <node x="652.375" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector</node>
-            <node x="556.3413978494624" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.FileVector</node>
-            <node x="251.0" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.CannotConstructVectorException</node>
-            <node x="181.0" y="757.0">pl.edu.platinum.archiet.jchess3man.engine.CanIDiagonal</node>
-            <node x="998.75" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.LongDiagonalVector</node>
-            <node x="906.5752688172042" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector</node>
-            <node x="343.0" y="757.0">pl.edu.platinum.archiet.jchess3man.engine.FigType</node>
-            <node x="360.2002688172043" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.PawnVector</node>
-            <node x="0.0" y="757.0">pl.edu.platinum.archiet.jchess3man.engine.helpers</node>
-            <node x="807.75" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.DirectDiagonalVector</node>
-            <node x="489.375" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector</node>
-            <node x="125.5" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.JumpVector</node>
-            <node x="1182.75" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.SolelyThruCenterDiagonalVector</node>
-            <node x="86.0" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.VecsInterface</node>
-            <node x="136.0" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector</node>
-            <node x="332.0" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.CastlingVector</node>
-            <node x="0.0" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.KnightVector</node>
-            <node x="892.9717741935483" y="93.0">pl.edu.platinum.archiet.jchess3man.engine.ZeroVector</node>
-            <node x="674.3413978494624" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.RankVector</node>
-            <node x="491.125" y="0.0">pl.edu.platinum.archiet.jchess3man.engine.Vector</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.KnightVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
-              <point x="0.0" y="0.0" />
-              <point x="0.0" y="0.0" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
-              <point x="44.0" y="-16.5" />
-              <point x="268.0" y="415.0" />
-              <point x="378.53360215053766" y="415.0" />
-              <point x="-36.66666666666663" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.DirectDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
-              <point x="0.0" y="-16.5" />
-              <point x="893.25" y="415.0" />
-              <point x="956.0752688172042" y="415.0" />
-              <point x="-16.5" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.AxisVector" target="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector">
-              <point x="0.0" y="-16.5" />
-              <point x="630.5913978494624" y="234.0" />
-              <point x="807.9717741935484" y="234.0" />
-              <point x="-37.25" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.RankVector" target="pl.edu.platinum.archiet.jchess3man.engine.AxisVector">
-              <point x="0.0" y="-16.5" />
-              <point x="727.3413978494624" y="317.0" />
-              <point x="655.8413978494624" y="317.0" />
-              <point x="25.25" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
-              <point x="33.5" y="-16.5" />
-              <point x="752.875" y="405.0" />
-              <point x="923.0752688172042" y="405.0" />
-              <point x="-49.5" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.LongDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
-              <point x="0.0" y="-16.5" />
-              <point x="1080.75" y="415.0" />
-              <point x="989.0752688172042" y="415.0" />
-              <point x="16.5" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig" target="pl.edu.platinum.archiet.jchess3man.engine.VecsInterface">
-              <point x="12.75" y="-16.5" />
-              <point x="102.25" y="654.0" />
-              <point x="146.0" y="654.0" />
-              <point x="0.0" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.KingVector">
-              <point x="31.5" y="-16.5" />
-              <point x="426.5" y="415.0" />
-              <point x="545.8413978494624" y="415.0" />
-              <point x="-25.75" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.JumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
-              <point x="0.0" y="-16.5" />
-              <point x="180.0" y="63.0" />
-              <point x="498.625" y="63.0" />
-              <point x="-30.0" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.QueensideCastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector">
-              <point x="0.0" y="-16.5" />
-              <point x="291.0" y="493.0" />
-              <point x="363.5" y="493.0" />
-              <point x="-31.5" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector">
-              <point x="0.0" y="-16.5" />
-              <point x="972.5752688172042" y="234.0" />
-              <point x="882.4717741935484" y="234.0" />
-              <point x="37.25" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.KingVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
-              <point x="0.0" y="-16.5" />
-              <point x="571.5913978494624" y="73.0" />
-              <point x="528.625" y="73.0" />
-              <point x="0.0" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
-              <point x="-33.5" y="-16.5" />
-              <point x="685.875" y="395.0" />
-              <point x="451.8669354838709" y="395.0" />
-              <point x="36.66666666666663" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" target="pl.edu.platinum.archiet.jchess3man.engine.KingVector">
-              <point x="-37.25" y="-16.5" />
-              <point x="807.9717741935484" y="151.0" />
-              <point x="597.3413978494624" y="151.0" />
-              <point x="25.75" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.FileVector" target="pl.edu.platinum.archiet.jchess3man.engine.AxisVector">
-              <point x="0.0" y="-16.5" />
-              <point x="-25.25" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
-              <point x="37.25" y="-16.5" />
-              <point x="882.4717741935484" y="63.0" />
-              <point x="543.625" y="63.0" />
-              <point x="15.0" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector" target="pl.edu.platinum.archiet.jchess3man.engine.RankVector">
-              <point x="35.75" y="-16.5" />
-              <point x="596.625" y="415.0" />
-              <point x="727.3413978494624" y="415.0" />
-              <point x="0.0" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
-              <point x="-31.5" y="-16.5" />
-              <point x="363.5" y="405.0" />
-              <point x="216.33333333333326" y="405.0" />
-              <point x="36.33333333333326" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector">
-              <point x="0.0" y="-16.5" />
-              <point x="499.0" y="493.0" />
-              <point x="426.5" y="493.0" />
-              <point x="31.5" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig" target="pl.edu.platinum.archiet.jchess3man.engine.Piece">
-              <point x="-12.75" y="-16.5" />
-              <point x="76.75" y="654.0" />
-              <point x="33.0" y="654.0" />
-              <point x="0.0" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.SolelyThruCenterDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
-              <point x="0.0" y="-16.5" />
-              <point x="1305.75" y="405.0" />
-              <point x="1022.0752688172042" y="405.0" />
-              <point x="49.5" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
-              <point x="0.0" y="-16.5" />
-              <point x="945.9717741935483" y="53.0" />
-              <point x="558.625" y="53.0" />
-              <point x="30.0" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
-              <point x="0.0" y="-16.5" />
-              <point x="415.2002688172043" y="73.0" />
-              <point x="513.625" y="73.0" />
-              <point x="-15.0" y="16.5" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
-              <point x="0.0" y="0.0" />
-              <point x="0.0" y="0.0" />
-            </edge>
-            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
-              <point x="-35.75" y="-16.5" />
-              <point x="525.125" y="405.0" />
-              <point x="415.2002688172043" y="405.0" />
-              <point x="0.0" y="16.5" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="0.6283924843423799" x="361.92691029900334" y="181.92691029900334" />
-          <SelectedNodes>
-            <node>pl.edu.platinum.archiet.jchess3man.engine.Vector</node>
-          </SelectedNodes>
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>public</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/AxisVector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -1936,14 +2012,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1387">
           <caret line="89" column="35" lean-forward="false" selection-start-line="89" selection-start-column="35" selection-end-line="89" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/DirectDiagonalVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2112,14 +2180,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnLongJumpVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="56" column="51" lean-forward="false" selection-start-line="56" selection-start-column="51" selection-end-line="56" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/Pos.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -2157,6 +2217,317 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/PawnLongJumpVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="669">
+          <caret line="56" column="51" lean-forward="false" selection-start-line="56" selection-start-column="51" selection-end-line="56" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/pl.edu.platinum.archiet.jchess3man.engine">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>pl.edu.platinum.archiet.jchess3man.engine</OriginalElement>
+          <nodes>
+            <node x="1429.9999999999998" y="518.0">pl.edu.platinum.archiet.jchess3man.engine.QueensideCastlingVector</node>
+            <node x="198.75" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.Piece</node>
+            <node x="35.99999999999997" y="802.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Queen</node>
+            <node x="131.99999999999997" y="802.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Bishop</node>
+            <node x="218.99999999999997" y="679.0">pl.edu.platinum.archiet.jchess3man.engine.Fig</node>
+            <node x="1387.4974747474744" y="93.0">pl.edu.platinum.archiet.jchess3man.engine.KingVector</node>
+            <node x="784.9999999999998" y="176.0">pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector</node>
+            <node x="889.1249999999998" y="259.0">pl.edu.platinum.archiet.jchess3man.engine.AxisVector</node>
+            <node x="1259.9999999999998" y="518.0">pl.edu.platinum.archiet.jchess3man.engine.CastlingVector.EmptyFromAdding</node>
+            <node x="301.9683257918552" y="895.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn</node>
+            <node x="858.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.Pos</node>
+            <node x="0.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.VectorAdditionFailedException</node>
+            <node x="745.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.Color</node>
+            <node x="1645.9999999999998" y="518.0">pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector</node>
+            <node x="951.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector</node>
+            <node x="829.6249999999998" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.FileVector</node>
+            <node x="265.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther</node>
+            <node x="531.3333333333333" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.CannotConstructVectorException</node>
+            <node x="455.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.CanIDiagonal</node>
+            <node x="576.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.LongDiagonalVector</node>
+            <node x="326.0" y="802.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface</node>
+            <node x="592.9999999999998" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector</node>
+            <node x="617.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.FigType</node>
+            <node x="1202.9633838383834" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.PawnVector</node>
+            <node x="274.0" y="973.0">pl.edu.platinum.archiet.jchess3man.engine.helpers</node>
+            <node x="760.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.DirectDiagonalVector</node>
+            <node x="1105.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector</node>
+            <node x="1527.5050505050503" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.JumpVector</node>
+            <node x="0.0" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.SolelyThruCenterDiagonalVector</node>
+            <node x="335.0516591251885" y="596.0">pl.edu.platinum.archiet.jchess3man.engine.VecsInterface</node>
+            <node x="1268.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector</node>
+            <node x="1464.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.CastlingVector</node>
+            <node x="413.3333333333333" y="895.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Knight</node>
+            <node x="1610.9999999999998" y="435.0">pl.edu.platinum.archiet.jchess3man.engine.KnightVector</node>
+            <node x="705.7499999999998" y="93.0">pl.edu.platinum.archiet.jchess3man.engine.ZeroVector</node>
+            <node x="1029.7474747474744" y="342.0">pl.edu.platinum.archiet.jchess3man.engine.RankVector</node>
+            <node x="1203.9999999999998" y="0.0">pl.edu.platinum.archiet.jchess3man.engine.Vector</node>
+            <node x="0.0" y="895.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.King</node>
+            <node x="227.99999999999997" y="802.0">pl.edu.platinum.archiet.jchess3man.engine.Fig.Rook</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.KnightVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
+              <point x="0.0" y="-16.5" />
+              <point x="1668.9999999999998" y="415.0" />
+              <point x="1618.3383838383834" y="415.0" />
+              <point x="36.33333333333326" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
+              <point x="-44.0" y="-16.5" />
+              <point x="1312.9999999999998" y="415.0" />
+              <point x="1294.6300505050503" y="415.0" />
+              <point x="36.66666666666674" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.DirectDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+              <point x="0.0" y="-16.5" />
+              <point x="846.4999999999998" y="415.0" />
+              <point x="685.3999999999997" y="415.0" />
+              <point x="26.399999999999977" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.King" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+              <point x="0.0" y="-16.5" />
+              <point x="30.0" y="875.0" />
+              <point x="25.49999999999997" y="875.0" />
+              <point x="25.49999999999997" y="742.0" />
+              <point x="224.88461538461536" y="742.0" />
+              <point x="-19.615384615384613" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn" target="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface">
+              <point x="22.333333333333314" y="-16.5" />
+              <point x="357.8016591251885" y="875.0" />
+              <point x="382.5" y="875.0" />
+              <point x="0.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.AxisVector" target="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector">
+              <point x="0.0" y="-16.5" />
+              <point x="939.6249999999998" y="234.0" />
+              <point x="896.7499999999998" y="234.0" />
+              <point x="37.25" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Bishop" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+              <point x="-19.0" y="-16.5" />
+              <point x="150.99999999999997" y="772.0" />
+              <point x="236.65384615384613" y="772.0" />
+              <point x="-7.84615384615384" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.RankVector" target="pl.edu.platinum.archiet.jchess3man.engine.AxisVector">
+              <point x="0.0" y="-16.5" />
+              <point x="1082.7474747474744" y="317.0" />
+              <point x="964.8749999999998" y="317.0" />
+              <point x="25.25" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+              <point x="-33.5" y="-16.5" />
+              <point x="985.4999999999998" y="405.0" />
+              <point x="711.7999999999997" y="405.0" />
+              <point x="52.799999999999955" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.LongDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+              <point x="0.0" y="-16.5" />
+              <point x="0.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.KingVector">
+              <point x="-31.5" y="-16.5" />
+              <point x="1496.4999999999998" y="405.0" />
+              <point x="1464.7474747474744" y="405.0" />
+              <point x="25.75" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig" target="pl.edu.platinum.archiet.jchess3man.engine.VecsInterface">
+              <point x="12.750000000000028" y="-16.5" />
+              <point x="257.25" y="654.0" />
+              <point x="365.0516591251885" y="654.0" />
+              <point x="-30.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Knight" target="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface">
+              <point x="-24.333333333333314" y="-16.5" />
+              <point x="425.5" y="875.0" />
+              <point x="420.16666666666663" y="875.0" />
+              <point x="37.66666666666663" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector.EmptyFromAdding" target="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector">
+              <point x="0.0" y="-16.5" />
+              <point x="1334.9999999999998" y="493.0" />
+              <point x="1485.9999999999998" y="493.0" />
+              <point x="-42.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.JumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+              <point x="0.0" y="-16.5" />
+              <point x="1582.0050505050503" y="53.0" />
+              <point x="1271.4999999999998" y="53.0" />
+              <point x="30.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.KingVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+              <point x="0.0" y="-16.5" />
+              <point x="1438.9974747474744" y="63.0" />
+              <point x="1256.4999999999998" y="63.0" />
+              <point x="15.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.QueensideCastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector">
+              <point x="0.0" y="-16.5" />
+              <point x="0.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector">
+              <point x="0.0" y="-16.5" />
+              <point x="658.9999999999998" y="234.0" />
+              <point x="822.2499999999998" y="234.0" />
+              <point x="-37.25" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" target="pl.edu.platinum.archiet.jchess3man.engine.KingVector">
+              <point x="37.25" y="-16.5" />
+              <point x="896.7499999999998" y="151.0" />
+              <point x="1413.2474747474744" y="151.0" />
+              <point x="-25.75" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnCapVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
+              <point x="33.5" y="-16.5" />
+              <point x="1052.4999999999998" y="405.0" />
+              <point x="1221.2967171717169" y="405.0" />
+              <point x="-36.66666666666674" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.FileVector" target="pl.edu.platinum.archiet.jchess3man.engine.AxisVector">
+              <point x="0.0" y="-16.5" />
+              <point x="878.6249999999998" y="317.0" />
+              <point x="914.3749999999998" y="317.0" />
+              <point x="-25.25" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.ContinuousVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+              <point x="-37.25" y="-16.5" />
+              <point x="822.2499999999998" y="73.0" />
+              <point x="1226.4999999999998" y="73.0" />
+              <point x="-15.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+              <point x="0.0" y="-16.5" />
+              <point x="335.4683257918552" y="855.0" />
+              <point x="315.5" y="855.0" />
+              <point x="315.5" y="762.0" />
+              <point x="256.2692307692307" y="762.0" />
+              <point x="11.769230769230745" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Queen" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+              <point x="-19.0" y="-16.5" />
+              <point x="54.99999999999997" y="752.0" />
+              <point x="228.80769230769226" y="752.0" />
+              <point x="-15.692307692307708" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector" target="pl.edu.platinum.archiet.jchess3man.engine.RankVector">
+              <point x="-35.75" y="-16.5" />
+              <point x="1141.7499999999998" y="395.0" />
+              <point x="1082.7474747474744" y="395.0" />
+              <point x="0.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface" target="pl.edu.platinum.archiet.jchess3man.engine.VecsInterface">
+              <point x="28.25" y="-16.5" />
+              <point x="410.75" y="782.0" />
+              <point x="425.0516591251885" y="782.0" />
+              <point x="29.999999999999986" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Knight" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+              <point x="0.0" y="-16.5" />
+              <point x="449.8333333333333" y="875.0" />
+              <point x="456.5" y="875.0" />
+              <point x="456.5" y="742.0" />
+              <point x="264.1153846153846" y="742.0" />
+              <point x="19.615384615384613" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
+              <point x="31.5" y="-16.5" />
+              <point x="1559.4999999999998" y="415.0" />
+              <point x="1582.0050505050503" y="415.0" />
+              <point x="0.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector.WhetherThruCenterAndWhetherFurther" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+              <point x="0.0" y="-16.5" />
+              <point x="411.4999999999998" y="415.0" />
+              <point x="632.5999999999998" y="415.0" />
+              <point x="-26.399999999999977" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig" target="pl.edu.platinum.archiet.jchess3man.engine.Piece">
+              <point x="-12.749999999999972" y="-16.5" />
+              <point x="0.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.KingsideCastlingVector" target="pl.edu.platinum.archiet.jchess3man.engine.CastlingVector">
+              <point x="0.0" y="-16.5" />
+              <point x="1735.9999999999998" y="493.0" />
+              <point x="1569.9999999999998" y="493.0" />
+              <point x="42.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.Rook" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+              <point x="16.5" y="-16.5" />
+              <point x="277.5" y="782.0" />
+              <point x="248.4230769230769" y="782.0" />
+              <point x="3.923076923076934" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.SolelyThruCenterDiagonalVector" target="pl.edu.platinum.archiet.jchess3man.engine.DiagonalVector">
+              <point x="0.0" y="-16.5" />
+              <point x="123.0" y="405.0" />
+              <point x="606.1999999999998" y="405.0" />
+              <point x="-52.799999999999955" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+              <point x="0.0" y="-16.5" />
+              <point x="1257.9633838383834" y="73.0" />
+              <point x="1241.4999999999998" y="73.0" />
+              <point x="0.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.ZeroVector" target="pl.edu.platinum.archiet.jchess3man.engine.Vector">
+              <point x="0.0" y="-16.5" />
+              <point x="758.7499999999998" y="63.0" />
+              <point x="1211.4999999999998" y="63.0" />
+              <point x="-30.0" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface" target="pl.edu.platinum.archiet.jchess3man.engine.Fig">
+              <point x="-28.25" y="-16.5" />
+              <point x="354.25" y="752.0" />
+              <point x="260.1923076923076" y="752.0" />
+              <point x="15.69230769230765" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnLongJumpVector" target="pl.edu.platinum.archiet.jchess3man.engine.JumpVector">
+              <point x="44.0" y="-16.5" />
+              <point x="1400.9999999999998" y="415.0" />
+              <point x="1545.6717171717169" y="415.0" />
+              <point x="-36.33333333333326" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.Fig.King" target="pl.edu.platinum.archiet.jchess3man.engine.Fig.VecInterface">
+              <point x="20.0" y="-16.5" />
+              <point x="50.0" y="875.0" />
+              <point x="344.83333333333326" y="875.0" />
+              <point x="-37.666666666666686" y="16.5" />
+            </edge>
+            <edge source="pl.edu.platinum.archiet.jchess3man.engine.PawnWalkVector" target="pl.edu.platinum.archiet.jchess3man.engine.PawnVector">
+              <point x="35.75" y="-16.5" />
+              <point x="1213.2499999999998" y="415.0" />
+              <point x="1257.9633838383834" y="415.0" />
+              <point x="0.0" y="16.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.6262135922330097" x="363.2558139534884" y="62.25581395348843" />
+          <SelectedNodes>
+            <node>pl.edu.platinum.archiet.jchess3man.engine.Vector</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Inner Classes</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>public</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pl.edu.platinum.archiet.jchess3man/src/pl/edu/platinum/archiet/jchess3man/engine/DirectDiagonalVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="664">
+          <caret line="54" column="18" lean-forward="false" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
