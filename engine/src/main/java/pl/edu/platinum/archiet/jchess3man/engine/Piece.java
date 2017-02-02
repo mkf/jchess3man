@@ -24,7 +24,7 @@ public class Piece {
     @NotNull
     @Contract("_ -> !null")
     private static Map<Color, Character> bCM(char... c) {
-        return Collections.unmodifiableMap(new HashMap<>() {{
+        return Collections.unmodifiableMap(new HashMap<Color, Character>() {{
             put(Color.ZeroColor, c[0]);
             put(Color.White, c[1]);
             put(Color.Gray, c[2]);
@@ -33,7 +33,7 @@ public class Piece {
     }
 
     static {
-        runeMap = Collections.unmodifiableMap(new HashMap<>() {{
+        runeMap = Collections.unmodifiableMap(new HashMap<FigType, Map<Color, Character>>() {{
             put(FigType.ZeroFigType, bCM('~', '=', (char) 0x2014, '-'));
             put(FigType.Rook, bCM('?', 'R', (char) 0x2656, 'r'));
             put(FigType.Knight, bCM('?', 'N', (char) 0x2658, 'n'));

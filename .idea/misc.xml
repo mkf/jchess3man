@@ -99,6 +99,13 @@
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.Fig.Pawn" />
     <pattern value="pl.edu.platinum.archiet.jchess3man.engine.VecsInterface" method="vecs" />
   </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/engine/pom.xml" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="9-internal (1)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
