@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by Michał Krzysztof Feiler on 02.02.17.
@@ -61,12 +63,48 @@ public interface Board {
         return null;
     }
 
-    /*
     default boolean isThereAThreat(
             Pos to,
             Pos from,
+            PlayersAlive playersAlive,
+            EnPassantStore enPassantStore
+    ) {
+        return isThereAThreat(to, from, playersAlive, enPassantStore, get(from));
+    }
 
-    )
-    */
+    default boolean isThereAThreat(
+            Pos to,
+            Pos from,
+            PlayersAlive playersAlive,
+            EnPassantStore enPassantStore,
+            Fig fig
+    ) {
+        return isThereAThreat(to, from, playersAlive, enPassantStore,
+                fig.vecs(from, to));
+    }
+
+    default boolean isThereAThreat(
+            Pos to,
+            Pos from,
+            PlayersAlive playersAlive,
+            EnPassantStore enPassantStore,
+            Iterable<? extends Vector> vecs
+    ) {
+        return isThereAThreat(to, from, playersAlive, enPassantStore,
+                StreamSupport
+                        .stream(vecs.spliterator(), false)
+        );
+    }
+
+    default boolean isThereAThreat(
+            Pos to,
+            Pos from,
+            PlayersAlive playersAlive,
+            EnPassantStore enPassantStore,
+            Stream<? extends Vector> vecs
+    ) {
+        //Stream
+        return false;
+    }
 }
 

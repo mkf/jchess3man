@@ -1,7 +1,5 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
-import pl.edu.platinum.archiet.jchess3man.engine.helpers.BooleanHelpers;
-
 import java.util.Map;
 
 /**
@@ -24,7 +22,7 @@ public class PlayersAlive {
         Boolean b = from.containsKey(Color.Black) ? from.get(Color.Black) : defVal;
         this.w = w == null ? defVal : w;
         this.g = g == null ? defVal : g;
-        this.b = g == null ? defVal : b;
+        this.b = b == null ? defVal : b;
     }
 
     public static final PlayersAlive all =
