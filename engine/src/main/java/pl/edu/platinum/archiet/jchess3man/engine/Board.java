@@ -13,6 +13,23 @@ import static java.util.Optional.ofNullable;
  * Created by Michał Krzysztof Feiler on 02.02.17.
  */
 public interface Board {
+
+    default String string() {
+        StringBuilder builder = new StringBuilder(300);
+        builder.append('[');
+        for (int i = 5; i >= 0; i--) {
+            builder.append('[');
+            for (int j = 0; j < 24; j++) {
+                Optional<Fig> what = Optional.ofNullable(get(i, j));
+                builder.append(what.isPresent() ? what.get().toString() : "__");
+                builder.append(" ");
+            }
+            if (i != 0) builder.append("] \n ");
+        }
+        builder.append("]]");
+        return builder.toString();
+    }
+
     default List<List<Fig>> toListOfRanksOfFiles() {
         ArrayList<List<Fig>> ret = new ArrayList<>();
         for (int i = 0; i < 6; i++) ret.add(i, toListOfSquaresInRank(i));

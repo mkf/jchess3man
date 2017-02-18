@@ -38,7 +38,7 @@ class MoveTest {
         System.out.println("H");
         GameState firstAfter = first.after();
         assertNotNull(firstAfter);
-        System.out.println(firstAfter.board.toListOfRanksOfFiles());
+        System.out.println(firstAfter.board.string());
     }
 
 }
