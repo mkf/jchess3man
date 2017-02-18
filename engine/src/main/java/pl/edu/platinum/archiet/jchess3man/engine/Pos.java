@@ -31,7 +31,7 @@ public class Pos {
     }
 
     public Pos(Color color, int rank, int colorFile) {
-        this(rank, (color.board() << 3) + colorFile);
+        this(rank, (color.segm() << 3) + colorFile);
     }
 
     public static final Pos zero = new Pos(0, 0);

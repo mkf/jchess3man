@@ -40,4 +40,9 @@ public class MutableArrayBoardImpl implements MutableBoard {
     public Fig get(int rank, int file) {
         return Fig.fromSevenBit(getByte(rank, file));
     }
+
+    @Override
+    public void clearAll() {
+        fill(new MutableHashMapBoardImpl());
+    }
 }

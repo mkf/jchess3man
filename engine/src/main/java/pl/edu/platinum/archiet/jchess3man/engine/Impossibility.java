@@ -179,4 +179,17 @@ public interface Impossibility {
             return "It's not " + who.toString() + "'s move";
         }
     }
+
+    class WeInCheck implements Impossibility {
+        public final Pos from;
+
+        public WeInCheck(Pos from) {
+            this.from = from;
+        }
+
+        @Override
+        public String msg() {
+            return "We would be in check! (checking " + from.toString() + ")";
+        }
+    }
 }

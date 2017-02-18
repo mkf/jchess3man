@@ -196,6 +196,12 @@ public abstract class Fig extends Piece implements VecsInterface {
             return from.pawnVectorTo(to);
         }
 
+        @Override
+        public String toString() {
+            char ourChar = toChar();
+            return new String(new char[]{pawnCenter ? '!' : '.', ourChar});
+        }
+
         public static PawnVector vector(Pos from, Pos to, Boolean pawnCenter) throws CannotConstructVectorException {
             if (pawnCenter == null) return vector(from, to);
             return vector(from, to, pawnCenter.booleanValue());

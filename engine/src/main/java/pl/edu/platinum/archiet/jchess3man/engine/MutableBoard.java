@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface MutableBoard extends Board {
-    void put(int rank, int file, Fig fig);
+    default void put(int rank, int file, Fig fig) {
+        put(new Pos(rank, file), fig);
+    }
 
     default void put(Pos pos, Fig fig) {
         put(pos.rank, pos.file, fig);
@@ -57,4 +59,6 @@ public interface MutableBoard extends Board {
             put(pos, source.get(pos));
         }
     }
+
+    void clearAll();
 }

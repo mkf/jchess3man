@@ -10,6 +10,20 @@ public class PlayersAlive {
     public final boolean g;
     public final boolean b;
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof PlayersAlive && equals((PlayersAlive) obj);
+    }
+
+    public boolean equals(PlayersAlive ano) {
+        return ano.w == w && ano.g == g && ano.b == b;
+    }
+
+    @Override
+    public int hashCode() {
+        return (w ? 0b1 : 0) | (g ? 0b10 : 0) | (b ? 0b100 : 0);
+    }
+
     public PlayersAlive(boolean w, boolean g, boolean b) {
         this.w = w;
         this.g = g;

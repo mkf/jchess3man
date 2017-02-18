@@ -1,7 +1,9 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -48,6 +50,62 @@ public class GameState {
                 source.halfMoveClock,
                 source.fullMoveNumber,
                 source.alivePlayers
+        );
+    }
+
+    public GameState(GameState source,
+                     Optional<PlayersAlive> withPlayersAlive
+    ) {
+        this(source, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), withPlayersAlive);
+    }
+
+    public GameState(GameState source, PlayersAlive withPlayersAlive) {
+        this(source, Optional.of(withPlayersAlive));
+    }
+
+    public GameState(GameState source,
+                     @Nullable Board withBoard,
+                     @Nullable MoatsState withMoatsState,
+                     @Nullable Color withMovesNext,
+                     @Nullable CastlingPossibilities withCastlingPossibilities,
+                     @Nullable EnPassantStore withEnPassantStore,
+                     @Nullable Integer withHalfMoveClock,
+                     @Nullable Integer withFullMoveNumber,
+                     @Nullable PlayersAlive withPlayersAlive
+    ) {
+        this(
+                source,
+                Optional.ofNullable(withBoard),
+                Optional.ofNullable(withMoatsState),
+                Optional.ofNullable(withMovesNext),
+                Optional.ofNullable(withCastlingPossibilities),
+                Optional.ofNullable(withEnPassantStore),
+                Optional.ofNullable(withHalfMoveClock),
+                Optional.ofNullable(withFullMoveNumber),
+                Optional.ofNullable(withPlayersAlive)
+        );
+    }
+
+    public GameState(GameState source,
+                     Optional<Board> withBoard,
+                     Optional<MoatsState> withMoatsState,
+                     Optional<Color> withMovesNext,
+                     Optional<CastlingPossibilities> withCastlingPossibilities,
+                     Optional<EnPassantStore> withEnPassantStore,
+                     Optional<Integer> withHalfMoveClock,
+                     Optional<Integer> withFullMoveNumber,
+                     Optional<PlayersAlive> withPlayersAlive
+    ) {
+        this(
+                withBoard.isPresent() ? withBoard.get() : (
+                        (source.board instanceof MutableBoard) ? source.board.mutableCopy() : source.board),
+                withMoatsState.isPresent() ? withMoatsState.get() : source.moatsState,
+                withMovesNext.isPresent() ? withMovesNext.get() : source.movesNext,
+                withCastlingPossibilities.isPresent() ? withCastlingPossibilities.get() : source.castlingPossibilities,
+                withEnPassantStore.isPresent() ? withEnPassantStore.get() : source.enPassantStore,
+                withHalfMoveClock.isPresent() ? withHalfMoveClock.get() : source.halfMoveClock,
+                withFullMoveNumber.isPresent() ? withFullMoveNumber.get() : source.fullMoveNumber,
+                withPlayersAlive.isPresent() ? withPlayersAlive.get() : source.alivePlayers
         );
     }
 

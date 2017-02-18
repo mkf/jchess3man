@@ -7,8 +7,7 @@ import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import static java.util.Optional.*;
-import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 /**
  * Created by Michał Krzysztof Feiler on 02.02.17.
@@ -50,12 +49,16 @@ public interface Board {
 
     //List<Fig> toListOfSquares();
     @Contract(pure = true, value = "null -> fail")
+    @Nullable
     default Fig get(Pos pos) {
         return get(pos.rank, pos.file);
     }
 
     @Contract(pure = true)
-    Fig get(int rank, int file);
+    @Nullable
+    default Fig get(int rank, int file) {
+        return get(new Pos(rank, file));
+    }
 
     @Contract(pure = true)
     default boolean isEmpty(int rank, int file) {

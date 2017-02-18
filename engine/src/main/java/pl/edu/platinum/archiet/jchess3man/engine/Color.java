@@ -94,7 +94,7 @@ public enum Color {
     }
 
     @Contract(pure = true)
-    public int board() {
+    public int segm() {
         return (int) index - 1;
     }
 }

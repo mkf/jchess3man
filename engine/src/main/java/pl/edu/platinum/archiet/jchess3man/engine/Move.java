@@ -174,7 +174,7 @@ public class Move<T extends Vector> {
                     moatsState = moatsState.bridgeOnBothSidesOf(current);
                     break;
                 }
-                for (int i = current.board() * 8; i < (current.board() + 1) * 8; i++)
+                for (int i = current.segm() * 8; i < (current.segm() + 1) * 8; i++)
                     if (afterBoard.get(0, i).color == current) {
                         moatsState = moatsState.bridgeOnBothSidesOf(current);
                         break;
@@ -209,7 +209,7 @@ public class Move<T extends Vector> {
                 return CastlingPossibilities.ColorEntry.No;
             case Rook:
                 if (from.rank == 0)
-                    switch (from.file - (who.board() * 8)) {
+                    switch (from.file - (who.segm() * 8)) {
                         case 0:
                             return colorCastling.offQueenside();
                         case 7:
@@ -299,5 +299,25 @@ public class Move<T extends Vector> {
                 before.fullMoveNumber + 1,
                 before.alivePlayers
         );
+    }
+
+    public static GameState evaluateDeathThrowingCheck(GameState next, Color whatColor)
+            throws WeInCheckException {
+        Optional<Pos> heyItsCheck = next.amIinCheck(whatColor).findFirst();
+        if (heyItsCheck.isPresent())
+            throw new WeInCheckException(
+                    new Impossibility.WeInCheck(heyItsCheck.get()));
+        PlayersAlive newAliveColors = next.evalDeath();
+        if (newAliveColors.equals(next.alivePlayers)) return next;
+        return new GameState(next, newAliveColors);
+    }
+
+    public GameState after() throws
+            CheckInitiatedThruMoatException,
+            ImpossibleMoveException,
+            NeedsToBePromotedException {
+        return evaluateDeathThrowingCheck(
+                afterWOEvaluatingDeathNorCheckingCheckJustCheckInitiation(),
+                who());
     }
 }
