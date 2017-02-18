@@ -31,7 +31,7 @@ public abstract class ContinuousVector implements Vector, KingVector {
     }
 
     Iterable<ContinuousVector> unitsContinuous(int fromRank) {
-        return () -> new Iterator<>() {
+        return () -> new Iterator<ContinuousVector>() {
             private boolean headRemaining = false;
             private ContinuousVector curHead = head(fromRank);
             private Vector curTail = tail(fromRank);
@@ -70,7 +70,7 @@ public abstract class ContinuousVector implements Vector, KingVector {
     }
 
     public Iterable<Pos> emptiesBetween(Pos from) {
-        return () -> new Iterator<>() {
+        return () -> new Iterator<Pos>() {
             private Pos pos = from;
             private final Iterator<ContinuousVector> it =
                     unitsContinuous(from.rank).iterator();

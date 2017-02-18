@@ -26,7 +26,7 @@ public class AMFT {
 
     @Contract("_ -> !null")
     public static Iterable<Pos> getIterableFor(Pos pos) {
-        return new Iterable<>() {
+        return new Iterable<Pos>() {
             private final Pos p = pos;
 
             @Override

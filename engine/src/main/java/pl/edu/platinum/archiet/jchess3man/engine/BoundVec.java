@@ -32,6 +32,11 @@ public class BoundVec<T extends Vector> {
             throw new NeedsToBePromotedException(this);
     }
 
+    public BoundVec(Pos from, T vec) throws
+            VectorAdditionFailedException, NeedsToBePromotedException {
+        this(vec, from);
+    }
+
     @Contract(pure = true)
     public String toString() {
         return "BVF" + from.toString() + "→\\" + vec.toString() + "\\";

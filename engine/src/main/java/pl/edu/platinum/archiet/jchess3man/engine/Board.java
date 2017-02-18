@@ -15,20 +15,20 @@ import static java.util.Optional.ofNullable;
 public interface Board {
     default List<List<Fig>> toListOfRanksOfFiles() {
         ArrayList<List<Fig>> ret = new ArrayList<>();
-        for (int i = 0; i < 6; i++) ret.set(i, toListOfSquaresInRank(i));
+        for (int i = 0; i < 6; i++) ret.add(i, toListOfSquaresInRank(i));
         return ret;
     }
 
     default List<Fig> toListOfSquaresInRank(int rank) {
         ArrayList<Fig> ret = new ArrayList<>(24);
-        for (int i = 0; i < 24; i++) ret.set(i, get(rank, i));
+        for (int i = 0; i < 24; i++) ret.add(get(rank, i));
         return ret;
     }
 
     default List<Fig> toListOfSquares() {
         ArrayList<Fig> ret = new ArrayList<>();
         for (int i = 0; i < 24 * 6; i++)
-            ret.set(i, get(i / 24, i % 24));
+            ret.add(i, get(i / 24, i % 24));
         return ret;
     }
 

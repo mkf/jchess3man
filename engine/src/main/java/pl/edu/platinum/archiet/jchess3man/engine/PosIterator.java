@@ -48,9 +48,14 @@ public class PosIterator implements Iterator<Pos> {
 
     @Override
     public Pos next() throws NoSuchElementException {
-        if (posAlready == null) posAlready = new Pos(0, 0);
-        if (posAlready.file != 23)
+        if (posAlready == null) {
+            posAlready = new Pos(0, 0);
+            return posAlready;
+        }
+        if (posAlready.file != 23) {
             posAlready = new Pos(posAlready.rank, posAlready.file + 1);
+            return posAlready;
+        }
         if (posAlready.rank == 5) throw new NoSuchElementException();
         posAlready = new Pos(posAlready.rank + 1, 0);
         return posAlready;

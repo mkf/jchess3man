@@ -20,7 +20,7 @@ interface PawnPromVector extends PawnVector {
         throw new IllegalArgumentException();
     }
 
-    private static void errKingPawnZero(FigType promTo) throws IllegalArgumentException {
+    static void errKingPawnZero(FigType promTo) throws IllegalArgumentException {
         switch (promTo) {
             case King:
             case Pawn:
