@@ -53,6 +53,15 @@ public class GameState {
         );
     }
 
+    public static final GameState newGame = new GameState(
+            NewGameBoardImpl.c,
+            MoatsState.noBridges,
+            Color.White,
+            CastlingPossibilities.all,
+            EnPassantStore.empty,
+            0, 0,
+            PlayersAlive.all
+    );
     public GameState(GameState source,
                      Optional<PlayersAlive> withPlayersAlive
     ) {
