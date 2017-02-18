@@ -2,7 +2,6 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
 
-import javax.lang.model.type.NullType;
 import java.util.ArrayList;
 
 /**

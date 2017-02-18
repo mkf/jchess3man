@@ -67,6 +67,7 @@ public abstract class Fig extends Piece implements VecsInterface {
     public static Fig fromSevenBit(byte sb) {
         return fromSevenBit((int) sb);
     }
+
     public static Fig fromSevenBit(int sb) {
         if (sb < 0) throw new IllegalArgumentException(Integer.toString(sb));
         return subClass(sb & 7, Color.byIndex((sb >> 3) & 3), (sb >> 6 != 0));

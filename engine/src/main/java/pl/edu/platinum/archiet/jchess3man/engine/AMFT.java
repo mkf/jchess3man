@@ -1,8 +1,6 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
-import org.intellij.lang.annotations.Flow;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
