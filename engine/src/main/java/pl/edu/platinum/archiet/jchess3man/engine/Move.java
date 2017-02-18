@@ -24,6 +24,10 @@ public class Move<T extends Vector> {
         this(new BoundVec<T>(vec, from), before);
     }
 
+    public Move(Pos from, T vec, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
+        this(vec, from, before);
+    }
+
     @Contract(pure = true)
     public Fig fromSquare() {
         return before.board.get(boundVec.from);
