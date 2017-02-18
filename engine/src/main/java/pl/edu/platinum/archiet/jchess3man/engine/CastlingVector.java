@@ -46,7 +46,7 @@ public abstract class CastlingVector implements JumpVector, KingVector {
         return 0;
     }
 
-    private static final int kfm = 4;
+    public static final int kfm = 4;
 
     @Override
     public Pos addTo(Pos from) {
@@ -79,4 +79,6 @@ public abstract class CastlingVector implements JumpVector, KingVector {
         EmptyFromAdding adder = new EmptyFromAdding(add);
         return Arrays.stream(empties()).mapToObj(adder::giveFor).collect(Collectors.toList());
     }
+
+    public abstract boolean checkPossibility(CastlingPossibilities.ColorEntry c);
 }

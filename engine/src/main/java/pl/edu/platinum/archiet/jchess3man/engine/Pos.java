@@ -3,6 +3,7 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static pl.edu.platinum.archiet.jchess3man.engine.helpers.BooleanHelpers.beq;
 
@@ -97,6 +98,14 @@ public class Pos {
     public KnightVector knightVectorTo(Pos ano)
             throws CannotConstructVectorException {
         return KnightVector.knightVector(this, ano);
+    }
+
+    Optional<KnightVector> optionalKnightVectorTo(Pos ano) {
+        try {
+            return Optional.of(knightVectorTo(ano));
+        } catch (CannotConstructVectorException ignored) {
+            return Optional.empty();
+        }
     }
 
     public RankVector rankVectorTo(Pos ano) throws CannotConstructVectorException {

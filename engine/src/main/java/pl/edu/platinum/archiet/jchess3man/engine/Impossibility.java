@@ -1,6 +1,11 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
+
 /**
  * Created by Michał Krzysztof Feiler on 03.02.17.
  */
@@ -29,6 +34,26 @@ public interface Impossibility {
         }
     }
     */
+
+    @Deprecated
+    class _InternalAboutTheLackOfPromotionSetting implements Impossibility {
+        @Override
+        public String msg() {
+            return "Why did you use that Impossibility! Don't use it!";
+        }
+
+        @Contract(" -> !null")
+        @Deprecated
+        public static Impossibility generateSuch() {
+            return new _InternalAboutTheLackOfPromotionSetting();
+        }
+
+        @NotNull
+        @Deprecated
+        public static Optional<Impossibility> generateSuchOptional() {
+            return Optional.of(generateSuch());
+        }
+    }
 
     class CannotEnPassant implements Impossibility {
         public final Pos to;
@@ -126,6 +151,32 @@ public interface Impossibility {
         public String msg() {
             return "Passing non-bridged " + curMoat.toString() + ": passing "
                     + moats.toString() + ", bridges " + m.toString();
+        }
+    }
+
+    class NothingToMoveHere implements Impossibility {
+        public final Pos pos;
+
+        public NothingToMoveHere(Pos pos) {
+            this.pos = pos;
+        }
+
+        @Override
+        public String msg() {
+            return "Cannot move from an empty square " + pos;
+        }
+    }
+
+    class ThatColorDoesNotMoveNow implements Impossibility {
+        public final Color who;
+
+        public ThatColorDoesNotMoveNow(Color who) {
+            this.who = who;
+        }
+
+        @Override
+        public String msg() {
+            return "It's not " + who.toString() + "'s move";
         }
     }
 }

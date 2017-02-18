@@ -26,7 +26,7 @@ public class MutableArrayBoardImpl implements MutableBoard {
     }
 
     @Override
-    public MutableArrayBoardImpl copy() {
+    public MutableArrayBoardImpl mutableCopy() {
         MutableArrayBoardImpl n = new MutableArrayBoardImpl();
         n.fill(this);
         return n;

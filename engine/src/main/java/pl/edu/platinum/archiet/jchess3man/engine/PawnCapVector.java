@@ -116,4 +116,18 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
     public Iterable<Pos> emptiesFrom(Pos ignored) {
         return Collections.emptyList();
     }
+
+    @Override
+    public void manipulateMutableAfterBoard(MutableBoard b, Pos from, EnPassantStore ep, Pos to) throws VectorAdditionFailedException {
+        Color col = b.get(from).color;
+        //emptying if enpassant
+        //if(before.enPassantStore.matchLast(boundVec.to))
+        //    return !before.board.get(boundVec.to)
+        //            .color.equals(who().previous());
+        if (Boolean.logicalOr(
+                ep.matchLast(to) && b.get(3, to.file).color == col.previous(),
+                ep.matchPrev(to) && b.get(3, to.file).color == col.next()))
+            b.clr(3, to.file);
+        b.move(from, to);
+    }
 }

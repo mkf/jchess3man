@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.Contract;
+
 /**
  * Created by Michał Krzysztof Feiler on 03.02.17.
  */
@@ -8,8 +10,9 @@ public class BoundVec<T extends Vector> {
     public final Pos from;
     public final Pos to;
 
+    @Contract(pure = true)
     public BoundVec(T vec, Pos from)
-            throws VectorAdditionFailedException {
+            throws VectorAdditionFailedException, NeedsToBePromotedException {
         this.vec = vec;
         this.from = from;
         this.to = from.addVec(vec);
@@ -25,9 +28,23 @@ public class BoundVec<T extends Vector> {
             moving to the same square is forbidden
             */
             throw new VectorAdditionFailedException.SameSquare(from, vec);
+        if (vec instanceof PawnVector && !(vec instanceof PawnPromVector) && ((PawnVector) vec).reqProm(from.rank))
+            throw new NeedsToBePromotedException(this);
     }
 
+    @Contract(pure = true)
     public String toString() {
         return "BVF" + from.toString() + "→\\" + vec.toString() + "\\";
     }
+
+    @Contract(pure = true)
+    public Iterable<Color> moats() {
+        return vec.moats(from);
+    }
+
+    @Contract(pure = true)
+    public Iterable<Pos> empties() throws VectorAdditionFailedException {
+        return vec.emptiesFrom(from);
+    }
+
 }

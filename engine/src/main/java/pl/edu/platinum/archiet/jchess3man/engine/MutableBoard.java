@@ -23,6 +23,10 @@ public interface MutableBoard extends Board {
         clr(from);
     }
 
+    default MutableBoard copy() {
+        return mutableCopy();
+    }
+
     default void fill(List<List<? extends Fig>> listOfRanksOfFiles) {
         for (Pos pos : new AllPosIterable())
             put(pos, listOfRanksOfFiles.get(pos.rank).get(pos.file));

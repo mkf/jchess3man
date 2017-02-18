@@ -11,4 +11,15 @@ public class QueensideCastlingVector extends CastlingVector {
     public static final int[] empties = {3, 2, 1};
 
     public static final QueensideCastlingVector c = new QueensideCastlingVector();
+
+    @Override
+    public boolean checkPossibility(CastlingPossibilities.ColorEntry c) {
+        return c.q;
+    }
+
+    @Override
+    public void manipulateMutableAfterBoard(MutableBoard b, Pos from, EnPassantStore ep, Pos to) throws VectorAdditionFailedException {
+        b.move(from, to);
+        b.move(new Pos(0, from.file - 4), new Pos(0, from.file - 1));
+    }
 }
