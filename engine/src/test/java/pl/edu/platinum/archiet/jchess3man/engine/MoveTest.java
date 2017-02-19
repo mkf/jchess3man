@@ -192,8 +192,7 @@ class MoveTest {
         }
         System.out.println(
                 "State after " + (i - 1) * 3 + " moves: " + statePointer.get().board.string());
-        /*
-        for (i = 1; i < 3; i++) {
+        for (i = 0; i < 3; i++) {
             thereAreStates.set(false);
             move = new FromToPromMove(
                     new Pos(5, i * 8), new Pos(5, (i*8+12) % 24), statePointer.get());
@@ -207,11 +206,15 @@ class MoveTest {
                     .collect(Collectors.toList());
             if (!thereAreStates.get()) {
                 System.out.println("Unexpected error (3st loop, i=" + i + "): ");
+                exceptions.forEach(exception -> System.out.println(
+                        exception instanceof ImpossibleMoveException
+                                ? ((ImpossibleMoveException) exception).impossibility.msg()
+                                : ""
+                ));
                 exceptions.forEach(Throwable::printStackTrace);
             }
             assertTrue(thereAreStates.get());
         }
-        System.out.println("State after another 3 moves: " + statePointer.get().board.string());
-        */
+        System.out.println("State after another 3 moves: \n" + statePointer.get().board.string());
     }
 }
