@@ -9,22 +9,22 @@ import java.util.Optional;
 /**
  * Created by Michał Krzysztof Feiler on 03.02.17.
  */
-public class Move<T extends Vector> {
-    public final BoundVec<T> boundVec;
+public class Move {
+    public final BoundVec boundVec;
     public final GameState before;
 
     @Contract(pure = true)
-    public Move(BoundVec<T> boundVec, GameState before) {
+    public Move(BoundVec boundVec, GameState before) {
         this.boundVec = boundVec;
         this.before = before;
     }
 
     @Contract(pure = true)
-    public Move(T vec, Pos from, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
-        this(new BoundVec<T>(vec, from), before);
+    public Move(Vector vec, Pos from, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
+        this(new BoundVec(vec, from), before);
     }
 
-    public Move(Pos from, T vec, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
+    public Move(Pos from, Vector vec, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
         this(vec, from, before);
     }
 
@@ -63,9 +63,11 @@ public class Move<T extends Vector> {
         assert (boundVec.vec instanceof PawnCapVector);
         if (toSquare() != null) return true;
         if (before.enPassantStore.matchLast(boundVec.to))
+            //noinspection ConstantConditions
             return !before.board.get(boundVec.to)
                     .color.equals(who().previous());
         if (before.enPassantStore.matchPrev(boundVec.to))
+            //noinspection ConstantConditions
             return !before.board.get(boundVec.to)
                     .color.equals(who().next());
         return true;
@@ -77,10 +79,15 @@ public class Move<T extends Vector> {
     }
 
 
+    /**
+     * Checks if all required empties [boundVec.empties()] are empty
+     *
+     * @return true if not all of them are empty, i.e. at least one is not; or false if all are empty
+     */
     @Contract(pure = true)
     private boolean areNotAllEmpties() {
         try {
-            return before.board.checkEmpties(boundVec.empties());
+            return !before.board.checkEmpties(boundVec.empties());
         } catch (VectorAdditionFailedException e) {
             e.printStackTrace();
             throw new AssertionError(e);
@@ -147,6 +154,7 @@ public class Move<T extends Vector> {
         return null;
     }
 
+    @SuppressWarnings("Contract")
     @Contract(pure = true)
     public void checkIfNotPromotedDespiteSuchANeed() throws NeedsToBePromotedException {
         if ((boundVec.vec instanceof PawnVector)
@@ -155,6 +163,7 @@ public class Move<T extends Vector> {
             throw new NeedsToBePromotedException(boundVec);
     }
 
+    @SuppressWarnings("Contract")
     @Contract(pure = true)
     public void throwImpossibility() throws ImpossibleMoveException {
         Optional<Impossibility> impossibility = checkPossibility();
@@ -179,6 +188,7 @@ public class Move<T extends Vector> {
                     break;
                 }
                 for (int i = current.segm() * 8; i < (current.segm() + 1) * 8; i++)
+                    //noinspection ConstantConditions
                     if (afterBoard.get(0, i).color == current) {
                         moatsState = moatsState.bridgeOnBothSidesOf(current);
                         break;

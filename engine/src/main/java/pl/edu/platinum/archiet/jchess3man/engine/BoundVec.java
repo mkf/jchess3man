@@ -5,13 +5,13 @@ import org.jetbrains.annotations.Contract;
 /**
  * Created by Michał Krzysztof Feiler on 03.02.17.
  */
-public class BoundVec<T extends Vector> {
-    public final T vec;
+public class BoundVec {
+    public final Vector vec;
     public final Pos from;
     public final Pos to;
 
     @Contract(pure = true)
-    public BoundVec(T vec, Pos from)
+    public BoundVec(Vector vec, Pos from)
             throws VectorAdditionFailedException, NeedsToBePromotedException {
         this.vec = vec;
         this.from = from;
@@ -32,7 +32,7 @@ public class BoundVec<T extends Vector> {
             throw new NeedsToBePromotedException(this);
     }
 
-    public BoundVec(Pos from, T vec) throws
+    public BoundVec(Pos from, Vector vec) throws
             VectorAdditionFailedException, NeedsToBePromotedException {
         this(vec, from);
     }

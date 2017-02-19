@@ -63,7 +63,8 @@ public class GameState {
             PlayersAlive.all
     );
     public GameState(GameState source,
-                     Optional<PlayersAlive> withPlayersAlive
+                     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+                             Optional<PlayersAlive> withPlayersAlive
     ) {
         this(source, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), withPlayersAlive);
     }
@@ -95,6 +96,7 @@ public class GameState {
         );
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     public GameState(GameState source,
                      Optional<Board> withBoard,
                      Optional<MoatsState> withMoatsState,
@@ -129,11 +131,13 @@ public class GameState {
     @Contract(pure = true)
     public boolean _canIMoveWOCheck(Color who) {
         for (final Pos from : new AllPosIterable())
+            //noinspection ConstantConditions
             if (!board.isEmpty(from) && board.get(from).color == who)
                 for (final Pos to : AMFT.getIterableFor(from))
+                    //noinspection ConstantConditions
                     for (final Vector vec : board.get(from).vecs(from, to))
                         try {
-                            final Move m = new Move<>(vec, from, this);
+                            final Move m = new Move(vec, from, this);
                             try {
                                 //noinspection ResultOfMethodCallIgnored
                                 m.afterWOEvaluatingDeathNorCheckingCheckJustCheckInitiation();

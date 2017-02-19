@@ -2,6 +2,11 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static pl.edu.platinum.archiet.jchess3man.engine.GameState.newGame;
 
@@ -31,5 +36,96 @@ class MoveTest {
         GameState firstAfter = first.after();
         assertNotNull(firstAfter);
         System.out.println(firstAfter.board.string());
+    }
+
+    @Test
+    void simpleGenNoPanic() throws NeedsToBePromotedException {
+        FromToPromMove first = new FromToPromMove(
+                new Pos(1, 0),
+                new Pos(3, 0),
+                newGame
+        );
+        AtomicReference<GameState> temp = new AtomicReference<GameState>();
+        final AtomicBoolean thereAreStates = new AtomicBoolean(false);
+        List<IllegalMoveException> exceptions = first.generateAfters().peek(
+                (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                    if (!thereAreStates.get() && either.isState()) {
+                        temp.set(either.state.get());
+                        thereAreStates.set(true);
+                    }
+                }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                .collect(Collectors.toList());
+        if (thereAreStates.get())
+            System.out.println("first.After " + temp.get().board.string());
+        else exceptions.forEach(Throwable::printStackTrace);
+        assertTrue(thereAreStates.get());
+        /*
+        assertThrows(FromToPromMove.MultipleIllegalMoveExceptions.class,
+                () -> {
+                    Optional<GameState> sTemp = new FromToPromMove(
+                            new Pos(3, 0),
+                            new Pos(4, 0),
+                            temp.get()
+                    ).generateAfters().filter();
+                });
+
+        } catch (FromToPromMove.MultipleIllegalMoveExceptions illegalMoveExceptions) {
+            for(final IllegalMoveException single : illegalMoveExceptions) {
+                if(single instanceof ImpossibleMoveException) {
+                    System.out.println(
+                        "jeden"+((ImpossibleMoveException) single).impossibility.msg()
+                    );
+                }
+            }
+            throw illegalMoveExceptions;
+        }
+        */
+        assertFalse((new FromToPromMove(
+                new Pos(3, 0),
+                new Pos(4, 0),
+                temp.get()
+        )).generateAfters()
+                .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                .peek(state -> System.out.print("SECOND SUCCEDED BADLY" + state.toString()))
+                .findAny().isPresent());
+
+        assertThrows(NullPointerException.class,
+                () -> assertFalse((new FromToPromMove(
+                        new Pos(3, 8),
+                        new Pos(4, 8),
+                        temp.get()
+                )).generateAfters()
+                        .flatMap(FromToPromMove
+                                .EitherStateOrIllMoveExcept::flatMapState)
+                        .peek(state -> System.out
+                                .print("THIRD SUCCEDED BADLY" + state.toString()))
+                        .findAny().isPresent()));
+
+        thereAreStates.set(false);
+        exceptions = (new FromToPromMove(
+                new Pos(1, 8),
+                new Pos(3, 8),
+                temp.get()
+        ))
+                .generateAfters().peek(
+                        (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                            if (!thereAreStates.get() && either.isState()) {
+                                temp.set(either.state.get());
+                                thereAreStates.set(true);
+                            }
+                        }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                .collect(Collectors.toList());
+        if (thereAreStates.get())
+            System.out.println("fourth.After " + temp.get().board.string());
+        else {
+            System.out.println("printing exceptions for fourth: ");
+            exceptions.forEach(exception -> System.out.println(
+                    exception instanceof ImpossibleMoveException
+                            ? ((ImpossibleMoveException) exception).impossibility.msg()
+                            : ""
+            ));
+            exceptions.forEach(Throwable::printStackTrace);
+        }
+        assertTrue(thereAreStates.get());
     }
 }

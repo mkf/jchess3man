@@ -146,7 +146,7 @@ public interface Board {
         Stream<Boolean> streamOfBools = vecs.map(
                 (Vector vec) -> {
                     try {
-                        Move move = new Move<>(vec, from, before);
+                        Move move = new Move(vec, from, before);
                         Optional<Impossibility> impossibilityOptional =
                                 move.checkPossibilityOppositeColor();
                         return !impossibilityOptional.isPresent() ||
@@ -167,6 +167,7 @@ public interface Board {
     }
 
     default Stream<Pos> threatChecking(Pos where, PlayersAlive pa, EnPassantStore ep) {
+        //noinspection ConstantConditions
         Color who = get(where).color;
         Stream<Pos> first = StreamSupport.stream(
                 new AllPosIterable().spliterator(), false);
@@ -183,6 +184,12 @@ public interface Board {
         return threatChecking(_whereIsKing(who), pa, EnPassantStore.empty);
     }
 
+    /**
+     * Checks whether all positions in [which] are empty
+     *
+     * @param which positions to check
+     * @return true if all are empty, false if at least one is not
+     */
     default boolean checkEmpties(Iterable<Pos> which) {
         for (final Pos pos : which) if (!isEmpty(pos)) return false;
         return true;

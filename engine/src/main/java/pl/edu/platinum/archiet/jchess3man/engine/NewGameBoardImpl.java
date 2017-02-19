@@ -52,7 +52,7 @@ public class NewGameBoardImpl implements Board {
 
     @Override
     public boolean isEmpty(int rank, int file) {
-        return rank > 2;
+        return rank > 1;
     }
 
     @Override
