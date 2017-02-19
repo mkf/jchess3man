@@ -189,12 +189,31 @@ public abstract class Fig extends Piece implements VecsInterface {
             this.pawnCenter = pawnCenter;
         }
 
+        @Override
+        public boolean equals(Object ano) {
+            return ano instanceof Pawn && equals((Pawn) ano);
+        }
+
+        @Override
+        public boolean equals(Piece ano) {
+            return ano instanceof Pawn && equals((Pawn) ano);
+        }
+
+        public boolean equals(Pawn ano) {
+            return super.equals(ano) && ano.pawnCenter == pawnCenter;
+        }
+
         public Pawn(Color color) {
             this(color, false);
         }
 
         public static PawnVector vector(Pos from, Pos to) throws CannotConstructVectorException {
             return from.pawnVectorTo(to);
+        }
+
+        @Override
+        public int hashCode() {
+            return sevenBitInt();
         }
 
         @Override

@@ -205,6 +205,13 @@ public interface Board {
         }
     }
 
+    default boolean equals(Board ano) {
+        for (Pos pos : new AllPosIterable())
+            if (!get(pos).equals(ano.get(pos)))
+                return false;
+        return true;
+    }
+
     default Stream<FriendOrNot> friendsAndNot(Color who, PlayersAlive pa) {
         if (pa.get(who)) {
             Stream<Pos> allPos = StreamSupport.stream(
