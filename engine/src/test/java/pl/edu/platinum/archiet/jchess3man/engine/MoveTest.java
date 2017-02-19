@@ -170,5 +170,48 @@ class MoveTest {
             assertTrue(thereAreStates.get());
         }
         System.out.println("State after 3 moves: " + statePointer.get().board.string());
+        for (i = 3; i < 5; i++) {
+            for (j = 0; j < 3; j++) {
+                thereAreStates.set(false);
+                move = new FromToPromMove(
+                        new Pos(i, j * 8), new Pos(i + 1, j * 8), statePointer.get());
+                exceptions = move.generateAfters().peek(
+                        either -> {
+                            if (!thereAreStates.get() && either.isState()) {
+                                statePointer.set(either.state.get());
+                                thereAreStates.set(true);
+                            }
+                        }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                        .collect(Collectors.toList());
+                if (!thereAreStates.get()) {
+                    System.out.println("Unexpected error (2nd loop, i=" + i + " j=" + j + " ): ");
+                    exceptions.forEach(Throwable::printStackTrace);
+                }
+                assertTrue(thereAreStates.get());
+            }
+        }
+        System.out.println(
+                "State after " + (i - 1) * 3 + " moves: " + statePointer.get().board.string());
+        /*
+        for (i = 1; i < 3; i++) {
+            thereAreStates.set(false);
+            move = new FromToPromMove(
+                    new Pos(5, i * 8), new Pos(5, (i*8+12) % 24), statePointer.get());
+            exceptions = move.generateAfters().peek(
+                    (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                        if (!thereAreStates.get() && either.isState()) {
+                            statePointer.set(either.state.get());
+                            thereAreStates.set(true);
+                        }
+                    }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                    .collect(Collectors.toList());
+            if (!thereAreStates.get()) {
+                System.out.println("Unexpected error (3st loop, i=" + i + "): ");
+                exceptions.forEach(Throwable::printStackTrace);
+            }
+            assertTrue(thereAreStates.get());
+        }
+        System.out.println("State after another 3 moves: " + statePointer.get().board.string());
+        */
     }
 }
