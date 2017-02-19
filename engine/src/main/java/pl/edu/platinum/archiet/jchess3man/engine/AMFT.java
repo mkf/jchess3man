@@ -35,4 +35,19 @@ public class AMFT {
             }
         };
     }
+
+    public static void showAMFT(Pos p, int vfile) {
+        boolean[][] ret = new boolean[6][24];
+        for (Pos val : getIterableFor(p))
+            ret[val.rank][val.file] = true;
+        System.out.println(p.toString());
+        for (int i = 5; i >= 0; i--) {
+            for (int j = vfile; j < 24 + vfile; j++) {
+                if (ret[i][(j + 24) % 24]) System.out.print("▓");
+                else if ((j + 24) % 24 == p.file && i == p.rank) System.out.print("█");
+                else System.out.print("░");
+            }
+            System.out.println();
+        }
+    }
 }
