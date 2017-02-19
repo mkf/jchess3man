@@ -82,7 +82,7 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
         }
         return new Pos(
                 from.rank + (inward ? 1 : -1),
-                (from.file + (plusFile ? 1 : -1)) % 24);
+                (from.file + (plusFile ? 1 : 24 - 1)) % 24);
     }
 
     @Override

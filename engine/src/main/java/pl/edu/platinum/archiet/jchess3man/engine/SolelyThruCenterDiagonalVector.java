@@ -50,6 +50,6 @@ public class SolelyThruCenterDiagonalVector extends DiagonalVector {
 
     @Contract(pure = true)
     static int addFile(int posFile, boolean plusFile) {
-        return (posFile + (plusFile ? -10 : 10)) % 24;
+        return (posFile + (plusFile ? -10 + 24 : 10)) % 24;
     }
 }

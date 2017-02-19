@@ -15,8 +15,8 @@ public class AMFT {
         for (final Pos from : new AllPosIterable()) {
             HashSet<Pos> our = new HashSet<>();
             for (final Pos to : new AllPosIterable()) {
-                if (!from.continuousVectorsTo(to).isEmpty() ||
-                        from.optionalKnightVectorTo(to).isPresent())
+                if (!from.equals(to) && (!from.continuousVectorsTo(to).isEmpty() ||
+                        from.optionalKnightVectorTo(to).isPresent()))
                     our.add(to);
             }
             ourmap.put(from, our);

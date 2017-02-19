@@ -88,9 +88,9 @@ public class KnightVector implements JumpVector {
             if (centerOneCloser)
                 return new Pos(
                         (5 + 4) - from.rank,
-                        (from.rank + (plusFile ? 1 : -1) + 12) % 24);
-            else return new Pos(5, (from.rank + (plusFile ? 2 : -2) + 12) % 24);
-        else return new Pos(from.rank + rank(), (from.file + file()) % 24);
+                        (from.file + (plusFile ? 1 : -1) + 12) % 24);
+            else return new Pos(5, (from.file + (plusFile ? 2 : -2) + 12) % 24);
+        else return new Pos(from.rank + rank(), (from.file + file() + 24) % 24);
     }
 
     /**

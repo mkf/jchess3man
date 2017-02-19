@@ -53,7 +53,7 @@ public class DirectDiagonalVector extends DiagonalVector {
 
     @Override
     public Pos addTo(Pos from) {
-        return new Pos(from.rank + rank(), (from.file + file()) % 24);
+        return new Pos(from.rank + rank(), (from.file + file() + 24) % 24);
     }
 
     @Override

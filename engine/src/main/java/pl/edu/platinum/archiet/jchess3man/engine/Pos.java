@@ -84,7 +84,8 @@ public class Pos {
     }
 
     public boolean isSameOrAdjacentFile(Pos ano) {
-        return file + 12 % 24 == ano.file % 12;
+        //return file + 12 % 24 == ano.file % 12;
+        return file % 12 == ano.file % 12;
     }
 
     public CanIDiagonal canIDiagonalTo(Pos ano) {
@@ -240,15 +241,15 @@ public class Pos {
         if (rank != ano.rank) {
             boolean inward = ano.rank > rank;
             int shorttd = (!inward ? rank - ano.rank : ano.rank - rank);
-            if (ano.file == (file + shorttd) % 24)
+            if (ano.file == (file + shorttd + 24) % 24)
                 return new DirectDiagonalVector(shorttd, inward, true);
-            if (ano.file == (file - shorttd) % 24)
+            if (ano.file == (file - shorttd + 24) % 24)
                 return new DirectDiagonalVector(shorttd, inward, false);
         } else if (file != ano.file) {
             int rankSum = ano.rank + rank;
             if (ano.file == (file + rankSum) % 24)
                 return new LongDiagonalVector(rankSum, false);
-            if (ano.file == (file - rankSum) % 24)
+            if (ano.file == (file - rankSum + 24) % 24)
                 return new LongDiagonalVector(rankSum, true);
         }
         throw new CannotConstructVectorException(this, ano);
@@ -262,10 +263,10 @@ public class Pos {
             boolean inward = ano.rank > rank;
             int shorttd = (!inward ? rank - ano.rank : ano.rank - rank);
             if (!beq(positiveSgn, false) &&
-                    ano.file == (file + shorttd) % 24)
+                    ano.file == (file + shorttd + 24) % 24)
                 return new DirectDiagonalVector(shorttd, inward, true);
             if (!beq(positiveSgn, true) &&
-                    ano.file == (file - shorttd) % 24)
+                    ano.file == (file - shorttd + 24) % 24)
                 return new DirectDiagonalVector(shorttd, inward, false);
         } else if (!beq(wLong, false)) {
             int rankSum = ano.rank + rank;
@@ -273,7 +274,7 @@ public class Pos {
                     ano.file == (file + rankSum) % 24)
                 return new LongDiagonalVector(rankSum, false);
             if (!beq(positiveSgn, false) &&
-                    ano.file == (file - rankSum) % 24)
+                    ano.file == (file - rankSum + 24) % 24)
                 return new LongDiagonalVector(rankSum, true);
         }
         throw new CannotConstructVectorException(this, ano);
@@ -287,7 +288,7 @@ public class Pos {
 
     public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DirectDiagonalVector shorter) throws CannotConstructVectorException {
         int ranksum = ano.rank + rank;
-        if (ano.file == (shorter.plusFile ? file - ranksum : file + ranksum) % 24)
+        if (ano.file == (shorter.plusFile ? file - ranksum + 24 : file + ranksum) % 24)
             return new LongDiagonalVector(ranksum, shorter.plusFile);
         throw new CannotConstructVectorException(this, ano);
     }

@@ -38,7 +38,7 @@ public class CanIDiagonal {
                 positiveSgn = true;
                 shortCan = true;
 
-            } else if (to.file == (from.file - shorttd) % 24) {
+            } else if (to.file == (from.file - shorttd + 24) % 24) {
                 positiveSgn = false;
                 shortCan = true;
 
@@ -46,7 +46,7 @@ public class CanIDiagonal {
                 positiveSgn = true;
                 shortCan = false;
 
-            } else if (to.file == (from.file - longtd) % 24) {
+            } else if (to.file == (from.file - longtd + 24) % 24) {
                 positiveSgn = false;
                 shortCan = false;
 
@@ -58,7 +58,7 @@ public class CanIDiagonal {
             }
             longCan = !shortCan ||
                     to.file ==
-                            from.file + (positiveSgn ? longtd : -longtd) % 24;
+                            from.file + (positiveSgn ? longtd : 24 - longtd) % 24;
         }
     }
 }

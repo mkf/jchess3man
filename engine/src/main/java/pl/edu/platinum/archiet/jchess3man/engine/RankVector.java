@@ -26,10 +26,10 @@ public class RankVector extends AxisVector {
         return direc && (fromRank + rank() > 5);
     }
 
-    public pl.edu.platinum.archiet.jchess3man.engine.RankVector head() {
+    public RankVector head() {
         if (abs > 0) {
             if (abs > 1) {
-                return new pl.edu.platinum.archiet.jchess3man.engine.RankVector(1, direc);
+                return new RankVector(1, direc);
             }
             return this;
         }
@@ -39,7 +39,7 @@ public class RankVector extends AxisVector {
     public Vector tail(int fromRank) {
         if (abs > 0) {
             if (abs > 1) {
-                return new pl.edu.platinum.archiet.jchess3man.engine.RankVector(abs - 1, direc && fromRank != 5);
+                return new RankVector(abs - 1, direc && fromRank != 5);
             }
             return new ZeroVector();
         }
