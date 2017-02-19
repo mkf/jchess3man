@@ -16,5 +16,15 @@ public class VectorAdditionFailedException extends Exception {
         public SameSquare(Pos from, Vector vector) {
             super(from, vector);
         }
+
+        @Override
+        public String getMessage() {
+            return "SameSquare: " + from + " " + vector;
+        }
+
+        @Override
+        public String toString() {
+            return getMessage();
+        }
     }
 }

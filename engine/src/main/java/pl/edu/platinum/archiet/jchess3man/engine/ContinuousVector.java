@@ -9,6 +9,7 @@ public abstract class ContinuousVector implements Vector, KingVector {
     public final int abs;
 
     ContinuousVector(int abs) {
+        assert (abs > 0);
         this.abs = abs;
     }
 

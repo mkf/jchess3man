@@ -117,7 +117,7 @@ public class Pos {
 
     public FileVector fileVectorTo(Pos ano)
             throws CannotConstructVectorException {
-        if (sameRank(ano)) {
+        if (sameRank(ano) && !sameFile(ano)) {
             return new FileVector(wrappedFileVector(file, ano.file));
         }
         throw new CannotConstructVectorException(this, ano);
@@ -128,7 +128,7 @@ public class Pos {
      */
     public FileVector fileVectorTo(Pos ano, boolean wLong)
             throws CannotConstructVectorException {
-        if (sameRank(ano)) {
+        if (sameRank(ano) && !sameFile(ano)) {
             return new FileVector(wrappedFileVector(file, ano.file, wLong));
         }
         throw new CannotConstructVectorException(this, ano);
@@ -244,7 +244,7 @@ public class Pos {
                 return new DirectDiagonalVector(shorttd, inward, true);
             if (ano.file == (file - shorttd) % 24)
                 return new DirectDiagonalVector(shorttd, inward, false);
-        } else {
+        } else if (file != ano.file) {
             int rankSum = ano.rank + rank;
             if (ano.file == (file + rankSum) % 24)
                 return new LongDiagonalVector(rankSum, false);

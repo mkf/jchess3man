@@ -6,11 +6,16 @@ import java.util.Collections;
 
 public class FileVector extends AxisVector {
     public FileVector(int abs, boolean direc) {
-        super(abs, direc);
+        super(abs % 24, direc);
+    }
+
+    @Override
+    public String toString() {
+        return "FileVec" + t();
     }
 
     public FileVector(int t) {
-        super(t);
+        super(t % 24);
     }
 
     public int file() {

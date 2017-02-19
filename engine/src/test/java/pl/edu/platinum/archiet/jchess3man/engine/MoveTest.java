@@ -128,4 +128,47 @@ class MoveTest {
         }
         assertTrue(thereAreStates.get());
     }
+
+    @Test
+    void pawnCrossCenterTest() throws NeedsToBePromotedException {
+        int i = 0;
+        int j = 0;
+        FromToPromMove move = new FromToPromMove(
+                new Pos(1, i * 8),
+                new Pos(3, i * 8),
+                newGame
+        );
+        AtomicReference<GameState> statePointer = new AtomicReference<>();
+        final AtomicBoolean thereAreStates = new AtomicBoolean(false);
+        List<IllegalMoveException> exceptions = move.generateAfters().peek(
+                (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                    if (!thereAreStates.get() && either.isState()) {
+                        statePointer.set(either.state.get());
+                        thereAreStates.set(true);
+                    }
+                }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                .collect(Collectors.toList());
+        if (!thereAreStates.get()) exceptions.forEach(Throwable::printStackTrace);
+        assertTrue(thereAreStates.get());
+
+        for (i = 1; i < 3; i++) {
+            thereAreStates.set(false);
+            move = new FromToPromMove(
+                    new Pos(1, i * 8), new Pos(3, i * 8), statePointer.get());
+            exceptions = move.generateAfters().peek(
+                    (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                        if (!thereAreStates.get() && either.isState()) {
+                            statePointer.set(either.state.get());
+                            thereAreStates.set(true);
+                        }
+                    }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                    .collect(Collectors.toList());
+            if (!thereAreStates.get()) {
+                System.out.println("Unexpected error (1st loop, i=" + i + "): ");
+                exceptions.forEach(Throwable::printStackTrace);
+            }
+            assertTrue(thereAreStates.get());
+        }
+        System.out.println("State after 3 moves: " + statePointer.get().board.string());
+    }
 }
