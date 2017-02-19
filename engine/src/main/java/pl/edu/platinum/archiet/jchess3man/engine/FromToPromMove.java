@@ -10,61 +10,22 @@ import java.util.stream.StreamSupport;
 /**
  * Created by Michał Krzysztof Feiler on 18.02.17.
  */
-public class FromToPromMove {
-    public final Pos from;
-    public final Pos to;
+public class FromToPromMove extends FromToProm {
     public final GameState before;
-    public final @Nullable FigType pawnPromotion;
-    protected boolean vecsAreGenerated = false;
-    protected @Nullable Iterable<? extends Vector> vecs = null;
 
     public FromToPromMove(Pos from, Pos to, GameState before) {
         this(from, to, before, null);
     }
 
     public FromToPromMove(Pos from, Pos to, GameState before, @Nullable FigType pawnPromotion) {
-        this.from = from;
-        this.to = to;
+        super(from, to, pawnPromotion);
         this.before = before;
-        this.pawnPromotion = pawnPromotion;
-    }
-
-    public boolean areVecsGenerated() {
-        return vecsAreGenerated;
     }
 
     public void generateVecs() throws NullPointerException, NeedsToBePromotedException {
         Fig fsq = before.board.get(from);
-        if (fsq != null) {
-            vecs = fsq.vecs(from, to);
-        } else throw new NullPointerException(from.toString() + "\n" + before.board.string());
-        checkPromotions();
-        vecsAreGenerated = true;
-    }
-
-    private void checkPromotions() throws NeedsToBePromotedException {
-        boolean started = false;
-        @Nullable ArrayList<PawnPromVector> theRet = null;
-        assert vecs != null;
-        for (final Vector vec : vecs) {
-            if (vec instanceof PawnVector) {
-                PawnVector pv = (PawnVector) vec;
-                if (pv.reqProm(from.rank)) {
-                    if (pawnPromotion == null)
-                        try {
-                            throw new NeedsToBePromotedException(new BoundVec(pv, from));
-                        } catch (VectorAdditionFailedException e) {
-                            throw new AssertionError(e);
-                        }
-                    started = true;
-                    theRet = new ArrayList<>(2);
-                }
-                if (started) {
-                    theRet.add(PawnPromVector.fromPawnVector(pv, pawnPromotion));
-                }
-            }
-        }
-        if (started) vecs = theRet;
+        if (fsq != null) generateVecs(fsq);
+        else throw new NullPointerException(from.toString() + "\n" + before.board.string());
     }
 
     public Stream<EitherStateOrIllMoveExcept> generateAfters() throws NeedsToBePromotedException {
