@@ -23,6 +23,9 @@ class AMFTTest {
         AMFT.showAMFT(new Pos(3, 0), 12);
         AMFT.showAMFT(new Pos(3, 12), 0);
         AMFT.showAMFT(new Pos(3, 7), 7 + 12);
+        AMFT.showAMFT(new Pos(2, 0), 12);
+        AMFT.showAMFT(new Pos(2, 12), 0);
+        AMFT.showAMFT(new Pos(2, 7), 7 + 12);
     }
 
 }
