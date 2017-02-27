@@ -287,9 +287,9 @@ public class Pos {
     }
 
     public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DirectDiagonalVector shorter) throws CannotConstructVectorException {
-        int ranksum = ano.rank + rank;
-        if (ano.file == (shorter.plusFile ? file - ranksum + 24 : file + ranksum) % 24)
-            return new LongDiagonalVector(ranksum, shorter.plusFile);
+        int rankSum = ano.rank + rank;
+        if (ano.file == (shorter.plusFile ? file - rankSum + 24 : file + rankSum) % 24)
+            return new LongDiagonalVector(rankSum, shorter.plusFile);
         throw new CannotConstructVectorException(this, ano);
     }
 
