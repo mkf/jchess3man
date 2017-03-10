@@ -1,6 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -280,26 +281,40 @@ public class Pos {
         throw new CannotConstructVectorException(this, ano);
     }
 
-    public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DiagonalVector shorter) throws CannotConstructVectorException {
+    public LongDiagonalVector longerDiagonalVectorTo(Pos ano, @Nullable DiagonalVector shorter) throws CannotConstructVectorException {
         if (shorter instanceof DirectDiagonalVector)
             return longerDiagonalVectorTo(ano, (DirectDiagonalVector) shorter);
         throw new CannotConstructVectorException(this, ano);
     }
 
-    public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DirectDiagonalVector shorter) throws CannotConstructVectorException {
+    public LongDiagonalVector longerDiagonalVectorTo(Pos ano, @Nullable DirectDiagonalVector shorter) throws CannotConstructVectorException {
         int rankSum = ano.rank + rank;
         if (ano.file == (shorter.plusFile ? file - rankSum + 24 : file + rankSum) % 24)
             return new LongDiagonalVector(rankSum, shorter.plusFile);
         throw new CannotConstructVectorException(this, ano);
     }
 
+    /**
+     * returns the long diagonal vector if there is no shorter one
+     * @param ano is the destination
+     * @return the LongDiagonalVector, a placeholder atm
+     */
+    protected LongDiagonalVector longOnlyDiagonalVector(Pos ano) {
+        //just a placeholder
+        return new LongDiagonalVector(1,true);
+    }
+
     public ArrayList<DiagonalVector> diagonalVectorsTo(Pos ano) {
         ArrayList<DiagonalVector> ret = new ArrayList<>();
+        DiagonalVector shorter = null;
         try {
-            DiagonalVector shorter = shorterDiagonalVectorTo(ano);
+            shorter = shorterDiagonalVectorTo(ano);
             ret.add(shorter);
-            ret.add(longerDiagonalVectorTo(ano, shorter));
         } catch (CannotConstructVectorException ignored) {
+        }
+        try {
+            ret.add(longerDiagonalVectorTo(ano, shorter));
+        } catch (CannotConstructVectorException e) {
         }
         return ret;
     }
