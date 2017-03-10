@@ -1,12 +1,9 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
-import static pl.edu.platinum.archiet.jchess3man.engine.helpers.BooleanHelpers.beq;
 
 /**
  * Created by Michał Krzysztof Feiler on 24.01.17.
@@ -239,23 +236,22 @@ public class Pos {
 
     public DiagonalVector shorterDiagonalVectorTo(Pos ano) throws CannotConstructVectorException {
         //return shorterDiagonalVectorTo(ano, null, null, null);
-        if (rank != ano.rank) {
-            boolean inward = ano.rank > rank;
-            int shorttd = (!inward ? rank - ano.rank : ano.rank - rank);
-            if (ano.file == (file + shorttd + 24) % 24)
-                return new DirectDiagonalVector(shorttd, inward, true);
-            if (ano.file == (file - shorttd + 24) % 24)
-                return new DirectDiagonalVector(shorttd, inward, false);
-        } else if (file != ano.file) {
-            int rankSum = ano.rank + rank;
-            if (ano.file == (file + rankSum) % 24)
-                return new LongDiagonalVector(rankSum, false);
-            if (ano.file == (file - rankSum + 24) % 24)
-                return new LongDiagonalVector(rankSum, true);
-        }
+        int fileDiff = wrappedFileVector(file, ano.file);
+        boolean plusFile = fileDiff>0;
+        int absFileDiff = plusFile?fileDiff:-fileDiff;
+        boolean inwardShort = ano.rank > rank;
+        int absRankDiff = (inwardShort ? ano.rank - rank : rank - ano.rank);
+        //if the move is not to the same rank
+        if (rank != ano.rank && absFileDiff==absRankDiff)
+            return new DirectDiagonalVector(absFileDiff, inwardShort, plusFile);
+        int rankSum = ano.rank+rank;
+        if (absFileDiff!=0 && absFileDiff==rankSum)
+            return new LongDiagonalVector(
+                    5 + 5 + 1 - rankSum /*(5-s)+1+(5-r)*/, !plusFile);
         throw new CannotConstructVectorException(this, ano);
     }
 
+    /*
     public DiagonalVector shorterDiagonalVectorTo(Pos ano,
             @Nullable Boolean positiveSgn,
             @Nullable Boolean wShort, @Nullable Boolean wLong)
@@ -282,6 +278,7 @@ public class Pos {
         }
         throw new CannotConstructVectorException(this, ano);
     }
+    */
 
     public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DiagonalVector shorter) throws CannotConstructVectorException {
         if (shorter instanceof DirectDiagonalVector)
