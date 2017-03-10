@@ -1,6 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -255,11 +256,12 @@ public class Pos {
         throw new CannotConstructVectorException(this, ano);
     }
 
-    public DiagonalVector shorterDiagonalVectorTo(
-            Pos ano, Boolean positiveSgn, Boolean wShort, Boolean wLong)
+    public DiagonalVector shorterDiagonalVectorTo(Pos ano,
+            @Nullable Boolean positiveSgn,
+            @Nullable Boolean wShort, @Nullable Boolean wLong)
             throws CannotConstructVectorException {
-        if (!beq(wShort, false) &&
-                rank != ano.rank) {
+        if (!beq(wShort, false) && //if wShort is false, don't even try DirectVecs
+                rank != ano.rank) { //if the move is on the same rank, no DirectVecs
             boolean inward = ano.rank > rank;
             int shorttd = (!inward ? rank - ano.rank : ano.rank - rank);
             if (!beq(positiveSgn, false) &&
@@ -268,7 +270,8 @@ public class Pos {
             if (!beq(positiveSgn, true) &&
                     ano.file == (file - shorttd + 24) % 24)
                 return new DirectDiagonalVector(shorttd, inward, false);
-        } else if (!beq(wLong, false)) {
+        } else if (!beq(wLong, false) && //if wLong is false, don't even try LongVecs
+                file != ano.file) { //if the move is on the same rank and same file it's bad
             int rankSum = ano.rank + rank;
             if (!beq(positiveSgn, true) &&
                     ano.file == (file + rankSum) % 24)
