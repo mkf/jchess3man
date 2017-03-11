@@ -247,35 +247,6 @@ public class Pos {
         throw new CannotConstructVectorException(this, ano);
     }
 
-    /*
-    public DiagonalVector shorterDiagonalVectorTo(Pos ano,
-            @Nullable Boolean positiveSgn,
-            @Nullable Boolean wShort, @Nullable Boolean wLong)
-            throws CannotConstructVectorException {
-        if (!beq(wShort, false) && //if wShort is false, don't even try DirectVecs
-                rank != ano.rank) { //if the move is on the same rank, no DirectVecs
-            boolean inward = ano.rank > rank;
-            int shorttd = (!inward ? rank - ano.rank : ano.rank - rank);
-            if (!beq(positiveSgn, false) &&
-                    ano.file == (file + shorttd + 24) % 24)
-                return new DirectDiagonalVector(shorttd, inward, true);
-            if (!beq(positiveSgn, true) &&
-                    ano.file == (file - shorttd + 24) % 24)
-                return new DirectDiagonalVector(shorttd, inward, false);
-        } else if (!beq(wLong, false) && //if wLong is false, don't even try LongVecs
-                file != ano.file) { //if the move is on the same rank and same file it's bad
-            int rankSum = ano.rank + rank;
-            if (!beq(positiveSgn, true) &&
-                    ano.file == (file + rankSum) % 24)
-                return new LongDiagonalVector(rankSum, false);
-            if (!beq(positiveSgn, false) &&
-                    ano.file == (file - rankSum + 24) % 24)
-                return new LongDiagonalVector(rankSum, true);
-        }
-        throw new CannotConstructVectorException(this, ano);
-    }
-    */
-
     public DiagonalVector longerDiagonalVectorTo(Pos ano, DiagonalVector shorter) throws CannotConstructVectorException {
         int rankSum = ano.rank + rank;
         if (ano.file == (shorter.plusFile ? file - rankSum + 24 : file + rankSum) % 24)
