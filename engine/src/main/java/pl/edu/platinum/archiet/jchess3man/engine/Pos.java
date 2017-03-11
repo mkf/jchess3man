@@ -3,6 +3,8 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -230,8 +232,8 @@ public class Pos {
         }
     }
 
-    public DiagonalVector shorterDiagonalVectorTo(Pos ano) throws CannotConstructVectorException {
-        //return shorterDiagonalVectorTo(ano, null, null, null);
+    public LinkedList<DiagonalVector> diagonalVectorsTo(Pos ano) {
+        LinkedList<DiagonalVector> ret = new LinkedList<>();
         int fileDiff = wrappedFileVector(file, ano.file);
         boolean plusFile = fileDiff>0;
         int absFileDiff = plusFile?fileDiff:-fileDiff;
@@ -239,29 +241,11 @@ public class Pos {
         int absRankDiff = (inwardShort ? ano.rank - rank : rank - ano.rank);
         //if the move is not to the same rank
         if (rank != ano.rank && absFileDiff==absRankDiff)
-            return new DiagonalVector(absFileDiff, inwardShort, plusFile);
-        int rankSum = ano.rank+rank;
-        if (absFileDiff!=0 && absFileDiff==rankSum)
-            return new DiagonalVector(
-                    5 + 5 + 1 - rankSum /*(5-s)+1+(5-r)*/,true, !plusFile);
-        throw new CannotConstructVectorException(this, ano);
-    }
-
-    public DiagonalVector longerDiagonalVectorTo(Pos ano, DiagonalVector shorter) throws CannotConstructVectorException {
+            ret.add(new DiagonalVector(absFileDiff, inwardShort, plusFile));
         int rankSum = ano.rank + rank;
-        if (ano.file == (shorter.plusFile ? file - rankSum + 24 : file + rankSum) % 24)
-            return new DiagonalVector(rankSum, true, shorter.plusFile);
-        throw new CannotConstructVectorException(this, ano);
-    }
-
-    public ArrayList<DiagonalVector> diagonalVectorsTo(Pos ano) {
-        ArrayList<DiagonalVector> ret = new ArrayList<>();
-        try {
-            DiagonalVector shorter = shorterDiagonalVectorTo(ano);
-            ret.add(shorter);
-            ret.add(longerDiagonalVectorTo(ano, shorter));
-        } catch (CannotConstructVectorException ignored) {
-        }
+        if (absFileDiff != 0 && absFileDiff == rankSum)
+            ret.add(new DiagonalVector(
+                    5 + 5 + 1 - rankSum /*(5-s)+1+(5-r)*/, true, !plusFile));
         return ret;
     }
 
