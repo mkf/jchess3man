@@ -181,35 +181,31 @@ public class Pos {
 
     public DiagonalVector kingDiagonalVectorTo(Pos ano)
             throws CannotConstructVectorException {
-        if (rank == 5 && ano.rank == 5) {
-            SolelyThruCenterDiagonalVector theSolely =
-                    new SolelyThruCenterDiagonalVector(true);
-            try {
-                if (theSolely.addTo(this).equals(ano))
-                    return theSolely;
-            } catch (VectorAdditionFailedException ignored) {
-            }
-            theSolely = new SolelyThruCenterDiagonalVector(false);
-            try {
-                if (theSolely.addTo(this).equals(ano))
-                    return theSolely;
-            } catch (VectorAdditionFailedException ignored) {
-            }
-            throw new CannotConstructVectorException(this, ano);
+        DiagonalVector theDirect;
+        theDirect = new DiagonalVector(1, true, true);
+        try {
+            if (theDirect.addTo(this).equals(ano))
+                return theDirect;
+        } catch (VectorAdditionFailedException ignored) {
         }
-        DirectDiagonalVector theDirect;
-        theDirect = new DirectDiagonalVector(1, 1);
-        if (theDirect.addTo(this).equals(ano))
-            return theDirect;
-        theDirect = new DirectDiagonalVector(-1, -1);
-        if (theDirect.addTo(this).equals(ano))
-            return theDirect;
-        theDirect = new DirectDiagonalVector(1, -1);
-        if (theDirect.addTo(this).equals(ano))
-            return theDirect;
-        theDirect = new DirectDiagonalVector(-1, 1);
-        if (theDirect.addTo(this).equals(ano))
-            return theDirect;
+        theDirect = new DiagonalVector(1, false, false);
+        try {
+            if (theDirect.addTo(this).equals(ano))
+                return theDirect;
+        } catch (VectorAdditionFailedException ignored) {
+        }
+        theDirect = new DiagonalVector(1, true, false);
+        try {
+            if (theDirect.addTo(this).equals(ano))
+                return theDirect;
+        } catch (VectorAdditionFailedException ignored) {
+        }
+        theDirect = new DiagonalVector(1, false, true);
+        try {
+            if (theDirect.addTo(this).equals(ano))
+                return theDirect;
+        } catch (VectorAdditionFailedException ignored) {
+        }
         throw new CannotConstructVectorException(this, ano);
     }
 
@@ -243,11 +239,11 @@ public class Pos {
         int absRankDiff = (inwardShort ? ano.rank - rank : rank - ano.rank);
         //if the move is not to the same rank
         if (rank != ano.rank && absFileDiff==absRankDiff)
-            return new DirectDiagonalVector(absFileDiff, inwardShort, plusFile);
+            return new DiagonalVector(absFileDiff, inwardShort, plusFile);
         int rankSum = ano.rank+rank;
         if (absFileDiff!=0 && absFileDiff==rankSum)
-            return new LongDiagonalVector(
-                    5 + 5 + 1 - rankSum /*(5-s)+1+(5-r)*/, !plusFile);
+            return new DiagonalVector(
+                    5 + 5 + 1 - rankSum /*(5-s)+1+(5-r)*/,true, !plusFile);
         throw new CannotConstructVectorException(this, ano);
     }
 
@@ -280,16 +276,10 @@ public class Pos {
     }
     */
 
-    public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DiagonalVector shorter) throws CannotConstructVectorException {
-        if (shorter instanceof DirectDiagonalVector)
-            return longerDiagonalVectorTo(ano, (DirectDiagonalVector) shorter);
-        throw new CannotConstructVectorException(this, ano);
-    }
-
-    public LongDiagonalVector longerDiagonalVectorTo(Pos ano, DirectDiagonalVector shorter) throws CannotConstructVectorException {
+    public DiagonalVector longerDiagonalVectorTo(Pos ano, DiagonalVector shorter) throws CannotConstructVectorException {
         int rankSum = ano.rank + rank;
         if (ano.file == (shorter.plusFile ? file - rankSum + 24 : file + rankSum) % 24)
-            return new LongDiagonalVector(rankSum, shorter.plusFile);
+            return new DiagonalVector(rankSum, true, shorter.plusFile);
         throw new CannotConstructVectorException(this, ano);
     }
 

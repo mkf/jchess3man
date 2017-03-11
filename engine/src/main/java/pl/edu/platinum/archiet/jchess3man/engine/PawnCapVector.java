@@ -12,16 +12,8 @@ import static java.lang.Boolean.logicalOr;
  * Created by Michał Krzysztof Feiler on 29.01.17.
  */
 public class PawnCapVector extends DiagonalVector implements PawnVector {
-    public final boolean inward;
-
     public PawnCapVector(boolean inward, boolean plusFile) {
-        super(1, plusFile);
-        this.inward = inward;
-    }
-
-    @Override
-    public boolean inward() {
-        return inward;
+        super(1,inward, plusFile);
     }
 
     @Override
@@ -76,9 +68,12 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
             throw new VectorAdditionFailedException(from, this);
         }
         if (thruCenter(from.rank)) {
+            /*
             return new Pos(
                     5,
                     SolelyThruCenterDiagonalVector.addFile(from.file, plusFile));
+                    */
+            return super.addTo(from);
         }
         return new Pos(
                 from.rank + (inward ? 1 : -1),
@@ -107,7 +102,6 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
      *
      * @return an impossible to perform reverse PawnCapVector
      */
-    @Override
     public PawnCapVector reversed() {
         return new PawnCapVector(!inward, !plusFile);
     }
