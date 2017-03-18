@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -75,6 +77,13 @@ public class PlayersAlive {
 
     public PlayersAlive die(Color c) {
         return change(c, false);
+    }
+
+    public ArrayList<Color> listEm() {
+        ArrayList<Color> ret = new ArrayList<>(3);
+        for (final Color color : Color.colors)
+            if (get(color)) ret.add(color);
+        return ret;
     }
 
 }

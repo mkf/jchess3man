@@ -6,11 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ai" />
         <module name="engine" />
+        <module name="player" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ai" target="1.8" />
       <module name="engine" target="1.8" />
+      <module name="player" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

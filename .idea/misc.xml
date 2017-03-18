@@ -103,6 +103,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/engine/pom.xml" />
+        <option value="$PROJECT_DIR$/ai/pom.xml" />
+        <option value="$PROJECT_DIR$/ai/src/main/java/pom.xml" />
+        <option value="$PROJECT_DIR$/player/pom.xml" />
       </list>
     </option>
   </component>

@@ -2,6 +2,8 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import org.jooq.lambda.Seq;
+import org.jooq.lambda.tuple.Tuple2;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -206,9 +208,12 @@ public interface Board {
     }
 
     default boolean equals(Board ano) {
-        for (Pos pos : new AllPosIterable())
-            if (!get(pos).equals(ano.get(pos)))
+        for (Pos pos : new AllPosIterable()) {
+            Fig a = get(pos);
+            Fig b = ano.get(pos);
+            if (a == b || a.equals(b))
                 return false;
+        }
         return true;
     }
 
@@ -222,6 +227,67 @@ public interface Board {
                 return Stream.of(new FriendOrNot(tjf.color == who, pos));
             });
         } else return Stream.empty();
+    }
+
+    default Tuple2<Seq<Pos>, Seq<Pos>> friendsAndOthers(Color who, PlayersAlive pa) {
+        Stream<FriendOrNot> stream = friendsAndNot(who, pa);
+        return friendsAndOthers(stream);
+    }
+
+    static Tuple2<Seq<Pos>, Seq<Pos>> friendsAndOthers(Stream<FriendOrNot> stream) {
+        Tuple2<Seq<FriendOrNot>, Seq<FriendOrNot>> duplicated =
+                Seq.seq(stream).duplicate();
+        Tuple2<Seq<FriendOrNot>, Seq<FriendOrNot>> friendsAndOthers =
+                duplicated.v1.partition(some -> some.friend);
+        Seq<Pos> friends = friendsAndOthers.v1.map(some -> some.pos);
+        Seq<Pos> others = friendsAndOthers.v2.map(some -> some.pos);
+        return new Tuple2<>(friends, others);
+    }
+
+    default Tuple2<Seq<FigType>, Seq<FigType>> threateningAndThreatened(
+            Color who, PlayersAlive pa, EnPassantStore ep
+    ) {
+        Tuple2<Seq<Pos>, Seq<Pos>> fAO = friendsAndOthers(who, pa);
+        return threateningAndThreatened(who, pa, ep, fAO);
+    }
+
+    default Tuple2<Seq<FigType>, Seq<FigType>> threateningAndThreatened(
+            Color who, PlayersAlive pa, EnPassantStore ep,
+            Stream<FriendOrNot> stream
+    ) {
+        Seq<FriendOrNot> primary = Seq.seq(stream);
+        return threateningAndThreatened(who, pa, ep, friendsAndOthers(primary));
+    }
+
+    default Tuple2<Seq<FigType>, Seq<FigType>> threateningAndThreatened(
+            Color who, PlayersAlive pa, EnPassantStore ep,
+            Tuple2<Seq<Pos>, Seq<Pos>> fAO
+    ) {
+        Seq<Pos> friends = fAO.v1;
+        Seq<Pos> others = fAO.v2;
+        return threateningAndThreatened(who, pa, ep, friends, others);
+    }
+
+    default Tuple2<Seq<FigType>, Seq<FigType>> threateningAndThreatened(
+            Color who, PlayersAlive pa, EnPassantStore ep,
+            Seq<Pos> friends, Seq<Pos> others
+    ) {
+//           others.forEach(ich -> friends.forEach(nasz -> ));
+        Seq<FigType> ing = others.parallel()
+                .flatMap(ich -> friends
+                        .flatMap(nasz -> {
+                            Fig fig = get(ich);
+                            return isThereAThreat(ich, nasz, pa, ep, fig)
+                                    ? Stream.of(fig.type) : Stream.empty();
+                        }));
+        Seq<FigType> ed = friends.parallel()
+                .flatMap(nasz -> friends
+                        .flatMap(ich -> {
+                            Fig fig = get(nasz);
+                            return isThereAThreat(nasz, ich, pa, ep, fig)
+                                    ? Stream.of(fig.type) : Stream.empty();
+                        }));
+        return new Tuple2<>(ing, ed);
     }
 }
 

@@ -5,11 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.edu.platinum.archiet.jchess3man</groupId>
-    <artifactId>engine</artifactId>
-    <version>0.0.1-SNAPSHOT+1</version>
-    <name>engine</name>
+    <artifactId>ai</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>ai</name>
 
     <dependencies>
+        <dependency>
+            <groupId>pl.edu.platinum.archiet.jchess3man</groupId>
+            <artifactId>engine</artifactId>
+            <version>0.0.1-SNAPSHOT+1</version>
+        </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
@@ -19,11 +24,6 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jool</artifactId>
-            <version>0.9.12</version>
         </dependency>
     </dependencies>
 
