@@ -10,7 +10,6 @@ public class BoundVec {
     public final Pos from;
     public final Pos to;
 
-    @Contract(pure = true)
     public BoundVec(Vector vec, Pos from)
             throws VectorAdditionFailedException, NeedsToBePromotedException {
         this.vec = vec;

@@ -13,13 +13,11 @@ public class Move {
     public final BoundVec boundVec;
     public final GameState before;
 
-    @Contract(pure = true)
     public Move(BoundVec boundVec, GameState before) {
         this.boundVec = boundVec;
         this.before = before;
     }
 
-    @Contract(pure = true)
     public Move(Vector vec, Pos from, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
         this(new BoundVec(vec, from), before);
     }
