@@ -6,7 +6,7 @@
 
     <groupId>pl.edu.platinum.archiet.jchess3man</groupId>
     <artifactId>engine</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>engine</name>
 
     <dependencies>
