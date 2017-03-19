@@ -24,7 +24,7 @@ interface PawnPromVector extends PawnVector {
         switch (promTo) {
             case King:
             case Pawn:
-            case ZeroFigType:
+                //case ZeroFigType:
                 throw new IllegalArgumentException(promTo.name());
         }
     }

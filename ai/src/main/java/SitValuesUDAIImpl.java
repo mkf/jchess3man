@@ -5,6 +5,8 @@ import pl.edu.platinum.archiet.jchess3man.engine.*;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -34,7 +36,8 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
         assert (this.ownedToThreatened > 0);
     }
 
-    private void worker(double newChance, AtomicReference<Double> makeFloat, GameState aft, Color movesNext) {
+    private void worker(double newChance, AtomicReference<Double> makeFloat, GameState after, Color movesNext, ExecutorService executor) {
+        final GameState aft = after.evaluateDeath();
         UnaryOperator<Double> addition = d -> d + (sitValue(aft, movesNext));
         if (!aft.alivePlayers.get(movesNext) || //if dead
                 newChance < curFixPrec) { //if too deep
@@ -46,7 +49,7 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
         for (final Pos wFrom : aft.board.friendsAndOthers(aft.movesNext, aft.alivePlayers).v1)
             for (final Pos wTo : AMFT.getIterableFor(wFrom)) {
                 wwg.incrementAndGet();
-                new Thread(() -> {
+                executor.submit(() -> {
                     FromToPromMove wFromToPromMove =
                             new FromToPromMove(wFrom, wTo, aft);
                     try {
@@ -69,11 +72,8 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                                 wFromToPromMove.generateAfters();
                         final Optional<GameState>
                                 wAny = wEitherStateOrIllMoveExceptStream
-                                .filter(FromToPromMove.EitherStateOrIllMoveExcept
-                                        ::isState)
-                                .map(some -> some.state)
-                                .findAny().flatMap(some ->
-                                        some.isPresent() ? Optional.empty() : some);
+                                .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                                .findAny();
                         if (wAny.isPresent()) {
                             GameState wAft = wAny.get();
                             possib.add(wAft);
@@ -86,7 +86,7 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                     }
                     wwg.decrementAndGet();
                     wwg.notif();
-                }).start();
+                });
             }
         while (wwg.get() > 0) {
             wwg.oWait();
@@ -95,7 +95,7 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
         for (final GameState m : possib) {
             wwg.incrementAndGet();
             new Thread(() -> {
-                worker(chance, makeFloat, m, movesNext);
+                worker(chance, makeFloat, m, movesNext, executor);
                 wwg.decrementAndGet();
                 wwg.notif();
             }).start();
@@ -141,6 +141,7 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
 
     @Override
     public FromToPromMove decide(GameState s) {
+        ExecutorService executor = Executors.newCachedThreadPool();
         curFixPrec = precision;
         ConcurrentHashMap<FromTo, AtomicReference<Double>> thoughts =
                 new ConcurrentHashMap<>(30);
@@ -153,7 +154,7 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
         //    }
         //}
         (new AllPosIterable()).forEach((Pos from) ->
-                AMFT.getIterableFor(from).forEach((Pos to) -> new Thread(() -> {
+                AMFT.getIterableFor(from).forEach((Pos to) -> executor.submit(() -> {
                     FromToPromMove fromToPromMove =
                             new FromToPromMove(from, to, s);
                     try {
@@ -174,19 +175,15 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                     try {
                         final Stream<FromToPromMove.EitherStateOrIllMoveExcept>
                                 eitherStateOrIllMoveExceptStream =
-                                fromToPromMove.generateAfters();
+                                fromToPromMove.generateAftersWOEvaluatingDeathNorCheckingCheckJustCheckInitiation();
                         final Optional<GameState>
                                 any = eitherStateOrIllMoveExceptStream
-                                .filter(FromToPromMove.EitherStateOrIllMoveExcept
-                                        ::isState)
-                                .map(some -> some.state)
-                                .filter(Optional::isPresent)
-                                .map(Optional::get)
+                                .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
                                 .findAny();
                         if (any.isPresent()) {
                             GameState aft = any.get();
                             gwg.incrementAndGet();
-                            new Thread(() -> {
+                            executor.submit(() -> {
                                 countEm.incrementAndGet();
                                 countEm.notif();
                                 double newChance;
@@ -196,10 +193,10 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                                 newChance = 1.0 / countEm.get();
                                 AtomicReference<Double> makeFloat = new AtomicReference<>(0.0);
                                 thoughts.put(new FromTo(from, to), makeFloat);
-                                worker(newChance, makeFloat, aft, s.movesNext);
+                                worker(newChance, makeFloat, aft, s.movesNext, executor);
                                 gwg.decrementAndGet();
                                 gwg.notif();
-                            }).start();
+                            });
                         } else gwg.notif();
                     } catch (NeedsToBePromotedException e) {
                         e.printStackTrace();
@@ -212,7 +209,7 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                         nlas.set(false);
                         nlas.notif();
                     }
-                }).start()));
+                })));
         wg.set(false);
         wg.notif();
         /*
@@ -231,6 +228,7 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
         while (gwg.get() > 0) {
             gwg.oWait();
         }
+        executor.shutdownNow();
         /*
         LinkedList<FromTo> ourfts = new LinkedList<>();
         for (final Map.Entry<FromTo, AtomicReference<Double>> entry
@@ -278,8 +276,6 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                 return 10;
             case King:
                 return 3;
-            case ZeroFigType:
-                throw new IllegalArgumentException(ft.toString());
             default:
                 throw new IllegalArgumentException(ft.toString());
         }

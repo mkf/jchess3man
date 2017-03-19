@@ -1,5 +1,6 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -8,81 +9,161 @@ import java.util.stream.StreamSupport;
 
 /**
  * Created by Michał Krzysztof Feiler on 18.02.17.
+ * FromToPromMove is an old-fashioned Move struct:
+ * it contains fields [from], [to], [GameState] [before],
+ * and optionally [pawnPromotion]
  */
+
 public class FromToPromMove extends FromToProm {
+    /**
+     * the state before move
+     * the only field that extends FromToPromMove from FromToProm
+     */
     public final GameState before;
 
+    /**
+     * A constructor for the old-fashioned Move struct analogue
+     * the move not being a pawn move having to result in promotion
+     *
+     * @param from   starting position
+     * @param to     destination
+     * @param before the state before
+     */
     public FromToPromMove(Pos from, Pos to, GameState before) {
         this(from, to, before, null);
     }
 
+    /**
+     * A constructor for the old-fashioned Move struct analogue
+     * if [pawnPromotion] not null, promotion is assumed
+     * although currently everything should work and if no promotion may occur
+     * a pawnPromotion==FigType.queen would probably change nothing
+     *
+     * @param from          starting position
+     * @param to            destination position
+     * @param before        the state before
+     * @param pawnPromotion the FigType to which there will be promotion or null
+     */
     public FromToPromMove(Pos from, Pos to, GameState before, @Nullable FigType pawnPromotion) {
         super(from, to, pawnPromotion);
         this.before = before;
     }
 
+    /**
+     * @return string representation:
+     * `[0,7]→[0,8]Þþt_///pl.edu.platinum.archiet.jchess3man.engine.GameState@3d8c7aca`
+     * from→toÞþ[pawnPromotion]///before.toString()
+     */
     @Override
     public String toString() {
         return super.toString() + "///" + before.toString();
     }
 
+    /**
+     * Gets the Fig from before.board and calls generateVecs(fsq) on it
+     *
+     * @throws NullPointerException       if the from square is empty on before.board
+     * @throws NeedsToBePromotedException if the promotion is required but pawnPromotion is null
+     */
     public void generateVecs() throws NullPointerException, NeedsToBePromotedException {
         Fig fsq = before.board.get(from);
         if (fsq != null) generateVecs(fsq);
         else throw new NullPointerException(from.toString() + "\n" + before.board.string());
     }
 
+    /**
+     * generates After states with evaluating death and checking check
+     *
+     * @return stream of Either them (those States) or IllegalMoveExceptions
+     * @throws NeedsToBePromotedException if not areVecsGenerated _and_ the promotion is required but pawnPromotion is null
+     */
     public Stream<EitherStateOrIllMoveExcept> generateAfters() throws NeedsToBePromotedException {
         return generateAfters(true);
     }
 
+    /**
+     * generates After states but without evaluating death nor checking check
+     * with check initiation checking though
+     * @return stream of Either them (those States) or IllegalMoveExceptions
+     * @throws NeedsToBePromotedException if not areVecsGenerated _and_ the promotion is required but pawnPromotion is null
+     */
     public Stream<EitherStateOrIllMoveExcept> generateAftersWOEvaluatingDeathNorCheckingCheckJustCheckInitiation(
     ) throws NeedsToBePromotedException {
         return generateAfters(false);
     }
 
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    /**
+     * An analogue to something like `Either<[GameState],[IllegalMoveException]>`
+     */
     public static class EitherStateOrIllMoveExcept {
-        public final Optional<GameState> state;
-        public final Optional<IllegalMoveException> exception;
+        /**
+         * The state field in this Either
+         */
+        public final @Nullable GameState state;
+        /**
+         * The exception field in this Either
+         */
+        public final @Nullable IllegalMoveException exception;
 
         private EitherStateOrIllMoveExcept(
-                Optional<GameState> state,
-                Optional<IllegalMoveException> exception) {
+                @Nullable GameState state,
+                @Nullable IllegalMoveException exception) {
             this.state = state;
             this.exception = exception;
         }
 
-        public EitherStateOrIllMoveExcept(GameState state) {
-            this(Optional.of(state), Optional.empty());
+        /**
+         * The "state" option of the Either
+         *
+         * @param state value
+         */
+        public EitherStateOrIllMoveExcept(@NotNull GameState state) {
+            this(state, null);
         }
 
-        public EitherStateOrIllMoveExcept(IllegalMoveException exception) {
-            this(Optional.empty(), Optional.of(exception));
+        /**
+         * The "exception" option of the Either
+         *
+         * @param exception value
+         */
+        public EitherStateOrIllMoveExcept(@NotNull IllegalMoveException exception) {
+            this(null, exception);
         }
 
         EitherStateOrIllMoveExcept() {
-            this(Optional.empty(), Optional.empty());
+            this(null, null);
         }
 
+        /**
+         * @return whether state is present in the Either
+         */
         public boolean isState() {
-            return state.isPresent();
+            return state != null;
         }
 
+        /**
+         * @return whether exception is present in the Either
+         */
         public boolean isException() {
-            return exception.isPresent();
+            return exception != null;
         }
 
+        /**
+         * @return Stream.of(state) or Stream.empty()
+         */
         public Stream<GameState> flatMapState() {
-            return state.isPresent() ? Stream.of(state.get()) : Stream.empty();
+            return isState() ? Stream.of(state) : Stream.empty();
         }
 
+        /**
+         * @return Stream.of(exception) or Stream.empty()
+         */
         public Stream<IllegalMoveException> flatMapException() {
-            return exception.isPresent() ? Stream.of(exception.get()) : Stream.empty();
+            return isException() ? Stream.of(exception) : Stream.empty();
         }
     }
 
-    public Stream<EitherStateOrIllMoveExcept> generateAfters(boolean withEvalDeath) throws NeedsToBePromotedException {
+    protected Stream<EitherStateOrIllMoveExcept> generateAfters(boolean withEvalDeath) throws NeedsToBePromotedException {
         if (!areVecsGenerated()) generateVecs();
         assert (vecs != null);
         return StreamSupport
@@ -107,8 +188,10 @@ public class FromToPromMove extends FromToProm {
                 })
                         : (move -> {
                     try {
-                        return new EitherStateOrIllMoveExcept(move
-                                .afterWOEvaluatingDeathNorCheckingCheckJustCheckInitiation());
+                        GameState ret = move
+                                .afterWOEvaluatingDeathNorCheckingCheckJustCheckInitiation();
+                        ret.throwCheck(move.who());
+                        return new EitherStateOrIllMoveExcept(ret);
                     } catch (NeedsToBePromotedException e) {
                         throw new AssertionError(e);
                     } catch (ImpossibleMoveException | CheckInitiatedThruMoatException e) {

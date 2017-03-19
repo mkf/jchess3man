@@ -4,9 +4,10 @@ import org.jetbrains.annotations.Contract;
 
 /**
  * Created by Michał Krzysztof Feiler on 02.02.17.
+ * An enum for FigType, without ZeroFigType which is not even deprecated but commented now
  */
 public enum FigType {
-    ZeroFigType((byte) 0),
+    //ZeroFigType((byte) 0),
     Rook((byte) 1),
     Knight((byte) 2),
     Bishop((byte) 3),
@@ -21,18 +22,29 @@ public enum FigType {
 
     public static final FigType[] vals = values();
 
+    @Contract(value = "null -> false", pure = true)
+    public boolean equals(FigType b) {
+        return b != null && b.index == index;
+    }
+
     @Contract(pure = true)
     public static FigType fromIndex(int index) {
         return vals[index];
     }
 
+    @Contract(pure = true)
     public static FigType fromIndex(byte index) {
         return vals[index];
     }
 
     @Contract(pure = true)
-    public int toInt() {
+    public final int toInt() {
         return (int) index;
+    }
+
+    @Contract(pure = true, value = "null -> _")
+    public static int toInt(FigType a) {
+        return a == null ? 0 : a.toInt();
     }
 
     public static final String[] strings = {"t0", "tR", "tN", "tB", "tQ", "tK", "tP"};

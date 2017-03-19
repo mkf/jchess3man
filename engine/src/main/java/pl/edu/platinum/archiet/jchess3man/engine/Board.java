@@ -1,6 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
@@ -108,7 +109,9 @@ public interface Board {
             PlayersAlive playersAlive,
             EnPassantStore enPassantStore
     ) {
-        return isThereAThreat(to, from, playersAlive, enPassantStore, get(from));
+        Fig fig = get(from);
+        if (fig == null) throw new NullPointerException(from.toString());
+        return isThereAThreat(to, from, playersAlive, enPassantStore, fig);
     }
 
     default boolean isThereAThreat(
@@ -116,7 +119,7 @@ public interface Board {
             Pos from,
             PlayersAlive playersAlive,
             EnPassantStore enPassantStore,
-            Fig fig
+            @NotNull Fig fig
     ) {
         return isThereAThreat(to, from, playersAlive, enPassantStore,
                 fig.vecs(from, to));
@@ -212,7 +215,7 @@ public interface Board {
         for (Pos pos : new AllPosIterable()) {
             Fig a = get(pos);
             Fig b = ano.get(pos);
-            if (a == b || a.equals(b))
+            if (a == b || a != null && a.equals(b))
                 return false;
         }
         return true;
@@ -281,6 +284,7 @@ public interface Board {
                 .flatMap(ich -> Seq.seq(free)
                         .flatMap(nasz -> {
                             Fig fig = get(ich);
+                            assert fig != null;
                             return isThereAThreat(ich, nasz, pa, ep, fig)
                                     ? Stream.of(fig.type) : Stream.empty();
                         }));
@@ -289,6 +293,7 @@ public interface Board {
                 .flatMap(nasz -> Seq.seq(oth)
                         .flatMap(ich -> {
                             Fig fig = get(nasz);
+                            assert fig != null;
                             return isThereAThreat(nasz, ich, pa, ep, fig)
                                     ? Stream.of(fig.type) : Stream.empty();
                         }));

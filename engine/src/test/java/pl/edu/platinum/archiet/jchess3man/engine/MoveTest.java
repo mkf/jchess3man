@@ -45,12 +45,12 @@ class MoveTest {
                 new Pos(3, 0),
                 newGame
         );
-        AtomicReference<GameState> temp = new AtomicReference<GameState>();
+        AtomicReference<GameState> temp = new AtomicReference<>();
         final AtomicBoolean thereAreStates = new AtomicBoolean(false);
         List<IllegalMoveException> exceptions = first.generateAfters().peek(
                 (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
                     if (!thereAreStates.get() && either.isState()) {
-                        temp.set(either.state.get());
+                        temp.set(either.state);
                         thereAreStates.set(true);
                     }
                 }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
@@ -110,7 +110,7 @@ class MoveTest {
                 .generateAfters().peek(
                         (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
                             if (!thereAreStates.get() && either.isState()) {
-                                temp.set(either.state.get());
+                                temp.set(either.state);
                                 thereAreStates.set(true);
                             }
                         }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
@@ -143,7 +143,7 @@ class MoveTest {
         List<IllegalMoveException> exceptions = move.generateAfters().peek(
                 (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
                     if (!thereAreStates.get() && either.isState()) {
-                        statePointer.set(either.state.get());
+                        statePointer.set(either.state);
                         thereAreStates.set(true);
                     }
                 }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
@@ -158,7 +158,7 @@ class MoveTest {
             exceptions = move.generateAfters().peek(
                     (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
                         if (!thereAreStates.get() && either.isState()) {
-                            statePointer.set(either.state.get());
+                            statePointer.set(either.state);
                             thereAreStates.set(true);
                         }
                     }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
@@ -178,7 +178,7 @@ class MoveTest {
                 exceptions = move.generateAfters().peek(
                         either -> {
                             if (!thereAreStates.get() && either.isState()) {
-                                statePointer.set(either.state.get());
+                                statePointer.set(either.state);
                                 thereAreStates.set(true);
                             }
                         }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
@@ -199,7 +199,7 @@ class MoveTest {
             exceptions = move.generateAfters().peek(
                     (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
                         if (!thereAreStates.get() && either.isState()) {
-                            statePointer.set(either.state.get());
+                            statePointer.set(either.state);
                             thereAreStates.set(true);
                         }
                     }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)

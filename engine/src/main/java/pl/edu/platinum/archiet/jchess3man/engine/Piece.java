@@ -35,7 +35,7 @@ public class Piece {
 
     static {
         runeMap = Collections.unmodifiableMap(new HashMap<FigType, Map<Color, Character>>() {{
-            put(FigType.ZeroFigType, bCM('~', '=', (char) 0x2014, '-'));
+            //put(FigType.ZeroFigType, bCM('~', '=', (char) 0x2014, '-'));
             put(FigType.Rook, bCM('?', 'R', (char) 0x2656, 'r'));
             put(FigType.Knight, bCM('?', 'N', (char) 0x2658, 'n'));
             put(FigType.Bishop, bCM('?', 'B', (char) 0x2657, 'b'));

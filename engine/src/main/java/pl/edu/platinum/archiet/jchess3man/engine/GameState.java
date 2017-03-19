@@ -179,4 +179,16 @@ public class GameState {
         }
         return pa;
     }
+
+    public GameState evaluateDeathThrowingCheck(Color whatColor) throws WeInCheckException {
+        return Move.evaluateDeathThrowingCheck(this, whatColor);
+    }
+
+    public void throwCheck(Color whatColor) throws WeInCheckException {
+        Move.throwCheck(this, whatColor);
+    }
+
+    public GameState evaluateDeath() {
+        return Move.evaluateDeath(this);
+    }
 }

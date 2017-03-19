@@ -285,12 +285,12 @@ public class Move {
         }
         EnPassantStore enPassantStore = afterEnPassantStore();
         if (boundVec.moats().iterator().hasNext()) {
-            if (before.board.isThereAThreat(
+            if (b.isThereAThreat(
                     before.board._whereIsKing(who().previous()),
                     boundVec.to,
                     before.alivePlayers,
                     enPassantStore
-            ) || before.board.isThereAThreat(
+            ) || b.isThereAThreat(
                     before.board._whereIsKing(who().next()),
                     boundVec.to,
                     before.alivePlayers,
@@ -313,15 +313,24 @@ public class Move {
         );
     }
 
-    public static GameState evaluateDeathThrowingCheck(GameState next, Color whatColor)
+    public static void throwCheck(GameState next, Color whatColor)
             throws WeInCheckException {
         Optional<Pos> heyItsCheck = next.amIinCheck(whatColor).findFirst();
         if (heyItsCheck.isPresent())
             throw new WeInCheckException(
                     new Impossibility.WeInCheck(heyItsCheck.get()));
+    }
+
+    public static GameState evaluateDeath(GameState next) {
         PlayersAlive newAliveColors = next.evalDeath();
         if (newAliveColors.equals(next.alivePlayers)) return next;
         return new GameState(next, newAliveColors);
+    }
+
+    public static GameState evaluateDeathThrowingCheck(GameState next, Color whatColor)
+            throws WeInCheckException {
+        throwCheck(next, whatColor);
+        return evaluateDeath(next);
     }
 
     public GameState after() throws

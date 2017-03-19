@@ -14,7 +14,8 @@ public class BoundVec {
             throws VectorAdditionFailedException, NeedsToBePromotedException {
         this.vec = vec;
         this.from = from;
-        this.to = from.addVec(vec);
+        to = from.addVec(vec);
+        assert (to != null);
         if (to.equals(from))
             /*
             As stated in Clif's email from Mon, 2 Nov 2015 11:32:54 -0500

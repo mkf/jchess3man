@@ -100,8 +100,7 @@ public abstract class Fig extends Piece implements VecsInterface {
                 return new Fig.Pawn(color, pawnCenter);
             case Queen:
                 return new Fig.Queen(color);
-            case ZeroFigType:
-                return null;
+            //case ZeroFigType: return null;
         }
         throw new AssertionError("" + type + color + pawnCenter);
     }
