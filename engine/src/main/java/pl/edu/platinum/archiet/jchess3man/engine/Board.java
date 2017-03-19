@@ -6,6 +6,7 @@ import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -273,15 +274,19 @@ public interface Board {
             Seq<Pos> friends, Seq<Pos> others
     ) {
 //           others.forEach(ich -> friends.forEach(nasz -> ));
-        Seq<FigType> ing = others.parallel()
-                .flatMap(ich -> friends
+        Tuple2<Seq<Pos>, Seq<Pos>> friendsT = friends.duplicate();
+        Tuple2<Seq<Pos>, Seq<Pos>> othersT = others.duplicate();
+        List<Pos> free = friendsT.v1.toList();
+        Seq<FigType> ing = othersT.v1.parallel()
+                .flatMap(ich -> Seq.seq(free)
                         .flatMap(nasz -> {
                             Fig fig = get(ich);
                             return isThereAThreat(ich, nasz, pa, ep, fig)
                                     ? Stream.of(fig.type) : Stream.empty();
                         }));
-        Seq<FigType> ed = friends.parallel()
-                .flatMap(nasz -> friends
+        List<Pos> oth = othersT.v2.toList();
+        Seq<FigType> ed = friendsT.v2.parallel()
+                .flatMap(nasz -> Seq.seq(oth)
                         .flatMap(ich -> {
                             Fig fig = get(nasz);
                             return isThereAThreat(nasz, ich, pa, ep, fig)

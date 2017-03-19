@@ -2,7 +2,6 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -20,6 +19,11 @@ public class FromToPromMove extends FromToProm {
     public FromToPromMove(Pos from, Pos to, GameState before, @Nullable FigType pawnPromotion) {
         super(from, to, pawnPromotion);
         this.before = before;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "///" + before.toString();
     }
 
     public void generateVecs() throws NullPointerException, NeedsToBePromotedException {

@@ -28,6 +28,11 @@ public class FromToProm {
         this.pawnPromotion = pawnPromotion;
     }
 
+    @Override
+    public String toString() {
+        return from.toString() + "→" + to.toString() + "Þþ" + FigType.string(pawnPromotion);
+    }
+
     public boolean areVecsGenerated() {
         return vecsAreGenerated;
     }

@@ -41,9 +41,9 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
             makeFloat.getAndUpdate(addition);
             return;
         }
-        AtomicInteger wwg = new AtomicInteger(0);
+        AtoInt wwg = new AtoInt(0);
         ArrayList<GameState> possib = new ArrayList<>(2050);
-        for (final Pos wFrom : new AllPosIterable())
+        for (final Pos wFrom : aft.board.friendsAndOthers(aft.movesNext, aft.alivePlayers).v1)
             for (final Pos wTo : AMFT.getIterableFor(wFrom)) {
                 wwg.incrementAndGet();
                 new Thread(() -> {
@@ -85,14 +85,11 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                                 e);
                     }
                     wwg.decrementAndGet();
-                    wwg.notifyAll();
+                    wwg.notif();
                 }).start();
             }
         while (wwg.get() > 0) {
-            try {
-                wwg.wait();
-            } catch (InterruptedException ignored) {
-            }
+            wwg.oWait();
         }
         double chance = newChance / (double) (possib.size());
         for (final GameState m : possib) {
@@ -100,14 +97,45 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
             new Thread(() -> {
                 worker(chance, makeFloat, m, movesNext);
                 wwg.decrementAndGet();
-                wwg.notifyAll();
+                wwg.notif();
             }).start();
         }
         while (wwg.get() > 0) {
+            wwg.oWait();
+        }
+    }
+
+    private static class AtoInt extends AtomicInteger {
+        AtoInt(int src) {
+            super(src);
+        }
+
+        synchronized void oWait() {
             try {
-                wwg.wait();
+                wait();
             } catch (InterruptedException ignored) {
             }
+        }
+
+        synchronized void notif() {
+            notifyAll();
+        }
+    }
+
+    private static class AtoBool extends AtomicBoolean {
+        AtoBool(boolean src) {
+            super(src);
+        }
+
+        synchronized void oWait() {
+            try {
+                wait();
+            } catch (InterruptedException ignored) {
+            }
+        }
+
+        synchronized void notif() {
+            notifyAll();
         }
     }
 
@@ -116,15 +144,16 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
         curFixPrec = precision;
         ConcurrentHashMap<FromTo, AtomicReference<Double>> thoughts =
                 new ConcurrentHashMap<>(30);
-        AtomicLong countEm = new AtomicLong(0);
-        AtomicBoolean wg = new AtomicBoolean(true);
-        AtomicInteger gwg = new AtomicInteger(0);
+        AtoInt countEm = new AtoInt(0);
+        AtoBool wg = new AtoBool(true);
+        AtoInt gwg = new AtoInt(0);
+        AtoBool nlas = new AtoBool(true);
         //for(final Pos from : new AllPosIterable()) {
         //    for(final Pos to : AMFT.getIterableFor(from)) {
         //    }
         //}
         (new AllPosIterable()).forEach((Pos from) ->
-                AMFT.getIterableFor(from).forEach((Pos to) -> {
+                AMFT.getIterableFor(from).forEach((Pos to) -> new Thread(() -> {
                     FromToPromMove fromToPromMove =
                             new FromToPromMove(from, to, s);
                     try {
@@ -151,28 +180,27 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                                 .filter(FromToPromMove.EitherStateOrIllMoveExcept
                                         ::isState)
                                 .map(some -> some.state)
-                                .findAny().flatMap(some ->
-                                        some.isPresent() ? Optional.empty() : some);
+                                .filter(Optional::isPresent)
+                                .map(Optional::get)
+                                .findAny();
                         if (any.isPresent()) {
                             GameState aft = any.get();
                             gwg.incrementAndGet();
                             new Thread(() -> {
                                 countEm.incrementAndGet();
+                                countEm.notif();
                                 double newChance;
                                 while (wg.get()) {
-                                    try {
-                                        wg.wait();
-                                    } catch (InterruptedException ignored) {
-                                    }
+                                    wg.oWait();
                                 }
                                 newChance = 1.0 / countEm.get();
                                 AtomicReference<Double> makeFloat = new AtomicReference<>(0.0);
                                 thoughts.put(new FromTo(from, to), makeFloat);
                                 worker(newChance, makeFloat, aft, s.movesNext);
                                 gwg.decrementAndGet();
-                                gwg.notifyAll();
+                                gwg.notif();
                             }).start();
-                        }
+                        } else gwg.notif();
                     } catch (NeedsToBePromotedException e) {
                         e.printStackTrace();
                         throw new AssertionError(
@@ -180,33 +208,49 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
                                 e);
                     } catch (NullPointerException ignored) {
                     }
-                }));
+                    if (from.equals(new Pos(1, 5))) {
+                        nlas.set(false);
+                        nlas.notif();
+                    }
+                }).start()));
         wg.set(false);
+        wg.notif();
+        /*
         try {
-            synchronized (gwg) {
-                gwg.wait();
-            }
+                gwg.oWait();
         } catch (InterruptedException ignored) {
         }
+        */
+        while (nlas.get()) {
+            nlas.oWait();
+        }
+        while (countEm.get() < 1) {
+            //countEm.oWait();
+            if (countEm.get() > 0) break;
+        }
         while (gwg.get() > 0) {
-            try {
-                gwg.wait();
-            } catch (InterruptedException ignored) {
-            }
+            gwg.oWait();
         }
-        double max = 0.0;
-        for (final AtomicReference<Double> vat : thoughts.values()) {
-            double v = vat.get();
-            if (v > max) max = v;
-        }
+        /*
         LinkedList<FromTo> ourfts = new LinkedList<>();
         for (final Map.Entry<FromTo, AtomicReference<Double>> entry
                 : thoughts.entrySet()) {
-            if (entry.getValue().get() == max)
+            if (entry.getValue().get() >= max-precision)
                 ourfts.add(entry.getKey());
         }
-        assert (!ourfts.isEmpty());
-        FromTo ft = ourfts.getLast();
+        */
+        Optional<FromTo> ftso =
+                Seq.seq(thoughts.entrySet()).sorted((a, b) -> {
+                    double c = a.getValue().get();
+                    double d = b.getValue().get();
+                    if (c < d) return 1;
+                    else if (c > d) return -1;
+                    return 0;
+                }).findFirst().map(Map.Entry::getKey);
+        //assert (!ourfts.isEmpty());
+        assert (ftso.isPresent());
+        //FromTo ft = ourfts.getLast();
+        FromTo ft = ftso.get();
         FromToPromMove m = new FromToPromMove(ft.from, ft.to, s);
         try {
             m.generateVecs();
@@ -250,10 +294,12 @@ public class SitValuesUDAIImpl implements SingleMoveUltimateDecisionAI {
         Board b = s.board;
         Tuple2<Seq<Pos>, Seq<Pos>> tuple2 =
                 b.friendsAndOthers(who, s.alivePlayers);
-        Seq<Pos> friends = tuple2.v1.parallel();
-        Seq<Pos> others = tuple2.v2.parallel();
+        Tuple2<Seq<Pos>, Seq<Pos>> friendsT = tuple2.v1.parallel().duplicate();
+        Tuple2<Seq<Pos>, Seq<Pos>> othersT = tuple2.v2.parallel().duplicate();
+        Seq<Pos> friends = friendsT.v1;
+        Seq<Pos> others = othersT.v1;
         Tuple2<Seq<FigType>, Seq<FigType>> threateningAndThreatened = b.threateningAndThreatened(who, s.alivePlayers, s.enPassantStore,
-                friends, others);
+                friendsT.v2, othersT.v2);
         Seq<FigType> ing = threateningAndThreatened.v1.parallel();
         Seq<FigType> ed = threateningAndThreatened.v2.parallel();
         int own = friends.mapToInt(o -> value(b.get(o))).sum();

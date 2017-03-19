@@ -42,6 +42,11 @@ public enum FigType {
         return strings[index];
     }
 
+    @Contract(value = "null -> !null", pure = true)
+    public static String string(FigType a) {
+        return a == null ? "t_" : a.toString();
+    }
+
     public static final FigType[] firstRankNewGame = {
             Rook,
             Knight,
