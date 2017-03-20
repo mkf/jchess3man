@@ -2,6 +2,7 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import org.jooq.lambda.Seq;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -190,5 +191,77 @@ public class GameState {
 
     public GameState evaluateDeath() {
         return Move.evaluateDeath(this);
+    }
+
+    private Seq<FromToProm> genVFTP(Pos from, Pos to) {
+        FromToPromMove move = new FromToPromMove(from, to, this);
+        Stream<FromToPromMove.EitherStateOrIllMoveExcept> afters;
+        try {
+            afters = move.generateAftersWOEvaluatingDeathNorCheckingCheckJustCheckInitiation();
+        } catch (NeedsToBePromotedException e) {
+            move = new FromToPromMove(from, to, this, FigType.Queen);
+            try {
+                afters = move.generateAftersWOEvaluatingDeathNorCheckingCheckJustCheckInitiation();
+            } catch (NeedsToBePromotedException e1) {
+                e1.printStackTrace();
+                throw new AssertionError(e1);
+            }
+        }
+        Optional<GameState> any = afters
+                .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                .findAny();
+        if (any.isPresent()) {
+            if (move.pawnPromotion == null)
+                return Seq.of(new FromToProm(from, to));
+            else return
+                    Seq.of(FigType.Queen, FigType.Rook, FigType.Bishop, FigType.Knight)
+                            .map(prom -> new FromToProm(from, to, prom));
+        } else return Seq.empty();
+    }
+
+    public Seq<FromToProm> genVFTP() {
+        Seq<Pos> ours = board.friendsAndOthers(movesNext, alivePlayers).v1.parallel();
+        return ours.flatMap(from -> Seq.seq(AMFT.getIterableFor(from)).parallel()
+                .flatMap(to -> genVFTP(from, to)));
+    }
+
+    public Seq<GameState> genASAOM(Color ourColor) {
+        if (!alivePlayers.get(ourColor) || movesNext.equals(ourColor))
+            return Seq.of(this);
+        else
+            return genVFTP().flatMap(tft -> genASAOM(ourColor, tft));
+    }
+
+    private Seq<GameState> genASAOM(Color ourColor, FromToProm only) {
+        FromToPromMove moveToApply = new FromToPromMove(
+                only.from, only.to, this, only.pawnPromotion);
+        try {
+            Optional<GameState> any = moveToApply.generateAfters()
+                    .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                    .findAny();
+            assert (any.isPresent());
+            GameState aft = any.get();
+            if (!aft.alivePlayers.get(ourColor) || aft.movesNext.equals(ourColor))
+                return Seq.of(aft);
+            else return aft.genVFTP().map(this::genASAOMinternal);
+        } catch (NeedsToBePromotedException e) {
+            e.printStackTrace();
+            throw new AssertionError(e);
+        }
+    }
+
+    private GameState genASAOMinternal(FromToProm tft) {
+        FromToPromMove moveToBe = new FromToPromMove(
+                tft.from, tft.to, this, tft.pawnPromotion);
+        try {
+            Optional<GameState> newAny = moveToBe.generateAfters()
+                    .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                    .findAny();
+            assert newAny.isPresent();
+            return newAny.get();
+        } catch (NeedsToBePromotedException e) {
+            e.printStackTrace();
+            throw new AssertionError(e);
+        }
     }
 }
