@@ -1,5 +1,6 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.NotNull;
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
 
 import java.util.Arrays;
@@ -55,7 +56,7 @@ public abstract class CastlingVector implements JumpVector, KingVector {
     }
 
     @Override
-    public Iterable<Color> moats(Pos from) {
+    public Iterable<@NotNull Color> moats(Pos from) {
         return Collections.emptyList();
     }
 

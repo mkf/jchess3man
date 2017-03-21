@@ -1,7 +1,11 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
+
+import java.util.Collections;
 
 /**
  * Created by Michał Krzysztof Feiler on 28.01.17.
@@ -76,11 +80,13 @@ public class DiagonalVector extends ContinuousVector {
     }
 
     @Override
-    public Iterable<Color> moats(Pos from) {
+    public Iterable<@NotNull Color> moats(Pos from) {
+        @Nullable Color m = moat(from);
+        if (m == null) return Collections.emptyList();
         return new SingleElementIterable<>(moat(from));
     }
 
-    public Color moat(Pos from) {
+    public @Nullable Color moat(Pos from) {
         /*
         return moat(from, false);
     }

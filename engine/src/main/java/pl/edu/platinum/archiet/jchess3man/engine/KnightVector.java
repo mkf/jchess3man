@@ -1,6 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
 
@@ -128,7 +129,7 @@ public class KnightVector implements JumpVector {
         }
     }
 
-    public Color moat(Pos from) {
+    public @Nullable Color moat(Pos from) {
         Pos to = addTo(from);
         Boolean _xoreq = xoreq(from, to);
         return _xoreq == Boolean.TRUE
@@ -136,8 +137,8 @@ public class KnightVector implements JumpVector {
                 : null;
     }
 
-    public Iterable<Color> moats(Pos from) {
-        Color m = moat(from);
+    public Iterable<@NotNull Color> moats(Pos from) {
+        @Nullable Color m = moat(from);
         if (m != null) return new SingleElementIterable<>(m);
         return Collections.emptyList();
     }

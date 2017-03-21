@@ -2,8 +2,8 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jooq.lambda.Seq;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -49,6 +49,22 @@ public class FromToPromMove extends FromToProm {
         this.before = before;
     }
 
+    protected FromToPromMove(FromToPromMove source, @NotNull FigType pawnPromotion) {
+        super(source, pawnPromotion);
+        this.before = source.before;
+    }
+
+    public FromToPromMove(FromToProm s, GameState before) {
+        this(s.from, s.to, before, s.pawnPromotion);
+        vecs = s.vecs;
+        vecsAreGenerated = s.vecsAreGenerated;
+    }
+
+    Seq<FromToPromMove> promPossible() {
+        if (this.pawnPromotion == null) return Seq.of(this);
+        return seqPromPossible.map(prom -> new FromToPromMove(this, prom));
+    }
+
     /**
      * @return string representation:
      * `[0,7]→[0,8]Þþt_///pl.edu.platinum.archiet.jchess3man.engine.GameState@3d8c7aca`
@@ -87,7 +103,7 @@ public class FromToPromMove extends FromToProm {
      * @return stream of Either them (those States) or IllegalMoveExceptions
      * @throws NeedsToBePromotedException if not areVecsGenerated _and_ the promotion is required but pawnPromotion is null
      */
-    public Stream<EitherStateOrIllMoveExcept> generateAftersWOEvaluatingDeathNorCheckingCheckJustCheckInitiation(
+    public Stream<EitherStateOrIllMoveExcept> generateAftersWOEvaluatingDeath(
     ) throws NeedsToBePromotedException {
         return generateAfters(false);
     }
@@ -189,7 +205,7 @@ public class FromToPromMove extends FromToProm {
                         : (move -> {
                     try {
                         GameState ret = move
-                                .afterWOEvaluatingDeathNorCheckingCheckJustCheckInitiation();
+                                .afterWOEvaluatingDeath();
                         ret.throwCheck(move.who());
                         return new EitherStateOrIllMoveExcept(ret);
                     } catch (NeedsToBePromotedException e) {

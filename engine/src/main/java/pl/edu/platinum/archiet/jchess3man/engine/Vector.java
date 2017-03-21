@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by Michał Krzysztof Feiler on 24.01.17.
  */
@@ -19,7 +21,7 @@ public interface Vector {
 
     Iterable<Pos> emptiesFrom(Pos from) throws VectorAdditionFailedException;
 
-    Iterable<Color> moats(Pos from);
+    Iterable<@NotNull Color> moats(Pos from);
 
     default MutableBoard mutableAfterBoard(Board oldb, Pos from, EnPassantStore ep) throws VectorAdditionFailedException {
         MutableBoard b = oldb.mutableCopy();

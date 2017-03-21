@@ -1,6 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,7 +49,7 @@ public class PawnLongJumpVector implements JumpVector, PawnVector {
         return Collections.emptyList();
     }
 
-    public Iterable<Color> moats(Pos ignored) {
+    public Iterable<@NotNull Color> moats(Pos ignored) {
         return Collections.emptyList();
     }
 

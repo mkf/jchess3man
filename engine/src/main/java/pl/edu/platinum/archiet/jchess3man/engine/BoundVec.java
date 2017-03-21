@@ -1,6 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Michał Krzysztof Feiler on 03.02.17.
@@ -43,7 +44,7 @@ public class BoundVec {
     }
 
     @Contract(pure = true)
-    public Iterable<Color> moats() {
+    public Iterable<@NotNull Color> moats() {
         return vec.moats(from);
     }
 

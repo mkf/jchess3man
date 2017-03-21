@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 
 /**
@@ -47,7 +49,7 @@ public class RankVector extends AxisVector {
     }
 
     @Override
-    public Iterable<Color> moats(Pos from) {
+    public Iterable<@NotNull Color> moats(Pos from) {
         return Collections.emptyList();
     }
 

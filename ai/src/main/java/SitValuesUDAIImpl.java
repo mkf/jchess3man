@@ -1,6 +1,5 @@
 import org.jetbrains.annotations.Nullable;
 import org.jooq.lambda.Seq;
-import org.jooq.lambda.tuple.Tuple2;
 import pl.edu.platinum.archiet.jchess3man.engine.*;
 
 import java.util.*;
@@ -9,7 +8,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
@@ -28,7 +26,7 @@ public class SitValuesUDAIImpl extends SitValuesUDAI {
             @Nullable FigType defPawnProm
     ) {
         super(ownedToThreatened);
-        this.precision = precision == null ? 0.0002 : precision;
+        this.precision = precision == null ? 0.02 /*0.002*/ /*0.0002*/ : precision;
         this.defPawnProm = defPawnProm;
         assert (this.precision > 0);
     }
@@ -172,7 +170,7 @@ public class SitValuesUDAIImpl extends SitValuesUDAI {
                     try {
                         final Stream<FromToPromMove.EitherStateOrIllMoveExcept>
                                 eitherStateOrIllMoveExceptStream =
-                                fromToPromMove.generateAftersWOEvaluatingDeathNorCheckingCheckJustCheckInitiation();
+                                fromToPromMove.generateAftersWOEvaluatingDeath();
                         final Optional<GameState>
                                 any = eitherStateOrIllMoveExceptStream
                                 .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)

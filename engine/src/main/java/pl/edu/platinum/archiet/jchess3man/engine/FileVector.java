@@ -1,6 +1,8 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -51,7 +53,7 @@ public class FileVector extends AxisVector {
         throw new AssertionError(this);
     }
 
-    public Iterable<Color> moats(Pos from) {
+    public Iterable<@NotNull Color> moats(Pos from) {
         if (from.rank != 0) return Collections.emptyList();
         int left = from.file % 8;
         int tm = direc ? 8 - left : left;

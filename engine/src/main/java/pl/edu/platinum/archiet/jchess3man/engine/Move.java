@@ -262,7 +262,7 @@ public class Move {
     public boolean couldYouDoItEvenIfYouWouldGetChecked() {
         try {
             //noinspection ResultOfMethodCallIgnored
-            afterWOEvaluatingDeathNorCheckingCheckJustCheckInitiation();
+            afterWOEvaluatingDeath();
         } catch (NeedsToBePromotedException ignored) {
         } catch (IllegalMoveException ignored) {
             return false;
@@ -272,7 +272,7 @@ public class Move {
 
     @Contract(pure = true)
     @NotNull
-    public GameState afterWOEvaluatingDeathNorCheckingCheckJustCheckInitiation() throws
+    public GameState afterWOEvaluatingDeath() throws
             NeedsToBePromotedException, ImpossibleMoveException, CheckInitiatedThruMoatException {
         throwImpossibility();
         checkIfNotPromotedDespiteSuchANeed();
@@ -338,7 +338,7 @@ public class Move {
             ImpossibleMoveException,
             NeedsToBePromotedException {
         return evaluateDeathThrowingCheck(
-                afterWOEvaluatingDeathNorCheckingCheckJustCheckInitiation(),
+                afterWOEvaluatingDeath(),
                 who());
     }
 }

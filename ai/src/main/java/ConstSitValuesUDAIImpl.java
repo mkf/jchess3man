@@ -25,7 +25,7 @@ public class ConstSitValuesUDAIImpl extends SitValuesUDAI {
         HashMap<Integer, ArrayList<Double>> myThoughts =
                 new HashMap<>();
         int index = 0;
-        double bestSitVal = 0;
+        double bestSitVal;
         for (GameState state : s.genASAOM(whoAreWe)) {
             myThoughts.computeIfAbsent(index,
                     ignored -> new ArrayList<Double>(1))
@@ -33,9 +33,7 @@ public class ConstSitValuesUDAIImpl extends SitValuesUDAI {
             if (curDepth > 0) {
                 bestSitVal = -1000000;
                 if (state.movesNext.equals(whoAreWe)) {
-                    for (FromToProm myMove : state.genVFTP()) {
-                        FromToPromMove moveToApply = new FromToPromMove(
-                                myMove.from, myMove.to, state, myMove.pawnPromotion);
+                    for (FromToPromMove moveToApply : state.genVFTPM()) {
                         Optional<GameState> newStateOptional;
                         try {
                             newStateOptional = moveToApply.generateAfters()
@@ -47,18 +45,54 @@ public class ConstSitValuesUDAIImpl extends SitValuesUDAI {
                         }
                         assert newStateOptional.isPresent();
                         GameState newState = newStateOptional.get();
+                        ArrayList<Double> newThought =
+                                worker(newState, whoAreWe, curDepth - 1);
+                        newThought.add(0, myThoughts.get(index).get(0));
+                        if (newThought.get(curDepth) > bestSitVal) {
+                            bestSitVal = newThought.get(curDepth);
+                            myThoughts.put(index, newThought);
+                        }
                     }
-                }
+                } else myThoughts.get(index).addAll(
+                        worker(state, whoAreWe, curDepth - 1));
             }
+            index++;
         }
-        //[...]
+        bestSitVal = 1000000;
+        for (int i = 0; i < index; i++)
+            if (myThoughts.get(i).get(curDepth) < bestSitVal)
+                minMaxSlice = myThoughts.get(i);
         return minMaxSlice;
     }
 
     @Override
     public FromToPromMove decide(GameState s) {
-        return new FromToPromMove(new Pos(0, 0),
-                new Pos(1, 0), GameState.newGame);
+        HashMap<FromToProm, ArrayList<Double>> thoughts =
+                new HashMap<>();
+        FromToPromMove bestMove = null;
+        double bestSitVal = -1000000;
+        for (final FromToPromMove moveToApply : s.genVFTPM()) {
+            if (bestMove == null) bestMove = moveToApply;
+            Optional<GameState> newStateOptional;
+            try {
+                newStateOptional = moveToApply.generateAfters()
+                        .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                        .findAny();
+            } catch (NeedsToBePromotedException e) {
+                e.printStackTrace();
+                throw new AssertionError(e);
+            }
+            assert newStateOptional.isPresent();
+            GameState newState = newStateOptional.get();
+            ArrayList<Double> workerOutput = worker(newState, s.movesNext, depth);
+            thoughts.put(new FromToProm(moveToApply), workerOutput);
+            double workerOutputAtDepth = workerOutput.get(depth);
+            if (workerOutputAtDepth > bestSitVal) {
+                bestMove = moveToApply;
+                bestSitVal = workerOutputAtDepth;
+            }
+        }
+        return bestMove;
     }
 
 }

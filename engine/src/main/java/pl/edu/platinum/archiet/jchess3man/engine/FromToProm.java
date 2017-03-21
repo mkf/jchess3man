@@ -2,6 +2,7 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jooq.lambda.Seq;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -40,6 +41,10 @@ public class FromToProm extends FromTo {
         this(from, to, null);
     }
 
+    public FromToProm(FromToProm s) {
+        this(s.from, s.to, s.pawnPromotion, s.vecs, s.vecsAreGenerated);
+    }
+
     /**
      * A constructor for FromToProm
      *
@@ -50,6 +55,27 @@ public class FromToProm extends FromTo {
     public FromToProm(Pos from, Pos to, @Nullable FigType pawnPromotion) {
         super(from, to);
         this.pawnPromotion = pawnPromotion;
+    }
+
+    protected FromToProm(Pos from, Pos to, @Nullable FigType pawnPromotion,
+                         @Nullable Iterable<? extends Vector> vecs,
+                         boolean vecsAreGenerated) {
+        this(from, to, pawnPromotion);
+        this.vecs = vecs;
+        this.vecsAreGenerated = vecsAreGenerated;
+    }
+
+    protected FromToProm(FromToProm source, @NotNull FigType pawnPromotion) {
+        this(source.from, source.to, pawnPromotion,
+                source.vecs, source.vecsAreGenerated);
+    }
+
+    protected static Seq<FigType> seqPromPossible = Seq.of(
+            FigType.Queen, FigType.Rook, FigType.Bishop, FigType.Knight);
+
+    Seq<? extends FromToProm> promPossible() {
+        if (pawnPromotion == null) return Seq.of(this);
+        return seqPromPossible.map(prom -> new FromToProm(this, prom));
     }
 
     /**
