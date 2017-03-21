@@ -177,6 +177,16 @@ public class FromToPromMove extends FromToProm {
         public Stream<IllegalMoveException> flatMapException() {
             return isException() ? Stream.of(exception) : Stream.empty();
         }
+
+        @Override
+        public String toString() {
+            if (isState()) {
+                if (isException()) return "EITH:BOTH:" + state.toString() + "AND" + exception.toString();
+                return "EITH:STATE:" + state.toString();
+            }
+            if (isException()) return "EITH:EXCE:" + exception.toString();
+            return "EITH:NONE";
+        }
     }
 
     protected Stream<EitherStateOrIllMoveExcept> generateAfters(boolean withEvalDeath) throws NeedsToBePromotedException {
