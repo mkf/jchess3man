@@ -41,7 +41,7 @@ public class PawnLongJumpVector implements JumpVector, PawnVector {
     }
 
     /**
-     * @param ignored
+     * @param ignored is basically ignored
      * @return false, always, as there is no promotion possibility
      */
     public boolean reqProm(int ignored) {
@@ -73,18 +73,32 @@ public class PawnLongJumpVector implements JumpVector, PawnVector {
     }
 
     /**
-     * @param ignored
+     * @param ignored is basically ignored
      * @return new SingleElementIterable(this)
      */
     public Iterable<PawnLongJumpVector> units(int ignored) {
+        return units();
+    }
+
+    /**
+     * @return new SingleElementIterable(this)
+     */
+    public Iterable<PawnLongJumpVector> units() {
         return new SingleElementIterable<PawnLongJumpVector>(this);
     }
 
     /**
-     * @param ignored
+     * @param ignored is basically ignored
      * @return Collections.emptyList(), as there are no moats in the way
      */
     public Iterable<@NotNull Color> moats(Pos ignored) {
+        return moats();
+    }
+
+    /**
+     * @return Collections.emptyList(), as there are no moats in the way
+     */
+    public Iterable<@NotNull Color> moats() {
         return Collections.emptyList();
     }
 
