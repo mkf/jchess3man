@@ -22,6 +22,7 @@ public class RankVector extends AxisVector {
 
     /**
      * Constructor for RankVector allowing negative param
+     *
      * @param t if positive, inward, else outward. It's absolute
      *          value is the count of ranks inwards/outwards.
      */
@@ -46,6 +47,7 @@ public class RankVector extends AxisVector {
 
     /**
      * Whether starting from fromRank we would cross the Center
+     *
      * @param fromRank starting rank
      * @return whether the vector is oriented towards the Center and
      * whether fromRank+abs>5
@@ -106,6 +108,7 @@ public class RankVector extends AxisVector {
 
     /**
      * Returns destination position of move from [from] with [this]
+     *
      * @param from starting position
      * @return if we cross the center, Pos of rank 11 - (from.rank + abs) and of opposite file,
      * else Pos of the same file and rank equal from.rank + inward?abs:-abs

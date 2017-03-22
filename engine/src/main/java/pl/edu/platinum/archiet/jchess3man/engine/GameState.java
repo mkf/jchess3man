@@ -64,6 +64,7 @@ public class GameState {
             0, 0,
             PlayersAlive.all
     );
+
     public GameState(GameState source,
                      @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
                              Optional<PlayersAlive> withPlayersAlive

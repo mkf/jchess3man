@@ -4,7 +4,6 @@ import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -240,12 +239,12 @@ public class Pos {
     public LinkedList<DiagonalVector> diagonalVectorsTo(Pos ano) {
         LinkedList<DiagonalVector> ret = new LinkedList<>();
         int fileDiff = wrappedFileVector(file, ano.file);
-        boolean plusFile = fileDiff>0;
-        int absFileDiff = plusFile?fileDiff:-fileDiff;
+        boolean plusFile = fileDiff > 0;
+        int absFileDiff = plusFile ? fileDiff : -fileDiff;
         boolean inwardShort = ano.rank > rank;
         int absRankDiff = (inwardShort ? ano.rank - rank : rank - ano.rank);
         //if the move is not to the same rank
-        if (rank != ano.rank && absFileDiff==absRankDiff)
+        if (rank != ano.rank && absFileDiff == absRankDiff)
             ret.add(new DiagonalVector(absFileDiff, inwardShort, plusFile));
         int rankSum = ano.rank + rank;
         if (absFileDiff != 0 && absFileDiff == rankSum)

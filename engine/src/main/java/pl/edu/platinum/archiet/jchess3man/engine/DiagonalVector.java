@@ -1,6 +1,5 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
@@ -22,7 +21,7 @@ public class DiagonalVector extends ContinuousVector {
 
     @Override
     public String toString() {
-        return "Diag["+abs+(inward?"↑":"↓")+(plusFile?"→":"←")+"]";
+        return "Diag[" + abs + (inward ? "↑" : "↓") + (plusFile ? "→" : "←") + "]";
     }
 
     public DiagonalVector shortFromCenter(int fromRank) {

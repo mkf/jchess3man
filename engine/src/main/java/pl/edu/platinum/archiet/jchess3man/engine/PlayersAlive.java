@@ -1,7 +1,6 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Map;
 
 /**

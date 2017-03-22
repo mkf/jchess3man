@@ -100,6 +100,7 @@ public class DescMove extends Desc {
     /**
      * generates After states but without evaluating death nor checking check
      * with check initiation checking though
+     *
      * @return stream of Either them (those States) or IllegalMoveExceptions
      * @throws NeedsToBePromotedException if not areVecsGenerated _and_ the promotion is required but pawnPromotion is null
      */

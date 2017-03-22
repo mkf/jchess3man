@@ -195,7 +195,7 @@ class VecMoveTest {
         for (i = 0; i < 3; i++) {
             thereAreStates.set(false);
             move = new DescMove(
-                    new Pos(5, i * 8), new Pos(5, (i*8+12) % 24), statePointer.get());
+                    new Pos(5, i * 8), new Pos(5, (i * 8 + 12) % 24), statePointer.get());
             exceptions = move.generateAfters().peek(
                     (DescMove.EitherStateOrIllMoveExcept either) -> {
                         if (!thereAreStates.get() && either.isState()) {

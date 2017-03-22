@@ -113,7 +113,7 @@ public class PawnLongJumpVector implements JumpVector, PawnVector {
      * @param from starting positions
      * @return two fields which have to be empty: on ranks 2 and 3, same file
      * @throws VectorAdditionFailedException if from.rank is not 1,
-     * as it uses [addTo] and [enPassantField] internally
+     *                                       as it uses [addTo] and [enPassantField] internally
      */
     @Override
     public List<Pos> emptiesFrom(Pos from) throws VectorAdditionFailedException {

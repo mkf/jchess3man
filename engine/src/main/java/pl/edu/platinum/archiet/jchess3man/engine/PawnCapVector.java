@@ -16,7 +16,7 @@ import static java.lang.Boolean.logicalOr;
  */
 public class PawnCapVector extends DiagonalVector implements PawnVector {
     public PawnCapVector(boolean inward, boolean plusFile) {
-        super(1,inward, plusFile);
+        super(1, inward, plusFile);
     }
 
     @Override

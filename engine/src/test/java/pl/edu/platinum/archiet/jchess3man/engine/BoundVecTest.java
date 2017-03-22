@@ -3,8 +3,6 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 import org.jooq.lambda.Seq;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Created by Michał Krzysztof Feiler on 22.03.17.
  */
