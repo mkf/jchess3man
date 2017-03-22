@@ -10,17 +10,63 @@ import java.util.stream.Stream;
 
 /**
  * Created by Michał Krzysztof Feiler on 03.02.17.
+ * GameState describes a single game state, board state, moats state,
+ * which color moves next, what castlings are possible, where one could
+ * capture en passant, how many "half moves" are on the counter and
+ * how many moves have been done since the beginning, and which players
+ * are still active.
+ * GameState aims at immutability, though it happens that there is an
+ * extension to interface [Board] called [MutableBoard].
+ * One simply shouldn't, though, modify board after assigning it to a GameState.
  */
 public class GameState {
+    /**
+     * Board describes board state
+     */
     public final Board board;
+    /**
+     * moatsState tells us which moats were bridged already
+     */
     public final MoatsState moatsState;
+    /**
+     * movesNext is the color of the player who moves next
+     */
     public final Color movesNext;
+    /**
+     * castlingPossibilities is about which players could still perform
+     * a queenside or a kingside castling
+     */
     public final CastlingPossibilities castlingPossibilities;
+    /**
+     * enPassantStore is about on which files you can capture en passant
+     */
     public final EnPassantStore enPassantStore;
+    /**
+     * see https://chessprogramming.wikispaces.com/Halfmove+Clock
+     * TODO: implement fifty-move rule and improve that counter as I ain't really sure whether it resets on all events it should
+     */
     public final int halfMoveClock;
+    /**
+     * fullMoveNumber is the count of moves performed since the beginning of the game
+     */
     public final int fullMoveNumber;
+    /**
+     * alivePlayers tells us which colors are still active
+     */
     public final PlayersAlive alivePlayers;
 
+    /**
+     * Just a basic constructor for GameState
+     *
+     * @param board                 will be assigned as even if mutable
+     * @param moatsState            will be assigned as is
+     * @param movesNext             will be assigned as is
+     * @param castlingPossibilities will be assigned as is
+     * @param enPassantStore        will be assigned as is
+     * @param halfMoveClock         will be assigned as is
+     * @param fullMoveNumber        will be assigned as is
+     * @param alivePlayers          will be assigned as is
+     */
     public GameState(
             Board board,
             MoatsState moatsState,
@@ -40,6 +86,14 @@ public class GameState {
         this.alivePlayers = alivePlayers;
     }
 
+    /**
+     * A cloning constructor for GameState.
+     * Everything will be assigned as is except Board if it
+     * turns out to be a MutableBoard. In such a case,
+     * source.board.mutableCopy() is assigned.
+     *
+     * @param source source GameState to copy
+     */
     public GameState(GameState source) {
         this(
                 (source.board instanceof MutableBoard)
@@ -55,6 +109,11 @@ public class GameState {
         );
     }
 
+    /**
+     * A new game state, i.e. new game board, no bridges,
+     * white moves next, all castling possible, empty enPassantStore,
+     * halfMoveClock and fullMoveNumber are at 0, all players active
+     */
     public static final GameState newGame = new GameState(
             NewGameBoardImpl.c,
             MoatsState.noBridges,
@@ -65,6 +124,11 @@ public class GameState {
             PlayersAlive.all
     );
 
+    /**
+     * A new GameState with (if isPresent()) updated alivePlayers
+     * @param source source for cloning
+     * @param withPlayersAlive Optional of new PlayersAlive
+     */
     public GameState(GameState source,
                      @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
                              Optional<PlayersAlive> withPlayersAlive
@@ -72,10 +136,28 @@ public class GameState {
         this(source, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), withPlayersAlive);
     }
 
-    public GameState(GameState source, PlayersAlive withPlayersAlive) {
+    /**
+     * A new GameState with updated alivePlayers
+     *
+     * @param source           source for cloning
+     * @param withPlayersAlive new alivePlayers
+     */
+    public GameState(GameState source, @NotNull PlayersAlive withPlayersAlive) {
         this(source, Optional.of(withPlayersAlive));
     }
 
+    /**
+     * Cloning GameState with updated these fields which as parameters are not null here
+     * @param source source GameState for copying
+     * @param withBoard update of Board if not null
+     * @param withMoatsState update of moatsState if not null
+     * @param withMovesNext update of movesNext if not null
+     * @param withCastlingPossibilities update of castlingPossibilities if not null
+     * @param withEnPassantStore update of enPassantStore if not null
+     * @param withHalfMoveClock update of halfMoveClock if not null
+     * @param withFullMoveNumber update of fullMoveNumber if not null
+     * @param withPlayersAlive update of alivePlayers if not null
+     */
     public GameState(GameState source,
                      @Nullable Board withBoard,
                      @Nullable MoatsState withMoatsState,
@@ -99,6 +181,18 @@ public class GameState {
         );
     }
 
+    /**
+     * Cloning GameState with updated these fields which as parameters are isPresent() here
+     * @param source source GameState for copying
+     * @param withBoard update of Board if isPresent
+     * @param withMoatsState update of moatsState if isPresent
+     * @param withMovesNext update of movesNext if isPresent
+     * @param withCastlingPossibilities update of castlingPossibilities if isPresent
+     * @param withEnPassantStore update of enPassantStore if isPresent
+     * @param withHalfMoveClock update of halfMoveClock if isPresent
+     * @param withFullMoveNumber update of fullMoveNumber if isPresent
+     * @param withPlayersAlive update of alivePlayers if isPresent
+     */
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     public GameState(GameState source,
                      Optional<Board> withBoard,
@@ -123,10 +217,19 @@ public class GameState {
         );
     }
 
+    /**
+     * Whether the player is checked
+     * @param who color if the checked player
+     * @return stream of positions which are threatening our king
+     */
     public Stream<Pos> amIinCheck(Color who) {
         return board.checkChecking(who, alivePlayers);
     }
 
+    /**
+     * Whether the player who moves next is checked
+     * @return stream of positions which are threatening our king
+     */
     public Stream<Pos> amIinCheck() {
         return amIinCheck(movesNext);
     }
