@@ -65,6 +65,12 @@ public class Desc extends FromTo {
     protected Desc(Desc source, @NotNull FigType pawnPromotion) {
         this(source.from, source.to, pawnPromotion,
                 source.vecs, source.vecsAreGenerated);
+        if (vecsAreGenerated && !pawnPromotion.equals(source.pawnPromotion))
+            vecs = Seq.seq(source.vecs).map(vec -> {
+                if (vec instanceof PawnPromVector)
+                    return ((PawnPromVector) vec).withProm(pawnPromotion);
+                return vec;
+            });
     }
 
     protected static Seq<FigType> seqPromPossible = Seq.of(

@@ -29,6 +29,10 @@ interface PawnPromVector extends PawnVector {
         }
     }
 
+    PawnVector basedOn();
+
+    PawnPromVector withProm(FigType what);
+
     class Walk extends PawnWalkVector implements PawnPromVector {
         public final FigType promTo;
 
@@ -49,6 +53,15 @@ interface PawnPromVector extends PawnVector {
             super(direc);
             this.promTo = promTo;
             errKingPawnZero(promTo);
+        }
+
+        public PawnWalkVector basedOn() {
+            return new PawnWalkVector(direc);
+        }
+
+        @Override
+        public Walk withProm(FigType what) {
+            return new Walk(basedOn(), what);
         }
     }
 
@@ -72,6 +85,16 @@ interface PawnPromVector extends PawnVector {
             super(inward, plusFile);
             this.promTo = promTo;
             errKingPawnZero(promTo);
+        }
+
+        @Override
+        public PawnCapVector basedOn() {
+            return new PawnCapVector(inward, plusFile);
+        }
+
+        @Override
+        public Cap withProm(FigType what) {
+            return new Cap(basedOn(), what);
         }
     }
 }

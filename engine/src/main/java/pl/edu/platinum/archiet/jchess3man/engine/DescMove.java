@@ -214,8 +214,7 @@ public class DescMove extends Desc {
                 })
                         : (move -> {
                     try {
-                        GameState ret = move
-                                .afterWOEvaluatingDeath();
+                        GameState ret = move.afterWOEvaluatingDeath();
                         ret.throwCheck(move.who());
                         return new EitherStateOrIllMoveExcept(ret);
                     } catch (NeedsToBePromotedException e) {
