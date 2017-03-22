@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 /**
  * Created by Michał Krzysztof Feiler on 03.02.17.
- * GameState describes a single game state, board state, moats state,
+ * GameState describes a single game state, i.e.: board state, moats state,
  * which color moves next, what castlings are possible, where one could
  * capture en passant, how many "half moves" are on the counter and
  * how many moves have been done since the beginning, and which players
