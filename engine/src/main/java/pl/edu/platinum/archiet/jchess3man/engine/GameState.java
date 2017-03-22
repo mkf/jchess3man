@@ -139,7 +139,7 @@ public class GameState {
                     //noinspection ConstantConditions
                     for (final Vector vec : board.get(from).vecs(from, to))
                         try {
-                            final Move m = new Move(vec, from, this);
+                            final VecMove m = new VecMove(vec, from, this);
                             try {
                                 //noinspection ResultOfMethodCallIgnored
                                 m.afterWOEvaluatingDeath();
@@ -183,15 +183,15 @@ public class GameState {
     }
 
     public GameState evaluateDeathThrowingCheck(Color whatColor) throws WeInCheckException {
-        return Move.evaluateDeathThrowingCheck(this, whatColor);
+        return VecMove.evaluateDeathThrowingCheck(this, whatColor);
     }
 
     public void throwCheck(Color whatColor) throws WeInCheckException {
-        Move.throwCheck(this, whatColor);
+        VecMove.throwCheck(this, whatColor);
     }
 
     public GameState evaluateDeath() {
-        return Move.evaluateDeath(this);
+        return VecMove.evaluateDeath(this);
     }
 
     private Seq<FromToPromMove> genVFTPM(Pos from, Pos to) {

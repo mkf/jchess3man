@@ -13,7 +13,7 @@ import static pl.edu.platinum.archiet.jchess3man.engine.GameState.newGame;
 /**
  * Created by Michał Krzysztof Feiler on 18.02.17.
  */
-class MoveTest {
+class VecMoveTest {
     @Test
     void after() throws
             VectorAdditionFailedException,
@@ -28,7 +28,7 @@ class MoveTest {
         assertTrue(vecs.iterator().hasNext());
         Vector vec = vecs.iterator().next();
         assertNotNull(vec);
-        Move first = new Move(new BoundVec(from, vec), newGame);
+        VecMove first = new VecMove(new BoundVec(from, vec), newGame);
         System.out.println("A");
         Fig realsq = newGame.board.get(1, 0);
         System.out.println(realsq.toString());

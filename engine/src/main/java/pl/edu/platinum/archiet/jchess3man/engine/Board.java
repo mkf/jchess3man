@@ -7,7 +7,6 @@ import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -152,7 +151,7 @@ public interface Board {
         Stream<Boolean> streamOfBools = vecs.map(
                 (Vector vec) -> {
                     try {
-                        Move move = new Move(vec, from, before);
+                        VecMove move = new VecMove(vec, from, before);
                         Optional<Impossibility> impossibilityOptional =
                                 move.checkPossibilityOppositeColor();
                         return !impossibilityOptional.isPresent() ||

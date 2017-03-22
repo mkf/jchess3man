@@ -196,7 +196,7 @@ public class FromToPromMove extends FromToProm {
                 .stream(vecs.spliterator(), false)
                 .map(vec -> {
                     try {
-                        return new Move(from, vec, before);
+                        return new VecMove(from, vec, before);
                     } catch (VectorAdditionFailedException | NeedsToBePromotedException e) {
                         throw new AssertionError(e);
                     }

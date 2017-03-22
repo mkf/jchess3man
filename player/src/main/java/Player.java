@@ -1,6 +1,5 @@
 import pl.edu.platinum.archiet.jchess3man.engine.FromToPromMove;
 import pl.edu.platinum.archiet.jchess3man.engine.GameState;
-import pl.edu.platinum.archiet.jchess3man.engine.Move;
 
 import java.util.concurrent.Future;
 

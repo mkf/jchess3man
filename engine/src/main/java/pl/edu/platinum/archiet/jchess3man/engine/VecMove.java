@@ -9,20 +9,20 @@ import java.util.Optional;
 /**
  * Created by Michał Krzysztof Feiler on 03.02.17.
  */
-public class Move {
+public class VecMove {
     public final BoundVec boundVec;
     public final GameState before;
 
-    public Move(BoundVec boundVec, GameState before) {
+    public VecMove(BoundVec boundVec, GameState before) {
         this.boundVec = boundVec;
         this.before = before;
     }
 
-    public Move(Vector vec, Pos from, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
+    public VecMove(Vector vec, Pos from, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
         this(new BoundVec(vec, from), before);
     }
 
-    public Move(Pos from, Vector vec, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
+    public VecMove(Pos from, Vector vec, GameState before) throws VectorAdditionFailedException, NeedsToBePromotedException {
         this(vec, from, before);
     }
 
