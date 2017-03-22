@@ -48,6 +48,13 @@ public class PawnLongJumpVector implements JumpVector, PawnVector {
         return false;
     }
 
+    /**
+     * Checks whether starting rank is 1, and returns Pos with same file and with rank 3
+     *
+     * @param from must be (1,x)
+     * @return Pos(3, x)
+     * @throws VectorAdditionFailedException if from.rank is not 1
+     */
     public Pos addTo(Pos from) throws VectorAdditionFailedException {
         if (from.rank != 1) throw new VectorAdditionFailedException(from, this);
         return new Pos(3, from.file);
@@ -102,6 +109,12 @@ public class PawnLongJumpVector implements JumpVector, PawnVector {
         return Collections.emptyList();
     }
 
+    /**
+     * @param from starting positions
+     * @return two fields which have to be empty: on ranks 2 and 3, same file
+     * @throws VectorAdditionFailedException if from.rank is not 1,
+     * as it uses [addTo] and [enPassantField] internally
+     */
     @Override
     public List<Pos> emptiesFrom(Pos from) throws VectorAdditionFailedException {
         Pos[] list = {enPassantField(from), addTo(from)};
