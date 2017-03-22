@@ -45,13 +45,13 @@ public class SitValuesUDAIImpl extends SitValuesUDAI {
             for (final Pos wTo : AMFT.getIterableFor(wFrom)) {
                 wwg.incrementAndGet();
                 executor.submit(() -> {
-                    FromToPromMove wFromToPromMove =
-                            new FromToPromMove(wFrom, wTo, aft);
+                    DescMove wFromToPromMove =
+                            new DescMove(wFrom, wTo, aft);
                     try {
                         wFromToPromMove.generateVecs();
                     } catch (NeedsToBePromotedException e) {
                         wFromToPromMove =
-                                new FromToPromMove(wFrom, wTo, aft, defPawnProm);
+                                new DescMove(wFrom, wTo, aft, defPawnProm);
                         try {
                             wFromToPromMove.generateVecs();
                         } catch (NeedsToBePromotedException e1) {
@@ -62,12 +62,12 @@ public class SitValuesUDAIImpl extends SitValuesUDAI {
                         }
                     }
                     try {
-                        final Stream<FromToPromMove.EitherStateOrIllMoveExcept>
+                        final Stream<DescMove.EitherStateOrIllMoveExcept>
                                 wEitherStateOrIllMoveExceptStream =
                                 wFromToPromMove.generateAfters();
                         final Optional<GameState>
                                 wAny = wEitherStateOrIllMoveExceptStream
-                                .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                                .flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapState)
                                 .findAny();
                         if (wAny.isPresent()) {
                             GameState wAft = wAny.get();
@@ -135,7 +135,7 @@ public class SitValuesUDAIImpl extends SitValuesUDAI {
     }
 
     @Override
-    public FromToPromMove decide(GameState s) {
+    public DescMove decide(GameState s) {
         ExecutorService executor = Executors.newCachedThreadPool();
         curFixPrec = precision;
         ConcurrentHashMap<FromTo, AtomicReference<Double>> thoughts =
@@ -150,13 +150,13 @@ public class SitValuesUDAIImpl extends SitValuesUDAI {
         //}
         (new AllPosIterable()).forEach((Pos from) ->
                 AMFT.getIterableFor(from).forEach((Pos to) -> executor.submit(() -> {
-                    FromToPromMove fromToPromMove =
-                            new FromToPromMove(from, to, s);
+                    DescMove fromToPromMove =
+                            new DescMove(from, to, s);
                     try {
                         fromToPromMove.generateVecs();
                     } catch (NeedsToBePromotedException e) {
                         fromToPromMove =
-                                new FromToPromMove(from, to, s, defPawnProm);
+                                new DescMove(from, to, s, defPawnProm);
                         try {
                             fromToPromMove.generateVecs();
                         } catch (NeedsToBePromotedException e1) {
@@ -168,12 +168,12 @@ public class SitValuesUDAIImpl extends SitValuesUDAI {
                     } catch (NullPointerException ignored) {
                     }
                     try {
-                        final Stream<FromToPromMove.EitherStateOrIllMoveExcept>
+                        final Stream<DescMove.EitherStateOrIllMoveExcept>
                                 eitherStateOrIllMoveExceptStream =
                                 fromToPromMove.generateAftersWOEvaluatingDeath();
                         final Optional<GameState>
                                 any = eitherStateOrIllMoveExceptStream
-                                .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                                .flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapState)
                                 .findAny();
                         if (any.isPresent()) {
                             GameState aft = any.get();
@@ -244,12 +244,12 @@ public class SitValuesUDAIImpl extends SitValuesUDAI {
         assert (ftso.isPresent());
         //FromTo ft = ourfts.getLast();
         FromTo ft = ftso.get();
-        FromToPromMove m = new FromToPromMove(ft.from, ft.to, s);
+        DescMove m = new DescMove(ft.from, ft.to, s);
         try {
             m.generateVecs();
             return m;
         } catch (NeedsToBePromotedException e) {
-            m = new FromToPromMove(ft.from, ft.to, s, defPawnProm);
+            m = new DescMove(ft.from, ft.to, s, defPawnProm);
             return m;
         }
     }

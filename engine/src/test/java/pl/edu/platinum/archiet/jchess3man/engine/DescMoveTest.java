@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Created by Michał Krzysztof Feiler on 21.03.17.
  */
-class FromToPromMoveTest {
+class DescMoveTest {
 
     @Test
     void newGameRookCap() {
-        FromToPromMove fromToPromMove =
-                new FromToPromMove(new Pos(0, 7), new Pos(0, 8), GameState.newGame);
-        final Stream<FromToPromMove.EitherStateOrIllMoveExcept>
+        DescMove fromToPromMove =
+                new DescMove(new Pos(0, 7), new Pos(0, 8), GameState.newGame);
+        final Stream<DescMove.EitherStateOrIllMoveExcept>
                 eitherStateOrIllMoveExceptStream;
         try {
             eitherStateOrIllMoveExceptStream = fromToPromMove.generateAfters();
@@ -26,7 +26,7 @@ class FromToPromMoveTest {
         }
         assertFalse(eitherStateOrIllMoveExceptStream
                 .peek(some -> System.out.println(some.toString()))
-                .anyMatch(FromToPromMove.EitherStateOrIllMoveExcept::isState));
+                .anyMatch(DescMove.EitherStateOrIllMoveExcept::isState));
     }
 
 }

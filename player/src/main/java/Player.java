@@ -1,4 +1,4 @@
-import pl.edu.platinum.archiet.jchess3man.engine.FromToPromMove;
+import pl.edu.platinum.archiet.jchess3man.engine.DescMove;
 import pl.edu.platinum.archiet.jchess3man.engine.GameState;
 
 import java.util.concurrent.Future;
@@ -7,9 +7,9 @@ import java.util.concurrent.Future;
  * Created by Michał Krzysztof Feiler on 18.03.17.
  */
 public interface Player {
-    Future<FromToPromMove> yourMove(GameState stateNow);
+    Future<DescMove> yourMove(GameState stateNow);
 
-    void spectateChange(FromToPromMove move, GameState stateAfter);
+    void spectateChange(DescMove move, GameState stateAfter);
 
     void youLost(GameState state);
 

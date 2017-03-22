@@ -40,7 +40,7 @@ class VecMoveTest {
 
     @Test
     void simpleGenNoPanic() throws NeedsToBePromotedException {
-        FromToPromMove first = new FromToPromMove(
+        DescMove first = new DescMove(
                 new Pos(1, 0),
                 new Pos(3, 0),
                 newGame
@@ -48,28 +48,28 @@ class VecMoveTest {
         AtomicReference<GameState> temp = new AtomicReference<>();
         final AtomicBoolean thereAreStates = new AtomicBoolean(false);
         List<IllegalMoveException> exceptions = first.generateAfters().peek(
-                (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                (DescMove.EitherStateOrIllMoveExcept either) -> {
                     if (!thereAreStates.get() && either.isState()) {
                         temp.set(either.state);
                         thereAreStates.set(true);
                     }
-                }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                }).flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapException)
                 .collect(Collectors.toList());
         if (thereAreStates.get())
             System.out.println("first.After " + temp.get().board.string());
         else exceptions.forEach(Throwable::printStackTrace);
         assertTrue(thereAreStates.get());
         /*
-        assertThrows(FromToPromMove.MultipleIllegalMoveExceptions.class,
+        assertThrows(DescMove.MultipleIllegalMoveExceptions.class,
                 () -> {
-                    Optional<GameState> sTemp = new FromToPromMove(
+                    Optional<GameState> sTemp = new DescMove(
                             new Pos(3, 0),
                             new Pos(4, 0),
                             temp.get()
                     ).generateAfters().filter();
                 });
 
-        } catch (FromToPromMove.MultipleIllegalMoveExceptions illegalMoveExceptions) {
+        } catch (DescMove.MultipleIllegalMoveExceptions illegalMoveExceptions) {
             for(final IllegalMoveException single : illegalMoveExceptions) {
                 if(single instanceof ImpossibleMoveException) {
                     System.out.println(
@@ -80,40 +80,40 @@ class VecMoveTest {
             throw illegalMoveExceptions;
         }
         */
-        assertFalse((new FromToPromMove(
+        assertFalse((new DescMove(
                 new Pos(3, 0),
                 new Pos(4, 0),
                 temp.get()
         )).generateAfters()
-                .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                .flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapState)
                 .peek(state -> System.out.print("SECOND SUCCEDED BADLY" + state.toString()))
                 .findAny().isPresent());
 
         assertThrows(NullPointerException.class,
-                () -> assertFalse((new FromToPromMove(
+                () -> assertFalse((new DescMove(
                         new Pos(3, 8),
                         new Pos(4, 8),
                         temp.get()
                 )).generateAfters()
-                        .flatMap(FromToPromMove
+                        .flatMap(DescMove
                                 .EitherStateOrIllMoveExcept::flatMapState)
                         .peek(state -> System.out
                                 .print("THIRD SUCCEDED BADLY" + state.toString()))
                         .findAny().isPresent()));
 
         thereAreStates.set(false);
-        exceptions = (new FromToPromMove(
+        exceptions = (new DescMove(
                 new Pos(1, 8),
                 new Pos(3, 8),
                 temp.get()
         ))
                 .generateAfters().peek(
-                        (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                        (DescMove.EitherStateOrIllMoveExcept either) -> {
                             if (!thereAreStates.get() && either.isState()) {
                                 temp.set(either.state);
                                 thereAreStates.set(true);
                             }
-                        }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                        }).flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapException)
                 .collect(Collectors.toList());
         if (thereAreStates.get())
             System.out.println("fourth.After " + temp.get().board.string());
@@ -133,7 +133,7 @@ class VecMoveTest {
     void pawnCrossCenterTest() throws NeedsToBePromotedException {
         int i = 0;
         int j = 0;
-        FromToPromMove move = new FromToPromMove(
+        DescMove move = new DescMove(
                 new Pos(1, i * 8),
                 new Pos(3, i * 8),
                 newGame
@@ -141,27 +141,27 @@ class VecMoveTest {
         AtomicReference<GameState> statePointer = new AtomicReference<>();
         final AtomicBoolean thereAreStates = new AtomicBoolean(false);
         List<IllegalMoveException> exceptions = move.generateAfters().peek(
-                (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                (DescMove.EitherStateOrIllMoveExcept either) -> {
                     if (!thereAreStates.get() && either.isState()) {
                         statePointer.set(either.state);
                         thereAreStates.set(true);
                     }
-                }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                }).flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapException)
                 .collect(Collectors.toList());
         if (!thereAreStates.get()) exceptions.forEach(Throwable::printStackTrace);
         assertTrue(thereAreStates.get());
 
         for (i = 1; i < 3; i++) {
             thereAreStates.set(false);
-            move = new FromToPromMove(
+            move = new DescMove(
                     new Pos(1, i * 8), new Pos(3, i * 8), statePointer.get());
             exceptions = move.generateAfters().peek(
-                    (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                    (DescMove.EitherStateOrIllMoveExcept either) -> {
                         if (!thereAreStates.get() && either.isState()) {
                             statePointer.set(either.state);
                             thereAreStates.set(true);
                         }
-                    }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                    }).flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapException)
                     .collect(Collectors.toList());
             if (!thereAreStates.get()) {
                 System.out.println("Unexpected error (1st loop, i=" + i + "): ");
@@ -173,7 +173,7 @@ class VecMoveTest {
         for (i = 3; i < 5; i++) {
             for (j = 0; j < 3; j++) {
                 thereAreStates.set(false);
-                move = new FromToPromMove(
+                move = new DescMove(
                         new Pos(i, j * 8), new Pos(i + 1, j * 8), statePointer.get());
                 exceptions = move.generateAfters().peek(
                         either -> {
@@ -181,7 +181,7 @@ class VecMoveTest {
                                 statePointer.set(either.state);
                                 thereAreStates.set(true);
                             }
-                        }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                        }).flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapException)
                         .collect(Collectors.toList());
                 if (!thereAreStates.get()) {
                     System.out.println("Unexpected error (2nd loop, i=" + i + " j=" + j + " ): ");
@@ -194,15 +194,15 @@ class VecMoveTest {
                 "State after " + (i - 1) * 3 + " moves: " + statePointer.get().board.string());
         for (i = 0; i < 3; i++) {
             thereAreStates.set(false);
-            move = new FromToPromMove(
+            move = new DescMove(
                     new Pos(5, i * 8), new Pos(5, (i*8+12) % 24), statePointer.get());
             exceptions = move.generateAfters().peek(
-                    (FromToPromMove.EitherStateOrIllMoveExcept either) -> {
+                    (DescMove.EitherStateOrIllMoveExcept either) -> {
                         if (!thereAreStates.get() && either.isState()) {
                             statePointer.set(either.state);
                             thereAreStates.set(true);
                         }
-                    }).flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapException)
+                    }).flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapException)
                     .collect(Collectors.toList());
             if (!thereAreStates.get()) {
                 System.out.println("Unexpected error (3st loop, i=" + i + "): ");

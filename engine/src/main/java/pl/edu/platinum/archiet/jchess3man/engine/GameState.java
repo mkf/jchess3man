@@ -194,13 +194,13 @@ public class GameState {
         return VecMove.evaluateDeath(this);
     }
 
-    private Seq<FromToPromMove> genVFTPM(Pos from, Pos to) {
-        FromToPromMove move = new FromToPromMove(from, to, this);
-        Stream<FromToPromMove.EitherStateOrIllMoveExcept> afters;
+    private Seq<DescMove> genDescMoves(Pos from, Pos to) {
+        DescMove move = new DescMove(from, to, this);
+        Stream<DescMove.EitherStateOrIllMoveExcept> afters;
         try {
             afters = move.generateAftersWOEvaluatingDeath();
         } catch (NeedsToBePromotedException e) {
-            move = new FromToPromMove(from, to, this, FigType.Queen);
+            move = new DescMove(from, to, this, FigType.Queen);
             try {
                 afters = move.generateAftersWOEvaluatingDeath();
             } catch (NeedsToBePromotedException e1) {
@@ -209,46 +209,46 @@ public class GameState {
             }
         }
         Optional<GameState> any = afters
-                .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                .flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapState)
                 .findAny();
         if (any.isPresent()) {
             /*
             if (move.pawnPromotion == null)
-                //return Seq.of(new FromToProm(from, to));
+                //return Seq.of(new Desc(from, to));
                 return Seq.of(move);
             else return
                     Seq.of(FigType.Queen, FigType.Rook, FigType.Bishop, FigType.Knight)
-                            .map(prom -> new FromToProm(from, to, prom));
+                            .map(prom -> new Desc(from, to, prom));
                             */
             return move.promPossible();
         } else return Seq.empty();
     }
 
-    public Seq<FromToPromMove> genVFTPM() {
+    public Seq<DescMove> genDescMoves() {
         Seq<Pos> ours = board.friendsAndOthers(movesNext, alivePlayers).v1.parallel();
         return ours.flatMap(from -> Seq.seq(AMFT.getIterableFor(from)).parallel()
-                .flatMap(to -> genVFTPM(from, to)));
+                .flatMap(to -> genDescMoves(from, to)));
     }
 
     public Seq<GameState> genASAOM(Color ourColor) {
         if (!alivePlayers.get(ourColor) || movesNext.equals(ourColor))
             return Seq.of(this);
         else
-            return genVFTPM().flatMap(tft -> genASAOM(ourColor, tft));
+            return genDescMoves().flatMap(tft -> genASAOM(ourColor, tft));
     }
 
-    private Seq<GameState> genASAOM(Color ourColor, FromToProm only) {
-        FromToPromMove moveToApply = new FromToPromMove(
+    private Seq<GameState> genASAOM(Color ourColor, Desc only) {
+        DescMove moveToApply = new DescMove(
                 only.from, only.to, this, only.pawnPromotion);
         try {
             Optional<GameState> any = moveToApply.generateAfters()
-                    .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                    .flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapState)
                     .findAny();
             assert (any.isPresent());
             GameState aft = any.get();
             if (!aft.alivePlayers.get(ourColor) || aft.movesNext.equals(ourColor))
                 return Seq.of(aft);
-            else return aft.genVFTPM().map(this::genASAOMinternal);
+            else return aft.genDescMoves().map(this::genASAOMinternal);
         } catch (NeedsToBePromotedException e) {
             e.printStackTrace();
             throw new AssertionError(e);
@@ -256,12 +256,12 @@ public class GameState {
     }
 
     @NotNull
-    private GameState genASAOMinternal(FromToPromMove moveToBe) {
-        //FromToPromMove moveToBe = new FromToPromMove(
+    private GameState genASAOMinternal(DescMove moveToBe) {
+        //DescMove moveToBe = new DescMove(
         //        tft.from, tft.to, this, tft.pawnPromotion);
         try {
             Optional<GameState> newAny = moveToBe.generateAfters()
-                    .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                    .flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapState)
                     .findAny();
             assert newAny.isPresent();
             return newAny.get();

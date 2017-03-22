@@ -5,16 +5,13 @@ import org.jetbrains.annotations.Nullable;
 import org.jooq.lambda.Seq;
 
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * Created by Michał Krzysztof Feiler on 18.02.17.
- * FromToProm is a struct of [from], [to] and optionally [pawnPromotion] [FigType]
+ * Desc is a struct of [from], [to] and optionally [pawnPromotion] [FigType]
  * also storing it's generated [vecs] Iterable reference in it
  */
-public class FromToProm extends FromTo {
+public class Desc extends FromTo {
     /**
      * the optional, i.e. nullable, pawnPromotion
      * current implementation probably should work with any non-null FigType always there
@@ -32,40 +29,40 @@ public class FromToProm extends FromTo {
     protected @Nullable Iterable<? extends Vector> vecs = null;
 
     /**
-     * A constructor for FromToProm with null pawnPromotion
+     * A constructor for Desc with null pawnPromotion
      *
      * @param from starting position
      * @param to   destination position
      */
-    public FromToProm(Pos from, Pos to) {
+    public Desc(Pos from, Pos to) {
         this(from, to, null);
     }
 
-    public FromToProm(FromToProm s) {
+    public Desc(Desc s) {
         this(s.from, s.to, s.pawnPromotion, s.vecs, s.vecsAreGenerated);
     }
 
     /**
-     * A constructor for FromToProm
+     * A constructor for Desc
      *
      * @param from          starting position
      * @param to            destination position
      * @param pawnPromotion optional pawnPromotion
      */
-    public FromToProm(Pos from, Pos to, @Nullable FigType pawnPromotion) {
+    public Desc(Pos from, Pos to, @Nullable FigType pawnPromotion) {
         super(from, to);
         this.pawnPromotion = pawnPromotion;
     }
 
-    protected FromToProm(Pos from, Pos to, @Nullable FigType pawnPromotion,
-                         @Nullable Iterable<? extends Vector> vecs,
-                         boolean vecsAreGenerated) {
+    protected Desc(Pos from, Pos to, @Nullable FigType pawnPromotion,
+                   @Nullable Iterable<? extends Vector> vecs,
+                   boolean vecsAreGenerated) {
         this(from, to, pawnPromotion);
         this.vecs = vecs;
         this.vecsAreGenerated = vecsAreGenerated;
     }
 
-    protected FromToProm(FromToProm source, @NotNull FigType pawnPromotion) {
+    protected Desc(Desc source, @NotNull FigType pawnPromotion) {
         this(source.from, source.to, pawnPromotion,
                 source.vecs, source.vecsAreGenerated);
     }
@@ -73,9 +70,9 @@ public class FromToProm extends FromTo {
     protected static Seq<FigType> seqPromPossible = Seq.of(
             FigType.Queen, FigType.Rook, FigType.Bishop, FigType.Knight);
 
-    Seq<? extends FromToProm> promPossible() {
+    Seq<? extends Desc> promPossible() {
         if (pawnPromotion == null) return Seq.of(this);
-        return seqPromPossible.map(prom -> new FromToProm(this, prom));
+        return seqPromPossible.map(prom -> new Desc(this, prom));
     }
 
     /**
@@ -89,13 +86,13 @@ public class FromToProm extends FromTo {
 
     /**
      * @param b tested object
-     * @return if b is a FromToProm return this.equals((FromToProm) b), else
+     * @return if b is a Desc return this.equals((Desc) b), else
      * whether this.pawnPromotion is null and b.equals(this)
      */
     @Override
     public boolean equals(FromTo b) {
-        return b instanceof FromToProm
-                ? equals((FromToProm) b)
+        return b instanceof Desc
+                ? equals((Desc) b)
                 : pawnPromotion == null && b.equals(this);
     }
 
@@ -103,7 +100,7 @@ public class FromToProm extends FromTo {
      * @param b tested object
      * @return whether this.equalsNoProm(b) and pawnPromotion is the same
      */
-    public boolean equals(FromToProm b) {
+    public boolean equals(Desc b) {
         return equalsNoProm(b) &&
                 (pawnPromotion == null && b.pawnPromotion == null ||
                         pawnPromotion != null &&

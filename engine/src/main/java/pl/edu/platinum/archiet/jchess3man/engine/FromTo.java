@@ -53,12 +53,12 @@ public class FromTo {
     }
 
     /**
-     * @param b FromTo or FromToProm tested
+     * @param b FromTo or Desc tested
      * @return whether equalsNoProm(b) and
      * if b is FromToPro whether b.pawnPromotion is null
      */
     public boolean equals(FromTo b) {
         return equalsNoProm(b) &&
-                !(b instanceof FromToProm && ((FromToProm) b).pawnPromotion != null);
+                !(b instanceof Desc && ((Desc) b).pawnPromotion != null);
     }
 }

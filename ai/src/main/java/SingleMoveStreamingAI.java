@@ -1,9 +1,8 @@
-import pl.edu.platinum.archiet.jchess3man.engine.FromToPromMove;
+import pl.edu.platinum.archiet.jchess3man.engine.DescMove;
 import pl.edu.platinum.archiet.jchess3man.engine.GameState;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Stream;
 
 /**
  * Created by Michał Krzysztof Feiler on 18.03.17.
@@ -12,7 +11,7 @@ public interface SingleMoveStreamingAI {
     ReadAtomicThinking thinking(GameState s);
 
     class AtomicThinking {
-        private final AtomicReference<FromToPromMove> i;
+        private final AtomicReference<DescMove> i;
         public final AtomicBoolean isNew;
         public final AtomicBoolean noMore;
 
@@ -22,13 +21,13 @@ public interface SingleMoveStreamingAI {
             noMore = new AtomicBoolean(false);
         }
 
-        public FromToPromMove get() {
-            FromToPromMove ret = i.get();
+        public DescMove get() {
+            DescMove ret = i.get();
             isNew.set(false);
             return ret;
         }
 
-        public void set(FromToPromMove move) {
+        public void set(DescMove move) {
             if (!noMore.get()) {
                 i.set(move);
                 isNew.set(true);
@@ -59,7 +58,7 @@ public interface SingleMoveStreamingAI {
             this.stoppable = stoppable;
         }
 
-        public FromToPromMove get() {
+        public DescMove get() {
             return i.get();
         }
 

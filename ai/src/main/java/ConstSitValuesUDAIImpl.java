@@ -1,5 +1,4 @@
 import org.jetbrains.annotations.Nullable;
-import org.jooq.lambda.Seq;
 import pl.edu.platinum.archiet.jchess3man.engine.*;
 
 import java.util.ArrayList;
@@ -33,11 +32,11 @@ public class ConstSitValuesUDAIImpl extends SitValuesUDAI {
             if (curDepth > 0) {
                 bestSitVal = -1000000;
                 if (state.movesNext.equals(whoAreWe)) {
-                    for (FromToPromMove moveToApply : state.genVFTPM()) {
+                    for (DescMove moveToApply : state.genDescMoves()) {
                         Optional<GameState> newStateOptional;
                         try {
                             newStateOptional = moveToApply.generateAfters()
-                                    .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                                    .flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapState)
                                     .findAny();
                         } catch (NeedsToBePromotedException e) {
                             e.printStackTrace();
@@ -66,17 +65,17 @@ public class ConstSitValuesUDAIImpl extends SitValuesUDAI {
     }
 
     @Override
-    public FromToPromMove decide(GameState s) {
-        HashMap<FromToProm, ArrayList<Double>> thoughts =
+    public DescMove decide(GameState s) {
+        HashMap<Desc, ArrayList<Double>> thoughts =
                 new HashMap<>();
-        FromToPromMove bestMove = null;
+        DescMove bestMove = null;
         double bestSitVal = -1000000;
-        for (final FromToPromMove moveToApply : s.genVFTPM()) {
+        for (final DescMove moveToApply : s.genDescMoves()) {
             if (bestMove == null) bestMove = moveToApply;
             Optional<GameState> newStateOptional;
             try {
                 newStateOptional = moveToApply.generateAfters()
-                        .flatMap(FromToPromMove.EitherStateOrIllMoveExcept::flatMapState)
+                        .flatMap(DescMove.EitherStateOrIllMoveExcept::flatMapState)
                         .findAny();
             } catch (NeedsToBePromotedException e) {
                 e.printStackTrace();
@@ -85,7 +84,7 @@ public class ConstSitValuesUDAIImpl extends SitValuesUDAI {
             assert newStateOptional.isPresent();
             GameState newState = newStateOptional.get();
             ArrayList<Double> workerOutput = worker(newState, s.movesNext, depth);
-            thoughts.put(new FromToProm(moveToApply), workerOutput);
+            thoughts.put(new Desc(moveToApply), workerOutput);
             double workerOutputAtDepth = workerOutput.get(depth);
             if (workerOutputAtDepth > bestSitVal) {
                 bestMove = moveToApply;

@@ -9,15 +9,15 @@ import java.util.stream.StreamSupport;
 
 /**
  * Created by Michał Krzysztof Feiler on 18.02.17.
- * FromToPromMove is an old-fashioned Move struct:
+ * DescMove is an old-fashioned Move struct:
  * it contains fields [from], [to], [GameState] [before],
  * and optionally [pawnPromotion]
  */
 
-public class FromToPromMove extends FromToProm {
+public class DescMove extends Desc {
     /**
      * the state before move
-     * the only field that extends FromToPromMove from FromToProm
+     * the only field that extends DescMove from Desc
      */
     public final GameState before;
 
@@ -29,7 +29,7 @@ public class FromToPromMove extends FromToProm {
      * @param to     destination
      * @param before the state before
      */
-    public FromToPromMove(Pos from, Pos to, GameState before) {
+    public DescMove(Pos from, Pos to, GameState before) {
         this(from, to, before, null);
     }
 
@@ -44,25 +44,25 @@ public class FromToPromMove extends FromToProm {
      * @param before        the state before
      * @param pawnPromotion the FigType to which there will be promotion or null
      */
-    public FromToPromMove(Pos from, Pos to, GameState before, @Nullable FigType pawnPromotion) {
+    public DescMove(Pos from, Pos to, GameState before, @Nullable FigType pawnPromotion) {
         super(from, to, pawnPromotion);
         this.before = before;
     }
 
-    protected FromToPromMove(FromToPromMove source, @NotNull FigType pawnPromotion) {
+    protected DescMove(DescMove source, @NotNull FigType pawnPromotion) {
         super(source, pawnPromotion);
         this.before = source.before;
     }
 
-    public FromToPromMove(FromToProm s, GameState before) {
+    public DescMove(Desc s, GameState before) {
         this(s.from, s.to, before, s.pawnPromotion);
         vecs = s.vecs;
         vecsAreGenerated = s.vecsAreGenerated;
     }
 
-    Seq<FromToPromMove> promPossible() {
+    Seq<DescMove> promPossible() {
         if (this.pawnPromotion == null) return Seq.of(this);
-        return seqPromPossible.map(prom -> new FromToPromMove(this, prom));
+        return seqPromPossible.map(prom -> new DescMove(this, prom));
     }
 
     /**

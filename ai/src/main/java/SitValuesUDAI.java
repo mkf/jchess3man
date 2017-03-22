@@ -17,7 +17,7 @@ public abstract class SitValuesUDAI implements SingleMoveUltimateDecisionAI {
         assert (this.ownedToThreatened > 0);
     }
 
-    abstract public FromToPromMove decide(GameState s);
+    abstract public DescMove decide(GameState s);
 
     public static final double DEATH = -100000;
     public static final double OPDIES = 15000;
