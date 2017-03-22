@@ -1,6 +1,9 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by Michał Krzysztof Feiler on 27.01.17.
  */
@@ -21,12 +24,12 @@ public abstract class AxisVector extends ContinuousVector {
         return direc ? abs : -abs;
     }
 
-    public abstract AxisVector head();
+    public abstract @NotNull AxisVector head();
 
-    public AxisVector head(int ignored) {
+    public @NotNull AxisVector head(int ignored) {
         return head();
     }
 
-    public abstract Vector tail(int fromRank);
+    public abstract @Nullable AxisVector tail(int fromRank);
 
 }

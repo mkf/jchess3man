@@ -2,6 +2,7 @@ package pl.edu.platinum.archiet.jchess3man.engine;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +29,7 @@ public class FileVector extends AxisVector {
         return 0;
     }
 
+    @NotNull
     public FileVector head() {
         if (abs > 0) {
             if (abs > 1) {
@@ -39,16 +41,18 @@ public class FileVector extends AxisVector {
     }
 
     @Override
-    public Vector tail(int ignored) {
+    @Nullable
+    public FileVector tail(int ignored) {
         return tail();
     }
 
-    public Vector tail() {
+    @Nullable
+    public FileVector tail() {
         if (abs > 0) {
             if (abs > 1) {
                 return new FileVector(abs - 1, direc);
             }
-            return new ZeroVector();
+            return null;
         }
         throw new AssertionError(this);
     }

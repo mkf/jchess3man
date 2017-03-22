@@ -1,6 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 
@@ -67,6 +68,7 @@ public class RankVector extends AxisVector {
      * if abs==1 returns this, if abs>1 returns new RankVector(1, inward).
      * If abs==0, throws an AssertionError(this)
      */
+    @NotNull
     public RankVector head() {
         if (abs > 0) {
             if (abs > 1) {
@@ -79,15 +81,16 @@ public class RankVector extends AxisVector {
 
     /**
      * @param fromRank starting rank
-     * @return Tail continuous vector. A vector one shorter or a ZeroVector.
+     * @return Tail continuous vector. A vector one shorter or null.
      * If head() crossed the center, tail() is oriented outwards.
      */
-    public Vector tail(int fromRank) {
+    @Nullable
+    public RankVector tail(int fromRank) {
         if (abs > 0) {
             if (abs > 1) {
                 return new RankVector(abs - 1, direc && fromRank != 5);
             }
-            return new ZeroVector();
+            return null;
         }
         throw new AssertionError(this);
     }

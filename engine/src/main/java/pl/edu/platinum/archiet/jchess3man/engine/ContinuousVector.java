@@ -1,5 +1,8 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Iterator;
 
 /**
@@ -23,9 +26,9 @@ public abstract class ContinuousVector implements Vector, KingVector {
      *
      * @param fromrank is the rank of the from Pos
      */
-    public abstract ContinuousVector head(int fromrank);
+    public abstract @NotNull ContinuousVector head(int fromrank);
 
-    public abstract Vector tail(int fromrank);
+    public abstract @Nullable ContinuousVector tail(int fromrank);
 
     public boolean isUnit() {
         return abs <= 1;
@@ -40,7 +43,7 @@ public abstract class ContinuousVector implements Vector, KingVector {
 
             @Override
             public boolean hasNext() {
-                return !(curTail instanceof ZeroVector) || headRemaining;
+                return curTail != null || headRemaining;
             }
 
             @Override
@@ -51,8 +54,8 @@ public abstract class ContinuousVector implements Vector, KingVector {
                     ContinuousVector theTail = ((ContinuousVector) curTail);
                     curHead = theTail.head(ourFromRank);
                     curTail = theTail.tail(ourFromRank);
-                    if (curTail instanceof ZeroVector) headRemaining = true;
-                } else if (curTail instanceof ZeroVector) {
+                    if (curTail == null) headRemaining = true;
+                } else if (curTail == null) {
                     headRemaining = false;
                     curHead = null;
                 }

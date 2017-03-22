@@ -83,7 +83,7 @@ public class DiagonalVector extends ContinuousVector {
     public Iterable<@NotNull Color> moats(Pos from) {
         @Nullable Color m = moat(from);
         if (m == null) return Collections.emptyList();
-        return new SingleElementIterable<>(moat(from));
+        return new SingleElementIterable<>(m);
     }
 
     public @Nullable Color moat(Pos from) {
@@ -145,12 +145,14 @@ public class DiagonalVector extends ContinuousVector {
     }
 
     @Override
+    @NotNull
     public DiagonalVector head(int fromRank) {
         return new DiagonalVector(1, inward, plusFile);
     }
 
     @Override
-    public Vector tail(int fromRank) {
+    @Nullable
+    public DiagonalVector tail(int fromRank) {
         if (abs > 1) {
             if (fromRank >= 4) {
                 if (fromRank >= 5)
@@ -160,7 +162,7 @@ public class DiagonalVector extends ContinuousVector {
             }
             return new DiagonalVector(abs - 1, true, plusFile);
         }
-        return new ZeroVector();
+        return null;
     }
 
     @Override

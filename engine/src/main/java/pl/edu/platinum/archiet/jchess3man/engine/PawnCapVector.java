@@ -1,5 +1,8 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
 
 import java.util.Arrays;
@@ -81,11 +84,14 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
     }
 
     @Override
-    public Vector tail(int ignored) {
-        return new ZeroVector();
+    @Nullable
+    @Contract("_ -> null")
+    public DiagonalVector tail(int ignored) {
+        return null;
     }
 
     @Override
+    @NotNull
     public PawnCapVector head(int ignored) {
         return this;
     }
@@ -112,7 +118,7 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
     }
 
     @Override
-    public void manipulateMutableAfterBoard(MutableBoard b, Pos from, EnPassantStore ep, Pos to) throws VectorAdditionFailedException {
+    public void manipulateMutableAfterBoard(MutableBoard b, Pos from, EnPassantStore ep, Pos to) throws VectorAdditionFailedException, NullPointerException {
         Color col = b.get(from).color;
         //emptying if enpassant
         //if(before.enPassantStore.matchLast(boundVec.to))
