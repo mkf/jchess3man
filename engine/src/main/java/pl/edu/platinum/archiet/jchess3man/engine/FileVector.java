@@ -59,9 +59,13 @@ public class FileVector extends AxisVector {
 
     public Iterable<@NotNull Color> moats(Pos from) {
         if (from.rank != 0) return Collections.emptyList();
-        int left = from.file % 8;
-        int tm = direc ? 8 - left : left;
-        Color start = from.colorSegm();
+        return moats(from.file);
+    }
+
+    public Iterable<@NotNull Color> moats(int from) {
+        int left = from % 8;
+        int tm = direc ? 7 - left : left;
+        Color start = Pos.colorSegm(from);
         int moating = abs - tm;
         ArrayList<Color> moatsToReturn = new ArrayList<>();
         if (moating > 0) {

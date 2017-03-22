@@ -45,6 +45,11 @@ public class Pos {
     }
 
     public Color colorSegm() {
+        return colorSegm(file);
+    }
+
+    @Contract(pure = true)
+    public static Color colorSegm(int file) {
         return Color.colors[file / 8];
     }
 
