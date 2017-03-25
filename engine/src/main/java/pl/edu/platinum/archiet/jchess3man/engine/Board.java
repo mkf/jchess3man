@@ -24,7 +24,7 @@ public interface Board {
             builder.append('[');
             for (int j = 0; j < 24; j++) {
                 Optional<Fig> what = Optional.ofNullable(get(i, j));
-                builder.append(what.isPresent() ? what.get().toString() : "__");
+                builder.append(what.map(Fig::toString).orElse("__"));
                 builder.append(" ");
             }
             if (i != 0) builder.append("] \n ");
