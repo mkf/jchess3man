@@ -205,15 +205,15 @@ public class GameState {
                      Optional<PlayersAlive> withPlayersAlive
     ) {
         this(
-                withBoard.isPresent() ? withBoard.get() : (
-                        (source.board instanceof MutableBoard) ? source.board.mutableCopy() : source.board),
-                withMoatsState.isPresent() ? withMoatsState.get() : source.moatsState,
-                withMovesNext.isPresent() ? withMovesNext.get() : source.movesNext,
-                withCastlingPossibilities.isPresent() ? withCastlingPossibilities.get() : source.castlingPossibilities,
-                withEnPassantStore.isPresent() ? withEnPassantStore.get() : source.enPassantStore,
-                withHalfMoveClock.isPresent() ? withHalfMoveClock.get() : source.halfMoveClock,
-                withFullMoveNumber.isPresent() ? withFullMoveNumber.get() : source.fullMoveNumber,
-                withPlayersAlive.isPresent() ? withPlayersAlive.get() : source.alivePlayers
+                withBoard.orElseGet(() -> (
+                        (source.board instanceof MutableBoard) ? source.board.mutableCopy() : source.board)),
+                withMoatsState.orElseGet(() -> source.moatsState),
+                withMovesNext.orElseGet(() -> source.movesNext),
+                withCastlingPossibilities.orElseGet(() -> source.castlingPossibilities),
+                withEnPassantStore.orElseGet(() -> source.enPassantStore),
+                withHalfMoveClock.orElseGet(() -> source.halfMoveClock),
+                withFullMoveNumber.orElseGet(() -> source.fullMoveNumber),
+                withPlayersAlive.orElseGet(() -> source.alivePlayers)
         );
     }
 
