@@ -1,5 +1,6 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class MutableHashMapBoardImpl implements MutableBoard {
         put(pos, Fig.fromSevenBit(fig));
     }
 
+    @NotNull
     @Override
     public MutableHashMapBoardImpl mutableCopy() {
         MutableHashMapBoardImpl n = new MutableHashMapBoardImpl();
@@ -40,12 +42,12 @@ public class MutableHashMapBoardImpl implements MutableBoard {
     }
 
     @Override
-    public Fig get(Pos pos) {
+    public @Nullable Fig get(@NotNull Pos pos) {
         return b.get(pos);
     }
 
     @Override
-    public boolean isEmpty(Pos pos) {
+    public boolean isEmpty(@NotNull Pos pos) {
         return !b.containsKey(pos);
     }
 
@@ -55,13 +57,14 @@ public class MutableHashMapBoardImpl implements MutableBoard {
                 .map(Map.Entry::getKey).findAny();
     }
 
+    @NotNull
     @Override
-    public Optional<Pos> whereIsKing(Color who) {
+    public Optional<Pos> whereIsKing(@NotNull Color who) {
         return whereIsSuchPiece(new Fig.King(who));
     }
 
     @Override
-    public @Nullable Pos _whereIsKing(Color who) {
+    public @Nullable Pos _whereIsKing(@NotNull Color who) {
         Optional<Pos> posOptional = whereIsKing(who);
         return posOptional.isPresent() ? posOptional.get() : null;
     }

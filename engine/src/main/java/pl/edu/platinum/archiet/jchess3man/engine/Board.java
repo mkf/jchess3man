@@ -17,7 +17,10 @@ import static java.util.Optional.ofNullable;
  */
 public interface Board {
 
-    default String string() {
+    /**
+     * @return a nice String representation of the board
+     */
+    default @NotNull String string() {
         StringBuilder builder = new StringBuilder(300);
         builder.append('[');
         for (int i = 5; i >= 0; i--) {
@@ -33,27 +36,80 @@ public interface Board {
         return builder.toString();
     }
 
-    default List<List<Fig>> toListOfRanksOfFiles() {
-        ArrayList<List<Fig>> ret = new ArrayList<>();
+    /**
+     * @return a List of six ranks (Lists of squares in a rank by files)
+     */
+    default @NotNull List<@NotNull List<@Nullable Fig>> toListOfRanksOfFiles() {
+        ArrayList<@NotNull List<@Nullable Fig>> ret = new ArrayList<>();
         for (int i = 0; i < 6; i++) ret.add(i, toListOfSquaresInRank(i));
         return ret;
     }
 
-    default List<Fig> toListOfSquaresInRank(int rank) {
-        ArrayList<Fig> ret = new ArrayList<>(24);
+    /**
+     * @param rank which rank to return
+     * @return rank — a List of squares in it
+     */
+    default @NotNull List<@Nullable Fig> toListOfSquaresInRank(int rank) {
+        ArrayList<@Nullable Fig> ret = new ArrayList<>(24);
         for (int i = 0; i < 24; i++) ret.add(get(rank, i));
         return ret;
     }
 
-    default List<Fig> toListOfSquares() {
-        ArrayList<Fig> ret = new ArrayList<>();
+    /**
+     * @return list of all squares from (0,0) thru (0,1), (1,0), (1,2), (5,22) to (5,23)
+     */
+    default @NotNull List<@Nullable Fig> toListOfSquaresConcatRanks() {
+        ArrayList<@Nullable Fig> ret = new ArrayList<>();
         for (int i = 0; i < 24 * 6; i++)
-            ret.add(i, get(i / 24, i % 24));
+            ret.add(i, get(idx(true, i)));
         return ret;
     }
 
-    default Map<Pos, Fig> toMapOfFigs() {
-        HashMap<Pos, Fig> ret = new HashMap<>(144);
+    /**
+     * @return array of all squares from (0,0) thru (0,1), (1,0), (1,2), (5,22) to (5,23)
+     */
+    default @Nullable Fig[] toArrayOfSquaresConcatRanks() {
+        @Nullable Fig[] ret = new Fig[24 * 6];
+        for (int i = 0; i < 24 * 6; i++)
+            ret[i] = get(idx(true, i));
+        return ret;
+    }
+
+    @Contract(pure = true)
+    static int idx(boolean rnf, int rank, int file) {
+        return rnf ? file * 6 + rank : rank * 24 + file;
+    }
+
+    @Contract(pure = true)
+    static Pos idx(boolean rnf, int idx) {
+        return rnf ? new Pos(idx % 6, idx / 6) : new Pos(idx / 24, idx % 24);
+    }
+
+    /**
+     * @return list of all squares from (0,0) thru (1,0), (0,1), (1,1), (2,1), (1,2), (5,22), (4,23) to (5,23)
+     */
+    default @NotNull List<@Nullable Fig> toListOfSquaresConcatFiles() {
+        ArrayList<@Nullable Fig> ret = new ArrayList<>();
+        for (int i = 0; i < 24 * 6; i++)
+            ret.add(i, get(idx(false, i)));
+        return ret;
+    }
+
+    /**
+     * @return array of all squares from (0,0) thru (1,0), (0,1), (1,1), (2,1), (1,2), (5,22), (4,23) to (5,23)
+     */
+    default @Nullable Fig[] toArrayOfSquaresConcatFiles() {
+        @Nullable Fig[] ret = new Fig[24 * 6];
+        for (int i = 0; i < 24 * 6; i++)
+            ret[i] = get(idx(true, i));
+        return ret;
+    }
+
+    /**
+     * @return a Map of all not empty squares by positions
+     */
+    default @NotNull Map<@NotNull Pos, @Nullable Fig> toMapOfFigs() {
+        HashMap<@NotNull Pos, @Nullable Fig> ret = new HashMap<>(144);
         AllPosIterable allPosIterable = new AllPosIterable();
         for (Pos pos : allPosIterable) {
             if (!isEmpty(pos)) ret.put(pos, get(pos));
@@ -61,75 +117,140 @@ public interface Board {
         return ret;
     }
 
+    /**
+     * A copy() method what we don't really use nor implement but we probably should
+     *
+     * @return this, new this(this.b) or something like that or a real copy sometimes
+     */
     @Contract(pure = true)
-    Board copy();
+    @NotNull Board copy();
 
+    /**
+     * @return now this one is a real copy, it is always a new object of type MutableBoard
+     * (often and by default MutableHashMapBoardImpl) that is then filled from the source board
+     */
     @Contract(pure = true)
-    MutableBoard mutableCopy();
+    default @NotNull MutableBoard mutableCopy() {
+        MutableBoard board = new MutableHashMapBoardImpl();
+        board.fill(this);
+        return board;
+    }
 
-    //List<Fig> toListOfSquares();
+    /**
+     * @param pos position to check
+     * @return either a fig that is there or null if it's empty
+     */
     @Contract(pure = true, value = "null -> fail")
     @Nullable
-    default Fig get(Pos pos) {
+    default Fig get(@NotNull Pos pos) {
         return get(pos.rank, pos.file);
     }
 
+    /**
+     * @param rank which rank (from 0 most outward to 5 near the center) to get square
+     * @param file which file (from left queenside white 0 to right black kingside 23) to get square
+     * @return either a fig that is there or null if it's empty
+     */
     @Contract(pure = true)
     @Nullable
     default Fig get(int rank, int file) {
         return get(new Pos(rank, file));
     }
 
+    /**
+     * @param rank which rank (from 0 most outward to 5 near the center) to get square
+     * @param file which file (from left queenside white 0 to right black kingside 23) to get square
+     * @return whether that square is empty
+     */
     @Contract(pure = true)
     default boolean isEmpty(int rank, int file) {
         return get(rank, file) == null;
     }
 
+    /**
+     * @param pos position to check
+     * @return whether that square is empty
+     */
     @Contract(pure = true, value = "null -> fail")
-    default boolean isEmpty(Pos pos) {
+    default boolean isEmpty(@NotNull Pos pos) {
         return isEmpty(pos.rank, pos.file);
     }
 
+    /**
+     * @param who color of the king we are looking for
+     * @return first position where there is a king of that color or null if none found
+     */
     @Nullable
-    default Pos _whereIsKing(Color who) {
+    default Pos _whereIsKing(@NotNull Color who) {
         final Fig.King suchKing = new Fig.King(who);
         for (final Pos pos : new AllPosIterable())
             if (suchKing.equals(get(pos))) return pos;
         return null;
     }
 
-    default Optional<Pos> whereIsKing(Color who) {
+    /**
+     * @param who color of the king we are looking for
+     * @return first position where there is a king of that color or, if none found, empty Optional
+     */
+    default @NotNull Optional<Pos> whereIsKing(@NotNull Color who) {
         return ofNullable(_whereIsKing(who));
     }
 
+    /**
+     * @param to             the square that we want to know whether it is under a threat
+     *                       such as a check
+     * @param from           the square that the potentially threatening fig is
+     * @param playersAlive   which players are still active
+     * @param enPassantStore where one could capture en passant
+     * @return whether there is such a threat
+     */
     default boolean isThereAThreat(
-            Pos to,
-            Pos from,
-            PlayersAlive playersAlive,
-            EnPassantStore enPassantStore
+            @NotNull Pos to,
+            @NotNull Pos from,
+            @NotNull PlayersAlive playersAlive,
+            @NotNull EnPassantStore enPassantStore
     ) {
         Fig fig = get(from);
         if (fig == null) throw new NullPointerException(from.toString());
         return isThereAThreat(to, from, playersAlive, enPassantStore, fig);
     }
 
+    /**
+     * @param to the square that we want to know whether it is under a threat
+     *           such as a check
+     * @param from the square that the potentially threatening fig is
+     * @param playersAlive which players are still active
+     * @param enPassantStore where one could capture en passant
+     * @param fig what is the fig at [from]?
+     * @return whether there is such a threat
+     */
     default boolean isThereAThreat(
-            Pos to,
-            Pos from,
-            PlayersAlive playersAlive,
-            EnPassantStore enPassantStore,
+            @NotNull Pos to,
+            @NotNull Pos from,
+            @NotNull PlayersAlive playersAlive,
+            @NotNull EnPassantStore enPassantStore,
             @NotNull Fig fig
     ) {
         return isThereAThreat(to, from, playersAlive, enPassantStore,
                 fig.vecs(from, to));
     }
 
+    /**
+     * @param to the square that we want to know whether it is under a threat
+     *           such as a check
+     * @param from the square that the potentially threatening fig is
+     * @param playersAlive which players are still active
+     * @param enPassantStore where one could capture en passant
+     * @param vecs not taking the board state into considerations, what are the
+     *             from [from] to [to] for the threatening fig?
+     * @return whether there is such a threat
+     */
     default boolean isThereAThreat(
-            Pos to,
-            Pos from,
-            PlayersAlive playersAlive,
-            EnPassantStore enPassantStore,
-            Iterable<? extends Vector> vecs
+            @NotNull Pos to,
+            @NotNull Pos from,
+            @NotNull PlayersAlive playersAlive,
+            @NotNull EnPassantStore enPassantStore,
+            @NotNull Iterable<? extends Vector> vecs
     ) {
         return isThereAThreat(to, from, playersAlive, enPassantStore,
                 StreamSupport
@@ -137,12 +258,22 @@ public interface Board {
         );
     }
 
+    /**
+     * @param to the square that we want to know whether it is under a threat
+     *           such as a check
+     * @param from the square that the potentially threatening fig is
+     * @param playersAlive which players are still active
+     * @param enPassantStore where one could capture en passant
+     * @param vecs not taking the board state into considerations, what are the
+     *             from [from] to [to] for the threatening fig?
+     * @return whether there is such a threat
+     */
     default boolean isThereAThreat(
-            Pos to,
-            Pos from,
-            PlayersAlive playersAlive,
-            EnPassantStore enPassantStore,
-            Stream<? extends Vector> vecs
+            @NotNull Pos to,
+            @NotNull Pos from,
+            @NotNull PlayersAlive playersAlive,
+            @NotNull EnPassantStore enPassantStore,
+            @NotNull Stream<@NotNull ? extends Vector> vecs
     ) {
         GameState before = new GameState(
                 this, MoatsState.noBridges, null,
@@ -171,7 +302,16 @@ public interface Board {
         return ourEnd.isPresent();
     }
 
-    default Stream<Pos> threatChecking(Pos where, PlayersAlive pa, EnPassantStore ep) {
+    /**
+     * @param where the square that we want to know whether it is under a threat
+     *              such as a check
+     * @param pa    which players are still active
+     * @param ep    where one could capture en passant
+     * @return the positions of threatening enemy figs
+     */
+    default @NotNull Stream<@NotNull Pos> threatChecking(
+            @NotNull Pos where,
+            @NotNull PlayersAlive pa, @NotNull EnPassantStore ep) {
         //noinspection ConstantConditions
         Color who = get(where).color;
         Stream<Pos> first = StreamSupport.stream(
@@ -184,9 +324,17 @@ public interface Board {
         });
     }
 
-    default Stream<Pos> checkChecking(Color who, PlayersAlive pa) {
+    /**
+     * @param who whose king do we want to examine situation
+     * @param pa  which players are still active
+     * @return the positions of the enemy figs which are threatening Who's king
+     */
+    default @NotNull Stream<@NotNull Pos> checkChecking(
+            @NotNull Color who, @NotNull PlayersAlive pa) {
         assert (pa.get(who));
-        return threatChecking(_whereIsKing(who), pa, EnPassantStore.empty);
+        Pos kingPos = _whereIsKing(who);
+        assert (kingPos != null);
+        return threatChecking(kingPos, pa, EnPassantStore.empty);
     }
 
     /**
@@ -195,22 +343,25 @@ public interface Board {
      * @param which positions to check
      * @return true if all are empty, false if at least one is not
      */
-    default boolean checkEmpties(Iterable<Pos> which) {
+    default boolean checkEmpties(@NotNull Iterable<@NotNull Pos> which) {
         for (final Pos pos : which) if (!isEmpty(pos)) return false;
         return true;
     }
 
+    /**
+     * Simple struct containing position [pos] and boolean [friend].
+     */
     class FriendOrNot {
         public final boolean friend;
-        public final Pos pos;
+        public final @NotNull Pos pos;
 
-        public FriendOrNot(boolean friend, Pos pos) {
+        public FriendOrNot(boolean friend, @NotNull Pos pos) {
             this.friend = friend;
             this.pos = pos;
         }
     }
 
-    default boolean equals(Board ano) {
+    default boolean equals(@NotNull Board ano) {
         for (Pos pos : new AllPosIterable()) {
             Fig a = get(pos);
             Fig b = ano.get(pos);

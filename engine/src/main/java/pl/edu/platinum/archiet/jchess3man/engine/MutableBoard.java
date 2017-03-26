@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ public interface MutableBoard extends Board {
         clr(from);
     }
 
+    @NotNull
     default MutableBoard copy() {
         return mutableCopy();
     }

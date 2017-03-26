@@ -1,5 +1,8 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by Michał Krzysztof Feiler on 02.02.17.
  */
@@ -25,6 +28,7 @@ public class MutableArrayBoardImpl implements MutableBoard {
         b[rank][file] = fig;
     }
 
+    @NotNull
     @Override
     public MutableArrayBoardImpl mutableCopy() {
         MutableArrayBoardImpl n = new MutableArrayBoardImpl();
@@ -37,7 +41,7 @@ public class MutableArrayBoardImpl implements MutableBoard {
     }
 
     @Override
-    public Fig get(int rank, int file) {
+    public @Nullable Fig get(int rank, int file) {
         return Fig.fromSevenBit(getByte(rank, file));
     }
 

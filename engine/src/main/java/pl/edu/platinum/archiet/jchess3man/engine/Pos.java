@@ -1,10 +1,14 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Optional;
+
+import static pl.edu.platinum.archiet.jchess3man.engine.CastlingVector.kfm;
 
 /**
  * Created by Michał Krzysztof Feiler on 24.01.17.
@@ -70,6 +74,60 @@ public class Pos {
 
     public int toInt() {
         return rank * 24 + file;
+    }
+
+    public static @Nullable Fig getNewGame(int rank, int file) {
+        if (rank == 1) return new Fig.Pawn(Color.fromSegm(file / 8));
+        if (rank == 0) {
+            final Color theColor = Color.fromSegm(file / 8);
+            switch (file % 8) {
+                case 0:
+                case 7:
+                    return new Fig.Rook(theColor);
+                case 1:
+                case 6:
+                    return new Fig.Knight(theColor);
+                case 2:
+                case 5:
+                    return new Fig.Bishop(theColor);
+                case 3:
+                    return new Fig.Queen(theColor);
+                case 4:
+                    return new Fig.King(theColor);
+                default:
+                    throw new IllegalArgumentException(file + " ");
+            }
+        }
+        return null;
+    }
+
+
+    @NotNull
+    @Contract(pure = true, value = "null -> fail")
+    public static Pos newGameKingPos(@NotNull Color who) {
+        return new Pos(0, kfm + (who.segm() << 3));
+    }
+
+    public static @Nullable Fig getNewGame(Pos pos) {
+        return getNewGame(pos.rank, pos.file);
+    }
+
+    public @Nullable Fig getNewGame() {
+        return getNewGame(rank, file);
+    }
+
+    @Contract(pure = true)
+    public static boolean emptyOnNewGame(int rank) {
+        return rank > 1;
+    }
+
+    @Contract(pure = true)
+    public static boolean emptyOnNewGame(Pos pos) {
+        return emptyOnNewGame(pos.rank);
+    }
+
+    public boolean emptyOnNewGame() {
+        return emptyOnNewGame(this);
     }
 
     @Override

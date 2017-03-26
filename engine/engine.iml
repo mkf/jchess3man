@@ -26,5 +26,7 @@
     <orderEntry type="library" name="Maven: org.opentest4j:opentest4j:1.0.0-M1" level="project" />
     <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-commons:1.0.0-M3" level="project" />
     <orderEntry type="library" name="Maven: org.jooq:jool:0.9.12" level="project" />
+    <orderEntry type="library" name="Maven: io.javaslang:javaslang:2.0.5" level="project" />
+    <orderEntry type="library" name="Maven: io.javaslang:javaslang-match:2.0.5" level="project" />
   </component>
 </module>
