@@ -25,6 +25,7 @@ public abstract class ContinuousVector implements Vector, KingVector {
      * head unit ContinuousVector
      *
      * @param fromrank is the rank of the from Pos
+     * @return head unit ContinuousVector
      */
     public abstract @NotNull ContinuousVector head(int fromrank);
 

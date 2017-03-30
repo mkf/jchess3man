@@ -50,7 +50,7 @@ public class RankVector extends AxisVector {
      *
      * @param fromRank starting rank
      * @return whether the vector is oriented towards the Center and
-     * whether fromRank+abs>5
+     * whether not fromRank+abs≤5
      */
     public boolean thruCenter(int fromRank) {
         return direc && (fromRank + abs > 5);
@@ -67,7 +67,7 @@ public class RankVector extends AxisVector {
 
     /**
      * @return Heading unit. As RankVector is a ContinuousVector,
-     * if abs==1 returns this, if abs>1 returns new RankVector(1, inward).
+     * if abs==1 returns this, if not abs ≤ 1 returns new RankVector(1, inward).
      * If abs==0, throws an AssertionError(this)
      */
     @NotNull

@@ -1,5 +1,6 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pl.edu.platinum.archiet.jchess3man.engine.helpers.SingleElementIterable;
 
@@ -29,8 +30,10 @@ public abstract class Fig extends Piece implements VecsInterface {
     }
 
     /**
-     * @noinspection SameReturnValue
+     * //@noinspection SameReturnValue
+     * @return null
      */
+    @Contract("->null")
     public Boolean pawnCenter() {
         return null;
     }

@@ -186,9 +186,7 @@ public class Pos {
         throw new CannotConstructVectorException(this, ano);
     }
 
-    /**
-     * @noinspection SameParameterValue
-     */
+    //* @noinspection SameParameterValue
     public FileVector fileVectorTo(Pos ano, boolean wLong)
             throws CannotConstructVectorException {
         if (sameRank(ano) && !sameFile(ano)) {

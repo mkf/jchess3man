@@ -63,6 +63,7 @@ public class KnightVector implements JumpVector {
 
     /**
      * Two times increment rank and once file?
+     * @return whether xor(centerOneCloser , inward)
      */
     public boolean moreRank() {
         return centerOneCloser == inward;
@@ -70,6 +71,7 @@ public class KnightVector implements JumpVector {
 
     /**
      * Two times increment file and once rank?
+     * @return whether not moreRank()
      */
     public boolean moreFile() {
         return !moreRank();

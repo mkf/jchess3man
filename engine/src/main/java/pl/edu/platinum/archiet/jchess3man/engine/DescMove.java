@@ -110,7 +110,7 @@ public class DescMove extends Desc {
     }
 
     /**
-     * An analogue to something like `Either<[GameState],[IllegalMoveException]>`
+     * An analogue to something like `Either≤[GameState],[IllegalMoveException]≥`
      */
     public static class EitherStateOrIllMoveExcept {
         /**
