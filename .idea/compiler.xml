@@ -9,12 +9,14 @@
         <module name="ai" />
         <module name="engine" />
         <module name="player" />
+        <module name="server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ai" target="1.8" />
       <module name="engine" target="1.8" />
       <module name="player" target="1.8" />
+      <module name="server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

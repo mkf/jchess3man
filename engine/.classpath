@@ -2,10 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="/engine/src/main/java"/>
-	<classpathentry kind="src" path="/engine/src/main/resources"/>
-	<classpathentry kind="src" path="/engine/src/test/java"/>
 	<classpathentry kind="var" path="APPLICATION_HOME_DIR/redist/annotations-java8.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/org.jetbrains:annotations:15.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jetbrains:annotations:15.0"/>
@@ -15,5 +13,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jooq:jool:0.9.12"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: io.javaslang:javaslang:2.0.5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: io.javaslang:javaslang-match:2.0.5"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

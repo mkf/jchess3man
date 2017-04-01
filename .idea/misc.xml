@@ -106,6 +106,7 @@
         <option value="$PROJECT_DIR$/ai/pom.xml" />
         <option value="$PROJECT_DIR$/ai/src/main/java/pom.xml" />
         <option value="$PROJECT_DIR$/player/pom.xml" />
+        <option value="$PROJECT_DIR$/server/pom.xml" />
       </list>
     </option>
   </component>
