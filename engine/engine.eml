@@ -5,14 +5,29 @@
 		<testFolder url="file://$MODULE_DIR$/src/test/java"/>
 		<excludeFolder url="file://$MODULE_DIR$/target"/>
 	</contentEntry>
+	<lib name="Maven: org.junit.jupiter:junit-jupiter-api:5.0.0-M3" scope="TEST"/>
+	<lib name="Maven: org.opentest4j:opentest4j:1.0.0-M1" scope="TEST"/>
+	<lib name="Maven: org.junit.platform:junit-platform-commons:1.0.0-M3" scope="TEST"/>
+	<lib name="Maven: org.junit.platform:junit-platform-surefire-provider:1.0.0-M3" scope="TEST"/>
+	<lib name="Maven: org.junit.platform:junit-platform-launcher:1.0.0-M3" scope="TEST"/>
+	<lib name="Maven: org.apache.maven.surefire:surefire-api:2.19.1" scope="TEST"/>
+	<lib name="Maven: org.apache.maven.surefire:common-java5:2.19.1" scope="TEST"/>
+	<lib name="Maven: org.junit.jupiter:junit-jupiter-engine:5.0.0-M3" scope="TEST"/>
+	<lib name="Maven: org.junit.platform:junit-platform-engine:1.0.0-M3" scope="TEST"/>
 	<levels>
+		<level name="Maven: org.jetbrains:annotations:15.0" value="project"/>
 		<level name="Maven: org.junit.jupiter:junit-jupiter-api:5.0.0-M3" value="project"/>
 		<level name="Maven: org.opentest4j:opentest4j:1.0.0-M1" value="project"/>
 		<level name="Maven: org.junit.platform:junit-platform-commons:1.0.0-M3" value="project"/>
-		<level name="Maven: com.google.guava:guava:21.0" value="project"/>
-		<level name="Maven: org.jetbrains:annotations:15.0" value="project"/>
 		<level name="Maven: org.jooq:jool:0.9.12" value="project"/>
 		<level name="Maven: io.javaslang:javaslang:2.0.5" value="project"/>
 		<level name="Maven: io.javaslang:javaslang-match:2.0.5" value="project"/>
+		<level name="Maven: com.google.guava:guava:21.0" value="project"/>
+		<level name="Maven: org.junit.platform:junit-platform-surefire-provider:1.0.0-M3" value="project"/>
+		<level name="Maven: org.junit.platform:junit-platform-launcher:1.0.0-M3" value="project"/>
+		<level name="Maven: org.apache.maven.surefire:surefire-api:2.19.1" value="project"/>
+		<level name="Maven: org.apache.maven.surefire:common-java5:2.19.1" value="project"/>
+		<level name="Maven: org.junit.jupiter:junit-jupiter-engine:5.0.0-M3" value="project"/>
+		<level name="Maven: org.junit.platform:junit-platform-engine:1.0.0-M3" value="project"/>
 	</levels>
 </component>
