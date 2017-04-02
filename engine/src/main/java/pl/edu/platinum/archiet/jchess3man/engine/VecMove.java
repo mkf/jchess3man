@@ -274,11 +274,19 @@ public class VecMove {
     @NotNull
     public GameState afterWOEvaluatingDeath() throws
             NeedsToBePromotedException, ImpossibleMoveException, CheckInitiatedThruMoatException {
+        return afterWOEvaluatingDeath(false);
+    }
+
+    @Contract(pure = true)
+    @NotNull
+    public GameState afterWOEvaluatingDeath(boolean useImmutableBoard) throws
+            NeedsToBePromotedException, ImpossibleMoveException, CheckInitiatedThruMoatException {
         throwImpossibility();
         checkIfNotPromotedDespiteSuchANeed();
-        MutableBoard b;
+        Board b;
         try {
-            b = boundVec.vec.mutableAfterBoard(before.board, boundVec.from, before.enPassantStore);
+            b = boundVec.vec.afterBoard(useImmutableBoard,
+                    before.board, boundVec.from, before.enPassantStore);
         } catch (VectorAdditionFailedException e) {
             e.printStackTrace();
             throw new AssertionError(e);
@@ -337,8 +345,15 @@ public class VecMove {
             CheckInitiatedThruMoatException,
             ImpossibleMoveException,
             NeedsToBePromotedException {
+        return after(false);
+    }
+
+    public GameState after(boolean useImmutableBoard) throws
+            CheckInitiatedThruMoatException,
+            ImpossibleMoveException,
+            NeedsToBePromotedException {
         return evaluateDeathThrowingCheck(
-                afterWOEvaluatingDeath(),
+                afterWOEvaluatingDeath(useImmutableBoard),
                 who());
     }
 }

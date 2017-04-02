@@ -23,6 +23,13 @@ public interface Vector {
 
     Iterable<@NotNull Color> moats(Pos from);
 
+    default Board afterBoard(boolean immutableBoard,
+                             Board oldb, Pos from, EnPassantStore ep)
+            throws VectorAdditionFailedException {
+        if (immutableBoard) return immutableAfterBoard(oldb, from, ep);
+        return mutableAfterBoard(oldb, from, ep);
+    }
+
     default ImmutableBoard immutableAfterBoard(Board oldb, Pos from, EnPassantStore ep)
             throws VectorAdditionFailedException {
         ImmutableBoard b = oldb.immutable();

@@ -190,7 +190,14 @@ public class DescMove extends Desc {
         }
     }
 
-    protected Stream<EitherStateOrIllMoveExcept> generateAfters(boolean withEvalDeath) throws NeedsToBePromotedException {
+    protected Stream<EitherStateOrIllMoveExcept> generateAfters(boolean withEvalDeath)
+            throws NeedsToBePromotedException {
+        return generateAfters(withEvalDeath, false);
+    }
+
+    protected Stream<EitherStateOrIllMoveExcept> generateAfters(boolean withEvalDeath,
+                                                                boolean useImmutableAfterBoard)
+            throws NeedsToBePromotedException {
         if (!areVecsGenerated()) generateVecs();
         assert (vecs != null);
         return StreamSupport
@@ -205,7 +212,7 @@ public class DescMove extends Desc {
                 .map(withEvalDeath
                         ? (move -> {
                     try {
-                        GameState after = move.after();
+                        GameState after = move.after(useImmutableAfterBoard);
                         return new EitherStateOrIllMoveExcept(after);
                     } catch (CheckInitiatedThruMoatException | ImpossibleMoveException e) {
                         return new EitherStateOrIllMoveExcept(e);
@@ -215,7 +222,7 @@ public class DescMove extends Desc {
                 })
                         : (move -> {
                     try {
-                        GameState ret = move.afterWOEvaluatingDeath();
+                        GameState ret = move.afterWOEvaluatingDeath(useImmutableAfterBoard);
                         ret.throwCheck(move.who());
                         return new EitherStateOrIllMoveExcept(ret);
                     } catch (NeedsToBePromotedException e) {

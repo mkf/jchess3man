@@ -236,6 +236,11 @@ public class GameState {
 
     @Contract(pure = true)
     public boolean _canIMoveWOCheck(Color who) {
+        return _canIMoveWOCheck(who, false);
+    }
+
+    @Contract(pure = true)
+    public boolean _canIMoveWOCheck(Color who, boolean useImmutableAfterBoard) {
         for (final Pos from : new AllPosIterable())
             //noinspection ConstantConditions
             if (!board.isEmpty(from) && board.get(from).color == who)
@@ -246,7 +251,7 @@ public class GameState {
                             final VecMove m = new VecMove(vec, from, this);
                             try {
                                 //noinspection ResultOfMethodCallIgnored
-                                m.afterWOEvaluatingDeath();
+                                m.afterWOEvaluatingDeath(useImmutableAfterBoard);
                             } catch (IllegalMoveException ignored) {
                                 return true;
                             }
