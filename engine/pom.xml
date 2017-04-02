@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>RELEASE</version>
+            <version>5.0.0-M3</version>
         </dependency>
         <dependency>
             <groupId>org.jooq</groupId>
@@ -29,6 +29,11 @@
             <groupId>io.javaslang</groupId>
             <artifactId>javaslang</artifactId>
             <version>2.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
         </dependency>
     </dependencies>
 

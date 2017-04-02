@@ -20,7 +20,10 @@ public enum FigType {
         this.index = index;
     }
 
-    public static final FigType[] vals = values();
+    public static final FigType[] vals = {
+            null,
+            Rook, Knight, Bishop, Queen, King, Pawn
+    };
 
     @Contract(value = "null -> false", pure = true)
     public boolean equals(FigType b) {
@@ -69,4 +72,22 @@ public enum FigType {
             Knight,
             Rook
     };
+
+    public final boolean canIPromTo() {
+        switch (this) {
+            case King:
+                return false;
+            case Pawn:
+                return false;
+            case Rook:
+                return true;
+            case Queen:
+                return true;
+            case Bishop:
+                return true;
+            case Knight:
+                return true;
+        }
+        throw new AssertionError(this);
+    }
 }

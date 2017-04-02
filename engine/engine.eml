@@ -13,5 +13,6 @@
 		<level name="Maven: org.jooq:jool:0.9.12" value="project"/>
 		<level name="Maven: io.javaslang:javaslang:2.0.5" value="project"/>
 		<level name="Maven: io.javaslang:javaslang-match:2.0.5" value="project"/>
+		<level name="Maven: com.google.guava:guava:21.0" value="project"/>
 	</levels>
 </component>

@@ -20,9 +20,13 @@ public class PlayersAlive {
         return ano.w == w && ano.g == g && ano.b == b;
     }
 
+    public int toInt() {
+        return (w ? 0b100 : 0) | (g ? 0b10 : 0) | (b ? 0b1 : 0);
+    }
+
     @Override
     public int hashCode() {
-        return (w ? 0b1 : 0) | (g ? 0b10 : 0) | (b ? 0b100 : 0);
+        return toInt();
     }
 
     public PlayersAlive(boolean w, boolean g, boolean b) {
@@ -31,10 +35,19 @@ public class PlayersAlive {
         this.b = b;
     }
 
+    /**
+     * @param bin 0b111 all are alive, 0b011 white is dead
+     */
+    public PlayersAlive(int bin) {
+        w = (bin & 0b100) != 0;
+        g = (bin & 0b10) != 0;
+        b = (bin & 0b1) != 0;
+    }
+
     public PlayersAlive(Map<Color, Boolean> from, boolean defVal) {
-        Boolean w = from.containsKey(Color.White) ? from.get(Color.White) : defVal;
-        Boolean g = from.containsKey(Color.Gray) ? from.get(Color.Gray) : defVal;
-        Boolean b = from.containsKey(Color.Black) ? from.get(Color.Black) : defVal;
+        Boolean w = from.getOrDefault(Color.White, defVal);
+        Boolean g = from.getOrDefault(Color.Gray, defVal);
+        Boolean b = from.getOrDefault(Color.Black, defVal);
         this.w = w == null ? defVal : w;
         this.g = g == null ? defVal : g;
         this.b = b == null ? defVal : b;

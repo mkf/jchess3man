@@ -1,13 +1,15 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
 import javaslang.collection.Array;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jooq.lambda.Seq;
 
 import java.util.Optional;
 
-import static javaslang.collection.Array.ofAll;
+import static com.google.common.base.Splitter.*;
+import static javaslang.collection.Array.*;
+import static org.jooq.lambda.Seq.*;
 
 /**
  * Created by Michał Krzysztof Feiler on 25.03.17.
@@ -21,6 +23,8 @@ public class Fun1DSeqBoardImpl implements ImmutableBoard {
     public final Array<@Nullable Fig> b;
     /**
      * whether ranks instead of files should be concatenated
+     * i.e. 24 files, 24 files, 24 files instead of
+     * 6 ranks, 6 ranks, 6 ranks
      */
     public final boolean rnf;
 
@@ -37,13 +41,30 @@ public class Fun1DSeqBoardImpl implements ImmutableBoard {
         this.rnf = concatRanksNotFiles;
     }
 
-    public Fun1DSeqBoardImpl(Board source, boolean concatRanksNotFiles) {
+    public Fun1DSeqBoardImpl(Board source,
+                             boolean concatRanksNotFiles) {
         //this.b = Array.ofAll(source.toListOfRanksOfFiles())
         //        .map(Array::ofAll);
         this.rnf = concatRanksNotFiles;
-        this.b = Array.ofAll(rnf
+        this.b = ofAll(rnf
                 ? source.toListOfSquaresConcatRanks()
                 : source.toListOfSquaresConcatFiles());
+    }
+
+    public Fun1DSeqBoardImpl(Seq<@Nullable Fig> source,
+                             boolean concatRanksNotFiles) {
+        this.rnf = concatRanksNotFiles;
+        this.b = ofAll(source);
+    }
+
+    public Fun1DSeqBoardImpl(String hexBoard,
+                             boolean concatRanksNotFiles) {
+        this.rnf = concatRanksNotFiles;
+        final Iterable<String> split = fixedLength(2).split(hexBoard);
+        final Seq<@Nullable Fig> fin = seq(split)
+                .map(t -> Integer.parseInt(t, 16))
+                .map(Fig::fromSevenBit);
+        this.b = ofAll(fin);
     }
 
     @Override

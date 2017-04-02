@@ -57,6 +57,10 @@ public abstract class Fig extends Piece implements VecsInterface {
         return sevenBitInt();
     }
 
+    public static int toSevenBitInt(Fig fig) {
+        return fig == null ? 0 : fig.sevenBitInt();
+    }
+
     public byte toByte() {
         return sevenBit();
     }
@@ -88,8 +92,10 @@ public abstract class Fig extends Piece implements VecsInterface {
         return subClass(type, color, null);
     }
 
+    @Contract("null, _, _ -> null")
     @Nullable
-    public static Fig subClass(FigType type, Color color, Boolean pawnCenter) {
+    public static Fig subClass(@Nullable FigType type, Color color, Boolean pawnCenter) {
+        if (type == null) return null;
         switch (type) {
             case Rook:
                 return new Fig.Rook(color);

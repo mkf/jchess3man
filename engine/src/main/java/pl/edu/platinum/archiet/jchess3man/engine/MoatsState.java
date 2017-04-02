@@ -16,6 +16,10 @@ public class MoatsState {
         this.gb = gb;
     }
 
+    public MoatsState(int fromInt) {
+        this((fromInt & 0b100) > 0, (fromInt & 0b10) > 0, (fromInt & 1) > 0);
+    }
+
     /***
      * Creates a MoatsState from a map {White:bw, Gray:wg, Black:gb}
      * @param from   is a map Color→Boolean
@@ -24,9 +28,9 @@ public class MoatsState {
      * @param defVal the default value in case some bool was missing or null
      */
     public MoatsState(Map<Color, Boolean> from, boolean defVal) {
-        Boolean bw = from.containsKey(Color.White) ? from.get(Color.White) : defVal;
-        Boolean wg = from.containsKey(Color.Gray) ? from.get(Color.Gray) : defVal;
-        Boolean gb = from.containsKey(Color.Black) ? from.get(Color.Black) : defVal;
+        Boolean bw = from.getOrDefault(Color.White, defVal);
+        Boolean wg = from.getOrDefault(Color.Gray, defVal);
+        Boolean gb = from.getOrDefault(Color.Black, defVal);
         this.bw = bw == null ? defVal : bw;
         this.wg = wg == null ? defVal : wg;
         this.gb = gb == null ? defVal : gb;
@@ -155,5 +159,22 @@ public class MoatsState {
 
     public MoatsState bridgeOnBothSidesOf(Color col) {
         return changeOnBothSidesOf(col, true);
+    }
+
+    public int toInt() {
+        return (bw ? (1 << 2) : 0) | (wg ? (1 << 1) : 0) | (gb ? 1 : 0);
+    }
+
+    @Override
+    public int hashCode() {
+        return toInt();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof MoatsState &&
+                bw == ((MoatsState) obj).bw &&
+                wg == ((MoatsState) obj).wg &&
+                gb == ((MoatsState) obj).gb;
     }
 }

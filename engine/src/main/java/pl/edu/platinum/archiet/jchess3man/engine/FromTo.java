@@ -13,8 +13,10 @@ public class FromTo {
      * the destination position
      */
     public final Pos to;
-    protected static final int finalBitSizeOfAPos = Integer.highestOneBit(
-            (new Pos(5, 23)).toInt()) + 1;
+    protected static final int finalBitSizeOfAPos = Integer
+            .toBinaryString(
+                    new Pos(5, 23).toInt())
+            .length();
 
     /**
      * Just a simple constructor for FromTo

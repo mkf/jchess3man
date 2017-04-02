@@ -7,6 +7,7 @@ import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -75,14 +76,71 @@ public interface Board {
         return ret;
     }
 
-    @Contract(pure = true)
-    static int idx(boolean rnf, int rank, int file) {
-        return rnf ? file * 6 + rank : rank * 24 + file;
+    default Seq<@Nullable Fig> toSeqOfSquaresConcatRanks() {
+        return Seq.range(0, 24 * 6)
+                .map(i -> idx(true, i))
+                .map(this::get);
     }
 
+    default Seq<Integer> toSeqOfSevenBitConcatRanks() {
+        return toSeqOfSquaresConcatRanks()
+                .map(Fig::toSevenBitInt);
+    }
+
+    default Seq<Tuple2<Integer, Integer>>
+    toSeqOfFirstThreeAndAnotherFourBitsConcatRanks() {
+        return toSeqOfSevenBitConcatRanks()
+                .map(t -> new Tuple2<>((t & 0xF0) >> 4, t & 0xF));
+    }
+
+    default Seq<Tuple2<String, String>>
+    toSeqOfSevenBitAsTwoHexDigitsConcatRanks() {
+        return toSeqOfFirstThreeAndAnotherFourBitsConcatRanks()
+                .map(t -> t
+                        .map1(Integer::toHexString)
+                        .map2(Integer::toHexString));
+    }
+
+    default Seq<String>
+    toSeqOfJoinedHexDigitsOfSevenBitConcatRanks() {
+        return toSeqOfSevenBitAsTwoHexDigitsConcatRanks()
+                .map(t -> t.v1 + t.v2);
+    }
+
+    default Seq<Integer> toSeqOfSeparatedHexDigitsOfSevenBitConcatRanks() {
+        return toSeqOfFirstThreeAndAnotherFourBitsConcatRanks()
+                .flatMap(t -> Seq.of(t.v1, t.v2));
+    }
+
+    default Seq<String> toSeqOfHexSevenBitConcatRanks() {
+        return toSeqOfSeparatedHexDigitsOfSevenBitConcatRanks()
+                .map(Integer::toHexString);
+    }
+
+    default String toHexConcatRanks() {
+        return toSeqOfHexSevenBitConcatRanks()
+                .collect(Collectors.joining());
+    }
+
+    /**
+     * @param rnf  24 files, 24 files, 24 files. Else 6 ranks, 6 ranks, 6 ranks...
+     * @param rank rank in corresponding position
+     * @param file file in corresponding position
+     * @return corresponding array index
+     */
+    @Contract(pure = true)
+    static int idx(boolean rnf, int rank, int file) {
+        return !rnf ? file * 6 + rank : rank * 24 + file;
+    }
+
+    /**
+     * @param rnf 24 files, 24 files, 24 files. Else 6 ranks, 6 ranks, 6 ranks...
+     * @param idx index in such an array
+     * @return corresponding position
+     */
     @Contract(pure = true)
     static Pos idx(boolean rnf, int idx) {
-        return rnf ? new Pos(idx % 6, idx / 6) : new Pos(idx / 24, idx % 24);
+        return !rnf ? new Pos(idx % 6, idx / 6) : new Pos(idx / 24, idx % 24);
     }
 
     /**

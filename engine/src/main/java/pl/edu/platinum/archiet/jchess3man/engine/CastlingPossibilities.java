@@ -1,5 +1,7 @@
 package pl.edu.platinum.archiet.jchess3man.engine;
 
+import org.jooq.lambda.tuple.Tuple6;
+
 import java.util.Map;
 
 /**
@@ -53,10 +55,16 @@ public class CastlingPossibilities {
         this.b = b;
     }
 
+    public CastlingPossibilities(int i) {
+        w = ColorEntry.n((i & 1 << 4) != 0, (i & 1 << 5) != 0);
+        g = ColorEntry.n((i & 1 << 2) != 0, (i & 1 << 3) != 0);
+        b = ColorEntry.n((i & 1) != 0, (i & 1 << 1) != 0);
+    }
+
     public CastlingPossibilities(Map<Color, ColorEntry> from, ColorEntry defVal) {
-        ColorEntry w = from.containsKey(Color.White) ? from.get(Color.White) : defVal;
-        ColorEntry g = from.containsKey(Color.Gray) ? from.get(Color.Gray) : defVal;
-        ColorEntry b = from.containsKey(Color.Black) ? from.get(Color.Black) : defVal;
+        ColorEntry w = from.getOrDefault(Color.White, defVal);
+        ColorEntry g = from.getOrDefault(Color.Gray, defVal);
+        ColorEntry b = from.getOrDefault(Color.Black, defVal);
         this.w = w == null ? defVal : w;
         this.g = g == null ? defVal : g;
         this.b = g == null ? defVal : b;
@@ -96,5 +104,19 @@ public class CastlingPossibilities {
 
     public CastlingPossibilities sayNoTo(Color c) {
         return change(c, ColorEntry.No);
+    }
+
+    public Tuple6<Boolean, Boolean, Boolean, Boolean, Boolean, Boolean> array() {
+        return new Tuple6<>(
+                w.k, w.q,
+                g.k, g.q,
+                b.k, b.q
+        );
+    }
+
+    public int toInt() {
+        return (w.k ? 1 << 5 : 0) | (w.q ? 1 << 4 : 0) |
+                (g.k ? 1 << 3 : 0) | (g.q ? 1 << 2 : 0) |
+                (b.k ? 1 << 1 : 0) | (b.q ? 1 : 0);
     }
 }
