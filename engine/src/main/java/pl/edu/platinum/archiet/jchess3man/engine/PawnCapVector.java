@@ -118,6 +118,22 @@ public class PawnCapVector extends DiagonalVector implements PawnVector {
     }
 
     @Override
+    public ImmutableBoard manipulateImmutableAfterBoard(ImmutableBoard b,
+                                                        Pos from, EnPassantStore ep, Pos to)
+            throws VectorAdditionFailedException, NullPointerException {
+        Color col = b.get(from).color;
+        //emptying if enpassant
+        //if(before.enPassantStore.matchLast(boundVec.to))
+        //    return !before.board.get(boundVec.to)
+        //            .color.equals(who().previous());
+        if (Boolean.logicalOr(
+                ep.matchLast(to) && b.get(3, to.file).color == col.previous(),
+                ep.matchPrev(to) && b.get(3, to.file).color == col.next()))
+            return b.clr(3, to.file);
+        return b.move(from, to);
+    }
+
+    @Override
     public void manipulateMutableAfterBoard(MutableBoard b, Pos from, EnPassantStore ep, Pos to) throws VectorAdditionFailedException, NullPointerException {
         Color col = b.get(from).color;
         //emptying if enpassant

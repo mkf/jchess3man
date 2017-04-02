@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
+import javaslang.collection.HashMap;
+
 import java.nio.channels.SeekableByteChannel;
 
 import static pl.edu.platinum.archiet.jchess3man.engine.CastlingVector.kfm;
@@ -100,5 +102,10 @@ public class NewGameBoardImpl implements ImmutableBoard {
         return new Tuple2<>(
                 sNE(friends(pa.get(who) ? who : null)),
                 notFriends(who, pa));
+    }
+
+    @Override
+    public ImmutableBoard put(@NotNull Pos pos, @Nullable Fig fig) {
+        return new DiffNGBoardImpl(HashMap.of(pos, fig));
     }
 }

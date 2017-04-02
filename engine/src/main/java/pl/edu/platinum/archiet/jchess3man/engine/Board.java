@@ -194,6 +194,11 @@ public interface Board {
         return board;
     }
 
+    @Contract(pure = true)
+    default @NotNull ImmutableBoard immutable() {
+        return new FunHashMapBoardImpl(this);
+    }
+
     /**
      * @param pos position to check
      * @return either a fig that is there or null if it's empty

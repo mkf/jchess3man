@@ -18,6 +18,15 @@ public class QueensideCastlingVector extends CastlingVector {
     }
 
     @Override
+    public ImmutableBoard manipulateImmutableAfterBoard(ImmutableBoard b,
+                                                        Pos from, EnPassantStore ep, Pos to)
+            throws VectorAdditionFailedException {
+        return b.move(from, to)
+                .move(new Pos(0, from.file - 4),
+                        new Pos(0, from.file - 1));
+    }
+
+    @Override
     public void manipulateMutableAfterBoard(MutableBoard b, Pos from, EnPassantStore ep, Pos to) throws VectorAdditionFailedException {
         b.move(from, to);
         b.move(new Pos(0, from.file - 4), new Pos(0, from.file - 1));

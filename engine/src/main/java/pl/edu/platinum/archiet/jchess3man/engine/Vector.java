@@ -23,6 +23,12 @@ public interface Vector {
 
     Iterable<@NotNull Color> moats(Pos from);
 
+    default ImmutableBoard immutableAfterBoard(Board oldb, Pos from, EnPassantStore ep)
+            throws VectorAdditionFailedException {
+        ImmutableBoard b = oldb.immutable();
+        return manipulateImmutableAfterBoard(b, from, ep);
+    }
+
     default MutableBoard mutableAfterBoard(Board oldb, Pos from, EnPassantStore ep) throws VectorAdditionFailedException {
         MutableBoard b = oldb.mutableCopy();
         manipulateMutableAfterBoard(b, from, ep);
@@ -33,8 +39,20 @@ public interface Vector {
         manipulateMutableAfterBoard(b, from, ep, from.addVec(this));
     }
 
+    default ImmutableBoard manipulateImmutableAfterBoard(ImmutableBoard b,
+                                                         Pos from, EnPassantStore ep)
+            throws VectorAdditionFailedException {
+        return manipulateImmutableAfterBoard(b, from, ep, from.addVec(this));
+    }
+
     default void manipulateMutableAfterBoard(MutableBoard b, Pos from, EnPassantStore ep, Pos to) throws VectorAdditionFailedException {
         b.move(from, to);
+    }
+
+    default ImmutableBoard manipulateImmutableAfterBoard(ImmutableBoard b,
+                                                         Pos from, EnPassantStore ep, Pos to)
+            throws VectorAdditionFailedException {
+        return b.move(from, to);
     }
 }
 
