@@ -5,9 +5,4 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
-env:
- - TEST_DIR=engine
- - TEST_DIR=player
- - TEST_DIR=ai
- - TEST_DIR=server
-script: cd $TEST_DIR && mvn install -B -V && mvn test -B
+script: cd engine && mvn install -B -V && mvn test -B && cd ../player && mvn install -B -V && mvn test -B && cd ../ai && mvn install -B -V && mvn test -B && cd ../server && mvn install -B -V && mvn test -B
