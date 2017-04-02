@@ -62,7 +62,7 @@ public class Piece {
     }
 
     public boolean equals(Piece ano) {
-        return type == ano.type && color == ano.color;
+        return ano != null && type == ano.type && color == ano.color;
     }
 
     public int hashCode() {
