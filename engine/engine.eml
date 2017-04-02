@@ -6,13 +6,13 @@
 		<excludeFolder url="file://$MODULE_DIR$/target"/>
 	</contentEntry>
 	<levels>
-		<level name="Maven: org.jetbrains:annotations:15.0" value="project"/>
 		<level name="Maven: org.junit.jupiter:junit-jupiter-api:5.0.0-M3" value="project"/>
 		<level name="Maven: org.opentest4j:opentest4j:1.0.0-M1" value="project"/>
 		<level name="Maven: org.junit.platform:junit-platform-commons:1.0.0-M3" value="project"/>
+		<level name="Maven: com.google.guava:guava:21.0" value="project"/>
+		<level name="Maven: org.jetbrains:annotations:15.0" value="project"/>
 		<level name="Maven: org.jooq:jool:0.9.12" value="project"/>
 		<level name="Maven: io.javaslang:javaslang:2.0.5" value="project"/>
 		<level name="Maven: io.javaslang:javaslang-match:2.0.5" value="project"/>
-		<level name="Maven: com.google.guava:guava:21.0" value="project"/>
 	</levels>
 </component>
